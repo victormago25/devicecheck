@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="picker">
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
+        <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.4.0.js"></script>
+        <script src="assets/js/index.js"></script>
+    </head>
+    <body>
+        <div ng-controller="TabsDemoCtrl">
+            Select a tab by setting active binding to true:
+            <br />
+            <button class="btn btn-small" ng-click="tabs[0].active = true">Select second tab</button>
+            <button class="btn btn-small" ng-click="tabs[1].active = true">Select third tab</button>
+            <button class="btn btn-small" ng-click="tabs[1].disabled = ! tabs[1].disabled">Enable / Disable third tab</button>
+            <hr />
+
+            <tabset>
+                <tab heading="Static title">Static content</tab>
+                <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
+                    {{tab.content}}
+                </tab>
+                <tab select="alertMe()">
+                    <tab-heading>
+                        <i class="icon-bell"></i> Select me for alert!
+                    </tab-heading>
+                    I've got an HTML heading, and a select callback. Pretty cool!
+                </tab>
+            </tabset>
+
+        </div>
+    </body>
+</html>
