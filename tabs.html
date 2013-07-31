@@ -1,0 +1,12 @@
+<tabset>
+    <tab ng-repeat="picker in devices" heading="Static title"><div ng-view></div></tab>
+    <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
+        {{tab.content}}
+    </tab>
+    <tab select="alertMe()">
+        <tab-heading>
+            <i class="icon-bell"></i> Select me for alert!
+        </tab-heading>
+        I've got an HTML heading, and a select callback. Pretty cool!
+    </tab>
+</tabset>

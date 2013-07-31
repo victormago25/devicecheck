@@ -7,6 +7,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
         <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.4.0.js"></script>
+        <script src="https://cdn.firebase.com/v0/firebase.js"></script>
+        <script src="http://firebase.github.io/angularFire/angularFire.js"></script>
         <script src="assets/js/index.js"></script>
     </head>
     <body>
@@ -17,19 +19,6 @@
             <button class="btn btn-small" ng-click="tabs[1].active = true">Select third tab</button>
             <button class="btn btn-small" ng-click="tabs[1].disabled = ! tabs[1].disabled">Enable / Disable third tab</button>
             <hr />
-
-            <tabset>
-                <tab heading="Static title">Static content</tab>
-                <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
-                    {{tab.content}}
-                </tab>
-                <tab select="alertMe()">
-                    <tab-heading>
-                        <i class="icon-bell"></i> Select me for alert!
-                    </tab-heading>
-                    I've got an HTML heading, and a select callback. Pretty cool!
-                </tab>
-            </tabset>
 
         </div>
     </body>
