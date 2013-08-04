@@ -1,7 +1,8 @@
 <tabset>
-    <tab ng-repeat="picker in devices" heading="Static title"><div ng-view></div></tab>
-    <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disabled="tab.disabled">
-        {{tab.content}}
+    <tab ng-repeat="device in stocks" heading="{{device.name}}">
+        <h1>{{device.name}}</h1>
+        <img alt="{{device.name}}" src="{{device.img}}" />
+        <a href="#/active/{{device.$id}}" class="btn btn-primary" >Active</a>
     </tab>
     <tab select="alertMe()">
         <tab-heading>
