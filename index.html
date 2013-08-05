@@ -3,19 +3,20 @@
     <head>
         <title>Device Checker</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link type="text/css" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="assets/css/index.css" type="text/css" rel="stylesheet">
+    </head>
+    <body>
+        <div>
+            <h1>Select the device to check for availability</h1>
+            <hr />
+            <div ng-view></div>
+        </div>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular-resource.min.js"></script>
         <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.4.0.js"></script>
         <script src="https://cdn.firebase.com/v0/firebase.js"></script>
         <script src="assets/js/lib/angularFire.js"></script>
         <script src="assets/js/index.js"></script>
-    </head>
-    <body>
-        <div ng-controller="TabsDemoCtrl">
-            Select a tab by setting active binding to true:
-            <hr />
-            <div ng-view></div>
-        </div>
     </body>
 </html>

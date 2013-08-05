@@ -1,13 +1,25 @@
 <tabset>
     <tab ng-repeat="device in stocks" heading="{{device.name}}">
-        <h1>{{device.name}}</h1>
+        <h2>{{device.name}}</h2>
         <img alt="{{device.name}}" src="{{device.img}}" />
-        <a href="#/active/{{device.$id}}" class="btn btn-primary" >Active</a>
-    </tab>
-    <tab select="alertMe()">
-        <tab-heading>
-            <i class="icon-bell"></i> Select me for alert!
-        </tab-heading>
-        I've got an HTML heading, and a select callback. Pretty cool!
+        <form name="checkForm">
+            <div class="control-group" ng-class="{error: checkForm.user.$invalid}">
+                <label>User Name</label>
+                <input type="text" name="user" ng-model="device.user" required>
+                <span ng-show="checkForm.user.$error.required" class="help-inline">
+                    Required</span>
+            </div>
+
+            <div class="control-group" ng-class="{error: checkForm.lockPhrase.$invalid}">
+                <label>Password</label>
+                <input type="password" name="lockPhrase" ng-model="device.lockPhrase" required>
+                <span ng-show="checkForm.lockPhrase.$error.required" class="help-inline">
+                    Required</span>
+            </div>
+
+            <br>
+            <button ng-click="send()" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary">Send</button>
+        </form>
+        <a href="#/active/{{device.$id}}" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" >Send</a>
     </tab>
 </tabset>
