@@ -1,25 +1,37 @@
 <tabset>
     <tab ng-repeat="device in stocks" heading="{{device.name}}">
         <h2>{{device.name}}</h2>
+        <div class="alert ng-scope alert-error" ng-show="device.inUse">Device in use by {{device.user}}</div>
+        <div class="alert ng-scope alert-success" ng-hide="device.inUse">Device ready to use</div>
         <img alt="{{device.name}}" src="{{device.img}}" />
-        <form name="checkForm">
-            <div class="control-group" ng-class="{error: checkForm.user.$invalid}">
-                <label>User Name</label>
-                <input type="text" name="user" ng-model="device.user" required>
-                <span ng-show="checkForm.user.$error.required" class="help-inline">
-                    Required</span>
-            </div>
+        <accordion close-others="true">
+            <accordion-group heading="Information">
+              This content is straight in the template.
+            </accordion-group>
+            <accordion-group heading="Request Device">
+              <form name="checkForm">
+                    <div class="control-group" ng-class="{error: checkForm.user.$invalid}">
+                        <label>User Name</label>
+                        <input type="text" name="user" ng-model="device.user" required>
+                        <span ng-show="checkForm.user.$error.required" class="help-inline">
+                            Required</span>
+                    </div>
 
-            <div class="control-group" ng-class="{error: checkForm.lockPhrase.$invalid}">
-                <label>Password</label>
-                <input type="password" name="lockPhrase" ng-model="device.lockPhrase" required>
-                <span ng-show="checkForm.lockPhrase.$error.required" class="help-inline">
-                    Required</span>
-            </div>
+                    <div class="control-group" ng-class="{error: checkForm.lockPhrase.$invalid}">
+                        <label>Password</label>
+                        <input type="password" name="lockPhrase" ng-model="device.lockPhrase" required>
+                        <span ng-show="checkForm.lockPhrase.$error.required" class="help-inline">
+                            Required</span>
+                    </div>
 
-            <br>
-            <button ng-click="send()" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary">Send</button>
-        </form>
-        <a href="#/active/{{device.$id}}" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" >Send</a>
+                    <br>
+                    <button ng-click="send()" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary">Send</button>
+                </form>
+                <a href="#/active/{{device.$id}}" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" >Send</a>
+            </accordion-group>
+            <accordion-group heading="History">
+              This content is straight in the template.
+            </accordion-group>
+        </accordion>
     </tab>
 </tabset>
