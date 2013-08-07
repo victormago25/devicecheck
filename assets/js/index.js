@@ -9,17 +9,11 @@ angular.module('device', ['ui.bootstrap', 'firebase']).
     config(function ($routeProvider) {
         $routeProvider.
             when('/', {controller: ListCtrl, templateUrl: '../../tabs.html'}).
-            when('/active/:deviceId', {controller:ActiveCtrl, templateUrl: '../../tabs.html'}).
             otherwise({redirectTo: '/'});
     });
 
-function ListCtrl($scope, Data) {
-   window.Data = Data;
-    $scope.stocks = Data;
-}
-
-function ActiveCtrl($scope, $location, $routeParams, angularFire, fbURL) {
-    angularFire(fbURL + $routeParams.deviceId, $scope, 'remote', {}).
+function getCurrent ($scope, $id, angularFire, fbURL) {
+    angularFire(fbURL + $id, $scope, 'remote', {}).
         then(function () {
             $scope.device = angular.copy($scope.remote);
             $scope.device.$id = $routeParams.deviceId;
@@ -28,7 +22,15 @@ function ActiveCtrl($scope, $location, $routeParams, angularFire, fbURL) {
             };
             $scope.send = function () {
                 $scope.remote = angular.copy($scope.device);
-                $location.path('/');
             };
         });
+}
+
+function ListCtrl($scope, Data, angularFire, fbURL) {
+   window.Data = Data;
+    $scope.stocks = Data;
+    $scope.send = function () {
+        $scope.remote = angularFire(fbURL + $scope.device.$id, $scope, 'remote', {});
+        $scope.remote = angular.copy($scope.device);
+    };
 }

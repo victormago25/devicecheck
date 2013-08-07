@@ -2,6 +2,15 @@ h1 {
     font-size: 150%
 }
 
+a {
+    font-weight: bold;
+    color: #990099;
+}
+
+a:hover {
+    color: #660066;
+}
+
 .header {
     margin: 10px 40px 0;
 }
@@ -37,5 +46,6 @@ h1 {
 }
 
 .accordion {
+    min-width: 50%;
     float: left;
 }
