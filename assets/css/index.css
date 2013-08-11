@@ -11,6 +11,10 @@ a:hover {
     color: #660066;
 }
 
+.bold {
+    font-weight: bold;
+}
+
 .header {
     margin: 10px 40px 0;
 }
@@ -47,5 +51,10 @@ a:hover {
 
 .accordion {
     min-width: 50%;
+    float: left;
+}
+
+.info {
+    min-width: 46%;
     float: left;
 }
