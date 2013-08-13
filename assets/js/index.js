@@ -28,8 +28,9 @@ function ListCtrl($scope, stocks, time, angularFire, fbURL) {
 //    _.forEach(stocks, function (value) {
 //        console.log(value);
 //    });
-    $scope.send = function () {
-        $scope.remote = $scope.angularFire($scope.fbURL + $scope.device.$id, $scope, 'remote', {});
+    $scope.send = function ($index) {
+        console.log($index);
+//        $scope.remote = $scope.angularFire($scope.fbURL + $scope.device.$id, $scope, 'remote', {});
         console.log('saving');
         $scope.remote = angular.copy($scope.device);
     };

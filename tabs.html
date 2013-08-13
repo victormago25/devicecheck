@@ -3,7 +3,7 @@
         <h2>{{device.name}}</h2>
         <div class="alert ng-scope alert-error" ng-show="device.inUse">Device in use by {{device.user}}</div>
         <div class="alert ng-scope alert-success" ng-hide="device.inUse">Device ready to use</div>
-        <img alt="{{device.name}}" src="{{device.img}}" />
+        <img alt="{{device.name}}" ng-src="{{device.img}}" />
         <div class="well well-large info">
             <h3>Device Information:</h3>
             <ul>
@@ -33,7 +33,7 @@
                         <span class="bold">Current time is:</span> {{ time.now | date:'short' }}
                     </p>
                     <br>
-                    <button ng-click="send()" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary">Send</button>
+                    <button ng-click="send($index)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary">Send</button>
                 </form>
             </accordion-group>
             <accordion-group heading="History">
