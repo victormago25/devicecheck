@@ -33,7 +33,7 @@
                         <span class="bold">Current time is:</span> {{ time.now | date:'short' }}
                     </p>
                     <br>
-                    <button ng-click="send($index)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary">Send</button>
+                    <button ng-click="send(device.$id)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary">Send</button>
                 </form>
             </accordion-group>
             <accordion-group heading="History">

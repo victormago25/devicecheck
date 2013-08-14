@@ -22,17 +22,25 @@ function ListCtrl($scope, stocks, time, angularFire, fbURL) {
     $scope.time = time;
     $scope.angularFire = angularFire;
     $scope.fbURL = fbURL;
-    angular.forEach(stocks, function (value, key) {
-        console.log(value);
-    });
-//    _.forEach(stocks, function (value) {
-//        console.log(value);
+//    angular.forEach(stocks, function (element) {
+//        element.lockPhrase = '';
+//    }, $scope.stocks);
+//    _.forEach(stocks, function (element, index, list) {
+//        console.log(index);
 //    });
-    $scope.send = function ($index) {
-        console.log($index);
-//        $scope.remote = $scope.angularFire($scope.fbURL + $scope.device.$id, $scope, 'remote', {});
-        console.log('saving');
-        $scope.remote = angular.copy($scope.device);
+    $scope.send = function (id) {
+        $scope.angularFire($scope.fbURL + '/stock/' + id, $scope, 'remote', {}).
+            then(function () {
+                $scope.project = angular.copy($scope.remote);
+                $scope.project.$id = id;
+                var current = _.filter($scope.stocks, function (device) {
+                    return device.$id === id;
+                });
+                if ($scope.remote.$id === current[0].$id && $scope.remote.lockPhrase === $scope.confirmLockPhrase) {
+                    console.log('saving');
+                }
+            });
+//        $scope.remote = angular.copy($scope.device);
     };
 }
 
@@ -41,7 +49,7 @@ angular.module('device', ['ui.bootstrap', 'firebase']).
     factory('stocks', function (angularFireCollection, fbURL) {
         return angularFireCollection(fbURL + 'stock');
     }).
-    factory('time', function ($timeout) {
+    factory('time', function () {
         var time = {};
         (function tick() {
             time.now = new Date();
