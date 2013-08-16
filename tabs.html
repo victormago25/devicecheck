@@ -15,7 +15,6 @@
         <accordion close-others="true">
             <accordion-group heading="Request Device">
                 <form name="checkForm">
-                    <input type="hidden" name="id" value="{{device.$id}}" />
                     <div class="control-group" ng-class="{error: checkForm.user.$invalid}">
                         <label>User Name</label>
                         <input type="text" name="user" ng-model="device.user" required>
