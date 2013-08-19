@@ -1,0 +1,64 @@
+{
+  "stock" : {
+    "sm02" : {
+      "name" : "ipod Touch",
+      "user" : "-",
+      "img" : "assets/img/ipod.jpg",
+      "os" : "iOS",
+      "inUse" : false,
+      "displaySize" : "3.5\"",
+      "lockPhrase" : ".",
+      "osVersion" : 4
+    },
+    "sm01" : {
+      "name" : "Galaxy S",
+      "user" : "Alonso Salas",
+      "img" : "assets/img/nexus-s.png",
+      "os" : "Android",
+      "inUse" : true,
+      "displaySize" : "4\"",
+      "lockPhrase" : "123456",
+      "osVersion" : "2.3.3"
+    },
+    "tb01" : {
+      "name" : "iPad",
+      "user" : "-",
+      "img" : "assets/img/ipad.jpg",
+      "os" : "iOS",
+      "inUse" : false,
+      "displaySize" : "10\"",
+      "lockPhrase" : ".",
+      "osVersion" : 5
+    },
+    "sm03" : {
+      "name" : "HTC Inspire",
+      "user" : "-",
+      "img" : "assets/img/inspire.jpg",
+      "os" : "Android",
+      "inUse" : false,
+      "displaySize" : "4\"",
+      "lockPhrase" : ".",
+      "osVersion" : "2.3.3"
+    },
+    "tb02" : {
+      "name" : "Galaxy Tab 7",
+      "user" : "-",
+      "img" : "assets/img/galaxy-tab.jpg",
+      "os" : "Android",
+      "inUse" : false,
+      "displaySize" : "7\"",
+      "lockPhrase" : ".",
+      "osVersion" : 2.2
+    }
+  },
+  "trcking" : {
+    "sm02" : {
+      "user" : "Erick",
+      "date" : 20130720
+    },
+    "sm01" : {
+      "user" : "Alonso",
+      "date" : 20130615
+    }
+  }
+}

@@ -6,7 +6,7 @@ function ListCtrl($scope, time, angularFire, fbURL) {
     angularFire(fbURL + deviceBasePath, $scope, 'stocks', {}).
         then(function () {
             angular.forEach($scope.stocks, function (element, id) {
-                element.lockPhrase = '';
+                element.password = '';
                 element.$id = id;
             }, $scope.stocks);
         });
@@ -19,8 +19,11 @@ function ListCtrl($scope, time, angularFire, fbURL) {
 //            return device.$id === id;
 //        });
         deviceRef.once('value', function(dataSnapshot) {
-            if ((dataSnapshot.child('lockPhrase').val() === $scope.stocks[id].lockPhrase) && (dataSnapshot.child('user').val() === $scope.stocks[id].user)) {
-                deviceRef.update({inUse: !dataSnapshot.child('inUse').val(), lockPhrase: '', user: ''});
+            if (dataSnapshot.child('inUse').val() && (dataSnapshot.child('lockPhrase').val() === $scope.stocks[id].password) && (dataSnapshot.child('user').val() === $scope.stocks[id].user)) {
+                $scope.stocks[id].password = '';
+                deviceRef.update({inUse: false, lockPhrase: '', user: ''});
+            } else if (dataSnapshot.child('inUse').val() && (dataSnapshot.child('lockPhrase').val() === '') && (dataSnapshot.child('user').val() === '')) {
+                $scope.stocks[id].password = '';
             }
         });
 //        $scope.angularFire($scope.fbURL + deviceBasePath + id, $scope, 'remote', {}).

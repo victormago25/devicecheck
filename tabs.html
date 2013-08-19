@@ -24,7 +24,7 @@
 
                     <div class="control-group" ng-class="{error: checkForm.lockPhrase.$invalid}">
                         <label>Password</label>
-                        <input type="password" name="lockPhrase" ng-model="device.lockPhrase" required ngMinlength="6">
+                        <input type="password" name="password" ng-model="device.password" required ngMinlength="6">
                         <span ng-show="checkForm.lockPhrase.$error.required" class="help-inline">
                             Required</span>
                     </div>
