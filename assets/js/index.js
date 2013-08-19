@@ -8,23 +8,31 @@ function ListCtrl($scope, time, angularFire, fbURL) {
             angular.forEach($scope.stocks, function (element, id) {
                 element.lockPhrase = '';
                 element.$id = id;
-                element.user = (element.user === '-') ? '' : element.user;
             }, $scope.stocks);
         });
     $scope.time = time;
     $scope.angularFire = angularFire;
     $scope.fbURL = fbURL;
     $scope.send = function (id) {
-        $scope.angularFire($scope.fbURL + deviceBasePath + id, $scope, 'remote', {}).
-            then(function () {
-                var current = _.filter($scope.stocks, function (device) {
-                    return device.$id === id;
-                });
-                if ($scope.remote.lockPhrase === current[0].lockPhrase) {
-                    $scope.remote.inUse = false;
-                    console.log('saved');
-                }
-            });
+        var deviceRef = new Firebase($scope.fbURL + deviceBasePath + id);
+//        var current = _.filter($scope.stocks, function (device) {
+//            return device.$id === id;
+//        });
+        deviceRef.once('value', function(dataSnapshot) {
+            if ((dataSnapshot.child('lockPhrase').val() === $scope.stocks[id].lockPhrase) && (dataSnapshot.child('user').val() === $scope.stocks[id].user)) {
+                deviceRef.update({inUse: !dataSnapshot.child('inUse').val(), lockPhrase: '', user: ''});
+            }
+        });
+//        $scope.angularFire($scope.fbURL + deviceBasePath + id, $scope, 'remote', {}).
+//            then(function () {
+//                var current = _.filter($scope.stocks, function (device) {
+//                    return device.$id === id;
+//                });
+//                if ($scope.remote.lockPhrase === current[0].lockPhrase) {
+//                    $scope.remote.inUse = false;
+//                    console.log('saved');
+//                }
+//            });
     };
 }
 
