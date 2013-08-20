@@ -22,8 +22,10 @@ function ListCtrl($scope, time, angularFire, fbURL) {
             if (dataSnapshot.child('inUse').val() && (dataSnapshot.child('lockPhrase').val() === $scope.stocks[id].password) && (dataSnapshot.child('user').val() === $scope.stocks[id].user)) {
                 $scope.stocks[id].password = '';
                 deviceRef.update({inUse: false, lockPhrase: '', user: ''});
-            } else if (dataSnapshot.child('inUse').val() && (dataSnapshot.child('lockPhrase').val() === '') && (dataSnapshot.child('user').val() === '')) {
+            } else if (!dataSnapshot.child('inUse').val() && (dataSnapshot.child('lockPhrase').val() === '') && (dataSnapshot.child('user').val() === '')) {
                 $scope.stocks[id].password = '';
+                var hash = CryptoJS.MD5($scope.stocks[id].lockPhrase);
+                deviceRef.update({inUse: true, lockPhrase: $scope.stocks[id].lockPhrase, user: $scope.stocks[id].user});
             }
         });
 //        $scope.angularFire($scope.fbURL + deviceBasePath + id, $scope, 'remote', {}).
