@@ -36,7 +36,9 @@
                 </form>
             </accordion-group>
             <accordion-group heading="History">
-                This content is straight in the template.
+                <ul>
+                    <li ng-repeat="entry in history">User: {{entry.user}}</li>
+                </ul>
             </accordion-group>
         </accordion>
     </tab>

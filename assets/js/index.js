@@ -1,6 +1,7 @@
 /*jslint sloppy: true */
 /*global angular, window, console */
-var deviceBasePath = 'stock/';
+var deviceBasePath = 'stock/',
+    deviceHistoryPath = 'history/';
 
 function ListCtrl($scope, time, angularFire, angularFireCollection, fbURL) {
 //    angularFire(fbURL + deviceBasePath, $scope, 'stocks', {}).
@@ -14,6 +15,7 @@ function ListCtrl($scope, time, angularFire, angularFireCollection, fbURL) {
         angular.forEach(dataSnapshot.val(), function (element, id) {
                 element.password = '';
                 element.$id = id;
+                element.history = angularFireCollection(fbURL + deviceHistoryPath + id);
             }, $scope.stocks);
     });
     $scope.time = time;
