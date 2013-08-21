@@ -1,32 +1,21 @@
 /*jslint sloppy: true */
-/*global angular, window, console */
+/*global angular, window, console, Firebase, CryptoJS */
 var deviceBasePath = 'stock/',
     deviceHistoryPath = 'history/';
 
-function ListCtrl($scope, time, angularFire, angularFireCollection, fbURL) {
-//    angularFire(fbURL + deviceBasePath, $scope, 'stocks', {}).
-//        then(function () {
-//            angular.forEach($scope.stocks, function (element, id) {
-//                element.password = '';
-//                element.$id = id;
-//            }, $scope.stocks);
-//        });
-    $scope.stocks = angularFireCollection(fbURL + deviceBasePath, function(dataSnapshot) {
+function ListCtrl($scope, time, angularFireCollection, fbURL) {
+    $scope.stocks = angularFireCollection(fbURL + deviceBasePath, function (dataSnapshot) {
         angular.forEach(dataSnapshot.val(), function (element, id) {
-                element.password = '';
-                element.$id = id;
-                element.history = angularFireCollection(fbURL + deviceHistoryPath + id);
-            }, $scope.stocks);
+            element.password = '';
+            element.$id = id;
+            element.history = angularFireCollection(fbURL + deviceHistoryPath + id);
+        }, $scope.stocks);
     });
     $scope.time = time;
-    $scope.angularFire = angularFire;
     $scope.fbURL = fbURL;
     $scope.send = function (index) {
         var deviceRef = new Firebase($scope.fbURL + deviceBasePath + $scope.stocks[index].$id);
-//        var current = _.filter($scope.stocks, function (device) {
-//            return device.$id === id;
-//        });
-        deviceRef.once('value', function(dataSnapshot) {
+        deviceRef.once('value', function (dataSnapshot) {
             var currentEncryptPass = CryptoJS.MD5($scope.stocks[index].password).toString();
             if (dataSnapshot.child('inUse').val() && (dataSnapshot.child('lockPhrase').val() === currentEncryptPass) && (dataSnapshot.child('user').val() === $scope.stocks[index].user)) {
                 $scope.stocks[index].password = '';
