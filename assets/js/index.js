@@ -25,7 +25,8 @@ function ListCtrl($scope, time, angularFire, angularFireCollection, fbURL) {
 //            return device.$id === id;
 //        });
         deviceRef.once('value', function(dataSnapshot) {
-            if (dataSnapshot.child('inUse').val() && (dataSnapshot.child('lockPhrase').val() === $scope.stocks[index].password) && (dataSnapshot.child('user').val() === $scope.stocks[index].user)) {
+            var currentEncryptPass = CryptoJS.MD5($scope.stocks[index].password).toString();
+            if (dataSnapshot.child('inUse').val() && (dataSnapshot.child('lockPhrase').val() === currentEncryptPass) && (dataSnapshot.child('user').val() === $scope.stocks[index].user)) {
                 $scope.stocks[index].password = '';
                 $scope.stocks[index].user = '';
                 $scope.stocks[index].lockPhrase = '';
@@ -33,8 +34,7 @@ function ListCtrl($scope, time, angularFire, angularFireCollection, fbURL) {
                 $scope.stocks.update($scope.stocks[index].$id);
             } else if (!dataSnapshot.child('inUse').val() && (dataSnapshot.child('lockPhrase').val() === '') && (dataSnapshot.child('user').val() === '')) {
                 $scope.stocks[index].inUse = true;
-                $scope.stocks[index].lockPhrase = $scope.stocks[index].password;
-//                $scope.stocks[index].lockPhrase = CryptoJS.MD5($scope.stocks[index].password);
+                $scope.stocks[index].lockPhrase = currentEncryptPass;
                 $scope.stocks[index].password = '';
                 $scope.stocks.update($scope.stocks[index].$id);
             }
