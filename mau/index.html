@@ -10,9 +10,10 @@
         <script src="//cdn.jsdelivr.net/angularjs/1.0.7/angular.min.js"></script>
         <script src="//cdn.jsdelivr.net/jquery/2.0.3/jquery-2.0.3.min.js"></script>
         <script src="//cdn.jsdelivr.net/underscorejs/1.5.1/underscore-min.js"></script>
+        <script src="app.js"></script>
 
     </head>
-    <body>
+    <body ng-controller="TopicsCtrl">
         <div class="container">
             <div class="row">
                 <div class=".col-lg-12">
@@ -25,11 +26,7 @@
                         </div>
                     </nav>
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#">HTML</a></li>
-                        <li><a href="#">CSS</a></li>
-                        <li><a href="#">Javascript</a></li>
-                        <li><a href="#">JQuery</a></li>
-                        <li><a href="#">Angular</a></li>
+                        <li ng-repeat="topic in topics" class="{{topic.class}}"><a href="#">{{topic.text}}</a></li>
                     </ul>
                     <div class="list-group">
                         <a href="#" class="list-group-item active">
@@ -43,14 +40,6 @@
                 </div>
             </div>
 
-        </div>
-        <div>
-            <ul class="unstyled" ng-controller="TodoCtrl">
-                <li ng-repeat="todo in todos">
-                    <input type="checkbox" ng-model="todo.done">
-                    <span class="done-{{todo.done}}">{{todo.text}}</span>
-                </li>
-            </ul>
         </div>
     </body>
 </html>
