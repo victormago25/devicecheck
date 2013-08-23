@@ -25,11 +25,19 @@
                             <button type="button" class="btn btn btn-primary pull-right" ng-click="refresh()"><span class="icon-repeat"></span> Load</button>
                         </div>
                     </nav>
-                    <ul class="nav nav-tabs">
-                        <li ng-repeat="group in groups" class="{{group.classes}}"><a href="">{{group.text}}</a></li>
-                    </ul>
+                    <workshop01.directives.tabs>
+                        <workshop01.directives.pane ng-repeat="group in groups" title="{{group.text}}">
+                            <a href="" ng-repeat="topic in group.topics" ng-model="topic.selected" ng-class="{
+                                                    active:topic.selected
+                                                }" class="list-group-item ">
+                                Cras justo odio
+                            </a>
+                        </workshop01.directives.pane>
+                    </workshop01.directives.tabs>
                     <div class="list-group">
-                        <a href="" ng-repeat="topic in topics" ng-model="topic.selected" ng-class="{active:topic.selected}" class="list-group-item ">
+                        <a href="" ng-repeat="topic in topics" ng-model="topic.selected" ng-class="{
+                                            active:topic.selected
+                                        }" class="list-group-item ">
                             Cras justo odio
                         </a>
                         <a href="" class="list-group-item">Dapibus ac facilisis in</a>

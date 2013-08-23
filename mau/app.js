@@ -2,7 +2,7 @@
 /*global angular, window, console, _ */
 
 angular.module('workshop01', []).
-    directive('workshop01.directives.tab', function () {
+    directive('workshop01.directives.tabs', function () {
         return {
             restrict: 'E',
             transclude: true,
@@ -24,36 +24,29 @@ angular.module('workshop01', []).
                 };
             },
             template:
-                    '<div class="tabbable">' +
-                    '<ul class="nav nav-tabs">' +
-                    '<li ng-repeat="pane in panes" ng-class="{active:pane.selected}">' +
-                    '<a hrefs="" ng-click="select(pane)">{{pane.title}}</a>' +
-                    '</li>' +
-                    '</ul>' +
-                    '<div class="tab-content" ng-transclude></div>' +
-                    '</div>',
+                '<div class="tabbable"><ul class="nav nav-tabs">' +
+                '<li ng-repeat="pane in panes" ng-class="{active:pane.selected}"><a hrefs="" ng-click="select(pane)">{{pane.title}}</a></li>' +
+                '</ul><div class="tab-content" ng-transclude></div></div>',
             replace: true
         };
     }).
-    directive('pane', function () {
+    directive('workshop01.directives.pane', function () {
         return {
-            require: '^tabs',
+            require: '^workshop01.directives.tabs',
             restrict: 'E',
             transclude: true,
             scope: {title: '@'},
             link: function (scope, element, attrs, tabsCtrl) {
                 tabsCtrl.addPane(scope);
             },
-            template:
-                    '<div class="tab-pane" ng-class="{active: selected}" ng-transclude>' +
-                    '</div>',
+            template: '<div class="list-group" ng-class="{active: selected}" ng-transclude></div>',
             replace: true
         };
     });
 
 function returnGroups() {
     var groups = [
-        {text: 'HTML', classes: 'active'},
+        {text: 'HTML'},
         {text: 'CSS'},
         {text: 'Javascript'},
         {text: 'JQuery'},
@@ -65,7 +58,15 @@ function returnGroups() {
 
 function TopicsCtrl($scope) {
     $scope.refresh = function () {
-        $scope.groups = returnGroups();
+//        angular.forEach(returnGroups(), function (element, id) {
+//            element.topics = _.range(10);
+//        }, $scope.groups);
+        $scope.groups = _.each(returnGroups(), function (element, index, list) {
+            element.topics = _.range(10);
+            console.log(element);
+        });
+        console.log($scope.groups);
+//        $scope.groups = returnGroups();
     };
-    $scope.topics = _.range(10);
+//    $scope.topics = _.range(10);
 }
