@@ -25,22 +25,20 @@
                             <button type="button" class="btn btn btn-primary pull-right" ng-click="refresh()"><span class="icon-repeat"></span> Load</button>
                         </div>
                     </nav>
-                    <workshop01.directives.tabs>
-                        <workshop01.directives.pane ng-repeat="group in groups" title="{{group.text}}">
-                            <a href="" ng-repeat="topic in group.topics" ng-model="topic.selected" ng-class="{
-                                                    active:topic.selected
-                                                }" class="list-group-item ">
-                                Cras justo odio
-                            </a>
-                        </workshop01.directives.pane>
-                    </workshop01.directives.tabs>
-                    <div class="list-group">
-                        <a href="" ng-repeat="topic in topics" ng-model="topic.selected" ng-class="{
-                                            active:topic.selected
-                                        }" class="list-group-item ">
-                            Cras justo odio
-                        </a>
-                        <a href="" class="list-group-item">Dapibus ac facilisis in</a>
+                    <div class="tabbable"><ul class="nav nav-tabs">
+                            <li ng-repeat="group in groups" ng-class="{active:group.selected}">
+                                <a hrefs="" ng-click="select(group)">{{group.title}}</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div ng-repeat="group in groups" class="tab-pane" id="{{group.title}}" ng-class="{active:group.selected}">
+                                <div class="list-group">
+                                    <a href="" ng-repeat="topic in group.topics" class="list-group-item">
+                                        <ng-pluralize count="group.index" when="{'0':'Tutorial #{{$index+1}} at W3Schools', '1':'Mozilla Developer Network, Learn CSS Topic #{{$index+1}}', '2':'Exercise #{{$index+1}} at CodeAcademy.com', '3':'Try jQuery, Chapter {{$index+1}}', '4':'AngularJS – Tutorial {{$index+1}}'}"></ng-pluralize>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

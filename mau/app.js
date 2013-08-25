@@ -1,72 +1,43 @@
 /*jslint sloppy: true */
-/*global angular, window, console, _ */
+/*global angular, window, console, _, $, document */
 
-angular.module('workshop01', []).
-    directive('workshop01.directives.tabs', function () {
-        return {
-            restrict: 'E',
-            transclude: true,
-            scope: {},
-            controller: function ($scope, $element) {
-                var panes = $scope.panes = [];
-
-                $scope.select = function (pane) {
-                    angular.forEach(panes, function (pane) {
-                        pane.selected = false;
-                    });
-                    pane.selected = true;
-                };
-                this.addPane = function (pane) {
-                    if (panes.length === 0) {
-                        $scope.select(pane);
-                    }
-                    panes.push(pane);
-                };
-            },
-            template:
-                '<div class="tabbable"><ul class="nav nav-tabs">' +
-                '<li ng-repeat="pane in panes" ng-class="{active:pane.selected}"><a hrefs="" ng-click="select(pane)">{{pane.title}}</a></li>' +
-                '</ul><div class="tab-content" ng-transclude></div></div>',
-            replace: true
-        };
-    }).
-    directive('workshop01.directives.pane', function () {
-        return {
-            require: '^workshop01.directives.tabs',
-            restrict: 'E',
-            transclude: true,
-            scope: {title: '@'},
-            link: function (scope, element, attrs, tabsCtrl) {
-                tabsCtrl.addPane(scope);
-            },
-            template: '<div class="list-group" ng-class="{active: selected}" ng-transclude></div>',
-            replace: true
-        };
-    });
+angular.module('workshop01', []);
 
 function returnGroups() {
     var groups = [
-        {text: 'HTML'},
-        {text: 'CSS'},
-        {text: 'Javascript'},
-        {text: 'JQuery'},
-        {text: 'Angular'}],
+        {title: 'HTML', selected: true},
+        {title: 'CSS'},
+        {title: 'Javascript'},
+        {title: 'JQuery'},
+        {title: 'Angular'}],
         maxGroups = _.random(1, 5);
     console.log(maxGroups);
     return groups.slice(0, maxGroups);
 }
 
-function TopicsCtrl($scope) {
+function TopicsCtrl($scope, $http, $q) {
     $scope.refresh = function () {
 //        angular.forEach(returnGroups(), function (element, id) {
 //            element.topics = _.range(10);
 //        }, $scope.groups);
-        $scope.groups = _.each(returnGroups(), function (element, index, list) {
-            element.topics = _.range(10);
-            console.log(element);
+        $scope.groups = returnGroups();
+        _.each($scope.groups, function (element, index) {
+            element.topics = _.range(_.random(1, 10));
+            element.index = index;
         });
+        $scope.select = function (group) {
+            _.each($scope.groups, function (element) {
+                element.selected = false;
+            });
+            group.selected = true;
+        };
         console.log($scope.groups);
 //        $scope.groups = returnGroups();
     };
 //    $scope.topics = _.range(10);
 }
+$(document).ready(function () {
+    $(".tab-content").on("click", "a", function () {
+        $(this).toggleClass('active');
+    });
+});
