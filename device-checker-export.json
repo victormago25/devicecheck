@@ -23,11 +23,11 @@
       "img" : "assets/img/galaxy-tab.jpg"
     },
     "sm01" : {
-      "inUse" : false,
+      "inUse" : true,
       "displaySize" : "4\"",
-      "lockPhrase" : "",
+      "lockPhrase" : "e10adc3949ba59abbe56e057f20f883e",
       "osVersion" : "2.3.3",
-      "user" : "",
+      "user" : "Alonso",
       "name" : "Galaxy S",
       "password" : "",
       "os" : "Android",
