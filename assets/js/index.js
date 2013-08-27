@@ -13,9 +13,7 @@ angular.module('device', ['ui.bootstrap', 'firebase']).
         return time;
     }).
     controller('ListCtrl', ['$scope', 'time', 'angularFireCollection', 'fbURL', function ($scope, time, angularFireCollection, fbURL) {
-        $scope.stocks = angularFireCollection(fbURL + deviceBasePath, function (dataSnapshot) {
-            dataSnapshot.val()['sm01'].password = 'test';
-        });
+        $scope.stocks = angularFireCollection(fbURL + deviceBasePath);
         window.stocks = $scope.stocks;
         $scope.time = time;
         $scope.fbURL = fbURL;

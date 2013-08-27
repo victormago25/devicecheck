@@ -9,7 +9,18 @@
       "name" : "ipod Touch",
       "password" : "",
       "os" : "iOS",
-      "img" : "assets/img/ipod.jpg"
+      "img" : "assets/img/ipod.jpg",
+      "history" : [{
+          "date" : 20130802,
+          "user" : "Alonso",
+          "status" : "co"
+        },
+        {
+          "date" : 20130802,
+          "user" : "Alonso",
+          "status" : "ci"
+        }
+      ]
     },
     "tb02" : {
       "inUse" : false,
@@ -20,18 +31,40 @@
       "name" : "Galaxy Tab 7",
       "password" : "",
       "os" : "Android",
-      "img" : "assets/img/galaxy-tab.jpg"
+      "img" : "assets/img/galaxy-tab.jpg",
+      "history" : [{
+          "date" : 20130802,
+          "user" : "Alonso",
+          "status" : "co"
+        },
+        {
+          "date" : 20130802,
+          "user" : "Alonso",
+          "status" : "ci"
+        }
+      ]
     },
     "sm01" : {
-      "inUse" : false,
+      "inUse" : true,
       "displaySize" : "4\"",
-      "lockPhrase" : "",
+      "lockPhrase" : "e10adc3949ba59abbe56e057f20f883e",
       "osVersion" : "2.3.3",
-      "user" : "",
+      "user" : "Alonso",
       "name" : "Galaxy S",
       "password" : "",
       "os" : "Android",
-      "img" : "assets/img/nexus-s.png"
+      "img" : "assets/img/nexus-s.png",
+      "history" : [{
+          "date" : 20130802,
+          "user" : "Alonso",
+          "status" : "co"
+        },
+        {
+          "date" : 20130802,
+          "user" : "Alonso",
+          "status" : "ci"
+        }
+      ]
     },
     "tb01" : {
       "inUse" : false,
@@ -42,7 +75,18 @@
       "name" : "iPad",
       "password" : "",
       "os" : "iOS",
-      "img" : "assets/img/ipad.jpg"
+      "img" : "assets/img/ipad.jpg",
+      "history" : [{
+          "date" : 20130802,
+          "user" : "Alonso",
+          "status" : "co"
+        },
+        {
+          "date" : 20130802,
+          "user" : "Alonso",
+          "status" : "ci"
+        }
+      ]
     },
     "sm03" : {
       "inUse" : false,
@@ -53,34 +97,18 @@
       "name" : "HTC Inspire",
       "password" : "",
       "os" : "Android",
-      "img" : "assets/img/inspire.jpg"
+      "img" : "assets/img/inspire.jpg",
+      "history" : [{
+          "date" : 20130802,
+          "user" : "Alonso",
+          "status" : "co"
+        },
+        {
+          "date" : 20130802,
+          "user" : "Alonso",
+          "status" : "ci"
+        }
+      ]
     }
-  },
-  "history" : {
-    "sm02" : [ null, {
-      "date" : 20130802,
-      "user" : "Alonso",
-      "status" : "co"
-    } ],
-    "tb02" : [ null, {
-      "date" : 20130802,
-      "staus" : "co",
-      "user" : "Erick"
-    } ],
-    "sm01" : [ null, {
-      "date" : 20130802,
-      "user" : "Alonso",
-      "status" : "co"
-    } ],
-    "tb01" : [ null, {
-      "date" : 20130802,
-      "user" : "Erick",
-      "status" : "co"
-    } ],
-    "sm03" : [ null, {
-      "date" : 20130802,
-      "user" : "Carlos",
-      "status" : "co"
-    } ]
   }
 }
