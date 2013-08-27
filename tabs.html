@@ -37,7 +37,7 @@
             </accordion-group>
             <accordion-group heading="History">
                 <ul>
-                    <li ng-repeat="entry in device.$history">User: {{entry.user}}</li>
+                    <li ng-repeat="log in device.history"><span class="bold">User:</span> {{log.user}}</li>
                 </ul>
             </accordion-group>
         </accordion>
