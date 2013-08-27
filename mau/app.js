@@ -3,8 +3,7 @@
 var myApp = angular.module('workshop01', []).
     controller('TopicsCtrl', ['$scope', '$http', '$q', function ($scope, $http, $q) {
         $scope.refresh = function () {
-            var maxGroups = _.random(1, 5),
-                promise = $q.all([$http.get('./data/tab1.json'), $http.get('./data/tab2.json'), $http.get('./data/tab3.json'), $http.get('./data/tab4.json'), $http.get('./data/tab5.json')].slice(0, maxGroups));
+            var promise = $q.all([$http.get('./data/tab1.json'), $http.get('./data/tab2.json'), $http.get('./data/tab3.json'), $http.get('./data/tab4.json'), $http.get('./data/tab5.json')].slice(0, _.random(1, 5)));
             promise.then(function (data) {
                 _.each(data, function (element, index) {
                     if (index === 0) {
@@ -15,12 +14,6 @@ var myApp = angular.module('workshop01', []).
                 });
                 $scope.groups = data;
             });
-        };
-        $scope.select = function (group) {
-            _.each($scope.groups, function (element) {
-                element.data.selected = false;
-            });
-            group.selected = true;
         };
     }]);
 $(document).ready(function () {
