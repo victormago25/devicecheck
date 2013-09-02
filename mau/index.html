@@ -24,17 +24,17 @@
                             <button type="button" class="btn navbar-btn btn-primary pull-right" ng-click="refresh()"><span class="icon-repeat"></span> Load</button>
                         </div>
                     </nav>
-                    <div class="tabbable">
+                    <div class="tabbable" workshop01.directives.tabs>
                         <ul class="nav nav-tabs">
-                            <li ng-repeat="group in groups" >
-                                <a>{{group.data.name}}</a>
+                            <li ng-repeat="group in groups">
+                                <a href="#{{group.name}}" data-toggle="tab">{{group.name}}</a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div ng-repeat="group in groups" class="tab-pane" id="{{group.data.name}}" ng-class="{active:group.data.selected}">
-                                <div class="list-group">
-                                    <a href="" ng-repeat="group.data.topics" class="list-group-item">
-                                        <ng-pluralize count="group.data.index" when="{'0':'Tutorial #{{$index+1}} at W3Schools', '1':'Mozilla Developer Network, Learn CSS Topic #{{$index+1}}', '2':'Exercise #{{$index+1}} at CodeAcademy.com', '3':'Try jQuery, Chapter {{$index+1}}', '4':'AngularJS – Tutorial {{$index+1}}'}"></ng-pluralize>
+                            <div ng-repeat="group in groups" class="tab-pane" id="{{group.name}}">
+                                <div class="list-group" active-link>
+                                    <a href="" ng-repeat="topic in group.topics" class="list-group-item">
+                                        <ng-pluralize count="group.index" when="{'0':'Tutorial #{{$index+1}} at W3Schools', '1':'Mozilla Developer Network, Learn CSS Topic #{{$index+1}}', '2':'Exercise #{{$index+1}} at CodeAcademy.com', '3':'Try jQuery, Chapter {{$index+1}}', '4':'AngularJS – Tutorial {{$index+1}}'}"></ng-pluralize>
                                     </a>
                                 </div>
                             </div>
