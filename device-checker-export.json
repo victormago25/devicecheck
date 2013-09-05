@@ -9,18 +9,88 @@
       "name" : "ipod Touch",
       "password" : "",
       "os" : "iOS",
-      "img" : "assets/img/ipod.jpg",
-      "history" : [{
-          "date" : 20130802,
-          "user" : "Alonso",
-          "status" : "co"
-        },
-        {
-          "date" : 20130802,
-          "user" : "Alonso",
-          "status" : "ci"
-        }
-      ]
+      "history" : [ {
+        "date" : 20130802,
+        "user" : "Alonso",
+        "status" : "ci"
+      }, {
+        "date" : 20130802,
+        "user" : "Alonso",
+        "status" : "co"
+      }, {
+        "date" : 20130803,
+        "user" : "Alonso",
+        "status" : "ci"
+      }, {
+        "date" : 20130803,
+        "user" : "Alonso",
+        "status" : "co"
+      }, {
+        "date" : 20130803,
+        "user" : "Alonso",
+        "status" : "ci"
+      }, {
+        "date" : 20130803,
+        "user" : "Alonso",
+        "status" : "co"
+      }, {
+        "date" : 20130804,
+        "user" : "Alonso",
+        "status" : "ci"
+      }, {
+        "date" : 20130804,
+        "user" : "Alonso",
+        "status" : "co"
+      }, {
+        "date" : 20130804,
+        "user" : "Alonso",
+        "status" : "ci"
+      }, {
+        "date" : 20130805,
+        "user" : "Alonso",
+        "status" : "co"
+      }, {
+        "date" : 20130805,
+        "user" : "Alonso",
+        "status" : "ci"
+      }, {
+        "date" : 20130805,
+        "user" : "Alonso",
+        "status" : "co"
+      }, {
+        "date" : 20130805,
+        "user" : "Alonso",
+        "status" : "ci"
+      }, {
+        "date" : 20130806,
+        "user" : "Alonso",
+        "status" : "co"
+      }, {
+        "date" : 20130806,
+        "user" : "Alonso",
+        "status" : "ci"
+      }, {
+        "date" : 20130806,
+        "user" : "Alonso",
+        "status" : "co"
+      }, {
+        "date" : 20130806,
+        "user" : "Alonso",
+        "status" : "ci"
+      }, {
+        "date" : 20130806,
+        "user" : "Alonso",
+        "status" : "co"
+      }, {
+        "date" : 20130806,
+        "user" : "Alonso",
+        "status" : "ci"
+      }, {
+        "date" : 20130806,
+        "user" : "Alonso",
+        "status" : "co"
+      } ],
+      "img" : "assets/img/ipod.jpg"
     },
     "tb02" : {
       "inUse" : false,
@@ -31,18 +101,16 @@
       "name" : "Galaxy Tab 7",
       "password" : "",
       "os" : "Android",
-      "img" : "assets/img/galaxy-tab.jpg",
-      "history" : [{
-          "date" : 20130802,
-          "user" : "Alonso",
-          "status" : "co"
-        },
-        {
-          "date" : 20130802,
-          "user" : "Alonso",
-          "status" : "ci"
-        }
-      ]
+      "history" : [ {
+        "date" : 20130802,
+        "user" : "Alonso",
+        "status" : "co"
+      }, {
+        "date" : 20130802,
+        "user" : "Alonso",
+        "status" : "ci"
+      } ],
+      "img" : "assets/img/galaxy-tab.jpg"
     },
     "sm01" : {
       "inUse" : true,
@@ -53,18 +121,16 @@
       "name" : "Galaxy S",
       "password" : "",
       "os" : "Android",
-      "img" : "assets/img/nexus-s.png",
-      "history" : [{
-          "date" : 20130802,
-          "user" : "Alonso",
-          "status" : "co"
-        },
-        {
-          "date" : 20130802,
-          "user" : "Alonso",
-          "status" : "ci"
-        }
-      ]
+      "history" : [ {
+        "date" : 20130802,
+        "user" : "Alonso",
+        "status" : "co"
+      }, {
+        "date" : 20130802,
+        "user" : "Alonso",
+        "status" : "ci"
+      } ],
+      "img" : "assets/img/nexus-s.png"
     },
     "tb01" : {
       "inUse" : false,
@@ -75,18 +141,16 @@
       "name" : "iPad",
       "password" : "",
       "os" : "iOS",
-      "img" : "assets/img/ipad.jpg",
-      "history" : [{
-          "date" : 20130802,
-          "user" : "Alonso",
-          "status" : "co"
-        },
-        {
-          "date" : 20130802,
-          "user" : "Alonso",
-          "status" : "ci"
-        }
-      ]
+      "history" : [ {
+        "date" : 20130802,
+        "user" : "Alonso",
+        "status" : "co"
+      }, {
+        "date" : 20130802,
+        "user" : "Alonso",
+        "status" : "ci"
+      } ],
+      "img" : "assets/img/ipad.jpg"
     },
     "sm03" : {
       "inUse" : false,
@@ -97,18 +161,16 @@
       "name" : "HTC Inspire",
       "password" : "",
       "os" : "Android",
-      "img" : "assets/img/inspire.jpg",
-      "history" : [{
-          "date" : 20130802,
-          "user" : "Alonso",
-          "status" : "co"
-        },
-        {
-          "date" : 20130802,
-          "user" : "Alonso",
-          "status" : "ci"
-        }
-      ]
+      "history" : [ {
+        "date" : 20130802,
+        "user" : "Alonso",
+        "status" : "co"
+      }, {
+        "date" : 20130802,
+        "user" : "Alonso",
+        "status" : "ci"
+      } ],
+      "img" : "assets/img/inspire.jpg"
     }
   }
 }

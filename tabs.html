@@ -36,9 +36,19 @@
                 </form>
             </accordion-group>
             <accordion-group heading="History">
-                <ul>
-                    <li ng-repeat="log in device.history"><span class="bold">User:</span> {{log.user}}</li>
-                </ul>
+                <table ng-table="tableParams" class="table">
+                    <tr ng-repeat="log in device.history">
+                        <td data-title="'Name'">
+                            {{log.user}}
+                        </td>
+                        <td data-title="'Status'">
+                            {{log.status}}
+                        </td>
+                        <td data-title="'Date'">
+                            {{log.date}}
+                        </td>
+                    </tr>
+                </table>
             </accordion-group>
         </accordion>
     </tab>
