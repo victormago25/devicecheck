@@ -12,7 +12,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'ngTable']).
         return time;
     }).
     controller('ListCtrl', ['$scope', 'time', 'angularFireCollection', 'fbURL', 'deviceBasePath', 'ngTableParams', function ($scope, time, angularFireCollection, fbURL, deviceBasePath, ngTableParams) {
-        $scope.stocks = angularFireCollection(fbURL + deviceBasePath);
+        $scope.stocks = angularFireCollection(new Firebase(fbURL + deviceBasePath));
         window.stocks = $scope.stocks;
         $scope.time = time;
         $scope.fbURL = fbURL;
@@ -24,11 +24,13 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'ngTable']).
                     $scope.stocks[index].password = '';
                     $scope.stocks[index].user = '';
                     $scope.stocks[index].lockPhrase = '';
+                    $scope.stocks[index].history = dataSnapshot.child('history').val();
                     $scope.stocks[index].inUse = false;
                     $scope.stocks.update($scope.stocks[index].$id);
                 } else if (!dataSnapshot.child('inUse').val() && (dataSnapshot.child('lockPhrase').val() === '') && (dataSnapshot.child('user').val() === '')) {
                     $scope.stocks[index].inUse = true;
                     $scope.stocks[index].lockPhrase = currentEncryptPass;
+                    $scope.stocks[index].history = dataSnapshot.child('history').val();
                     $scope.stocks[index].password = '';
                     $scope.stocks.update($scope.stocks[index].$id);
                 }
