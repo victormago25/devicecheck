@@ -54,6 +54,10 @@ a:hover {
     float: left;
 }
 
+.accordion .accordion-heading {
+    background: url(../img/close.png) center right no-repeat;
+}
+
 .info {
     min-width: 46%;
     float: left;

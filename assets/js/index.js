@@ -1,7 +1,7 @@
 /*jslint sloppy: true */
 /*global angular, window, console, Firebase, CryptoJS */
 
-angular.module('device', ['ui.bootstrap', 'firebase', 'ngTable']).
+angular.module('device', ['ui.bootstrap', 'firebase']).
     value('fbURL', 'https://device-checker.firebaseio.com/').
     value('deviceBasePath', 'stock/').
     factory('time', function () {
@@ -11,7 +11,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'ngTable']).
         }());
         return time;
     }).
-    controller('ListCtrl', ['$scope', 'time', 'angularFireCollection', 'fbURL', 'deviceBasePath', 'ngTableParams', function ($scope, time, angularFireCollection, fbURL, deviceBasePath, ngTableParams) {
+    controller('ListCtrl', ['$scope', 'time', 'angularFireCollection', 'fbURL', 'deviceBasePath', function ($scope, time, angularFireCollection, fbURL, deviceBasePath) {
         $scope.stocks = angularFireCollection(new Firebase(fbURL + deviceBasePath));
         window.stocks = $scope.stocks;
         $scope.time = time;
@@ -36,25 +36,13 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'ngTable']).
                 }
             });
         };
-        $scope.tableParams = new ngTableParams({
-            page: 1,            // show first page
-            total: $scope.stocks[1] ? $scope.stocks[1].history.lenght : 20,
-            count: 10           // count per page
-        });
-
-        // watch for changes of parameters
-        $scope.$watch('tableParams', function (params) {
-            // slice array data on pages
-            if ($scope.stocks.history) {
-                $scope.users = $scope.stocks[1].history.slice(
-                    (params.page - 1) * params.count,
-                    params.page * params.count
-                );
-            }
-        }, true);
     }]).
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.
             when('/', {controller: 'ListCtrl', templateUrl: '../../tabs.html'}).
             otherwise({redirectTo: '/'});
     }]);
+
+$(document).ready(function () {
+	$('#tableHistory1').dataTable();
+});
