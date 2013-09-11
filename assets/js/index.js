@@ -1,7 +1,22 @@
 /*jslint sloppy: true */
 /*global angular, window, console, Firebase, CryptoJS */
+angular.module('devicechecker.directives', [])
+    .directive('activeTable', function () {
+        return {
+            restrict: 'A',
+            link: function (scope, element, attrs) {
+                if (angular.isString(attrs.activeTable)) {
+                    element.dataTable({"aoColumns": [
+                        { "mData": "user" },
+                        { "mData": "status" },
+                        { "mData": "date" }],
+                        "aaSorting": [[ 2, "desc" ]]}).fnAddData(scope.stocks[attrs.activeTable].history);
+                }
+            }
+        };
+    });
 
-angular.module('device', ['ui.bootstrap', 'firebase']).
+angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives']).
     value('fbURL', 'https://device-checker.firebaseio.com/').
     value('deviceBasePath', 'stock/').
     factory('time', function () {
@@ -42,7 +57,3 @@ angular.module('device', ['ui.bootstrap', 'firebase']).
             when('/', {controller: 'ListCtrl', templateUrl: '../../tabs.html'}).
             otherwise({redirectTo: '/'});
     }]);
-
-$(document).ready(function () {
-	$('#tableHistory1').dataTable();
-});
