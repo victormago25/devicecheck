@@ -1,24 +1,16 @@
 {
   "stock" : {
-    "sm01" : {
-      "inUse" : true,
-      "displaySize" : "3.5\"",
-      "lockPhrase" : "e10adc3949ba59abbe56e057f20f883e",
-      "osVersion" : "6.1.3",
-      "user" : "Alonso",
-      "name" : "iPod",
+    "tb03" : {
+      "inUse" : false,
+      "displaySize" : "10\"",
+      "lockPhrase" : "",
+      "osVersion" : "4.0.3",
+      "user" : "",
+      "name" : "Asus Transformer",
       "password" : "",
-      "os" : "iOS",
-      "history" : [ {
-        "date" : 20130802,
-        "user" : "Beto",
-        "status" : "Checked-out"
-      }, {
-        "date" : 20130802,
-        "user" : "Beto",
-        "status" : "Checked-in"
-      } ],
-      "img" : "assets/img/ipod.jpg"
+      "os" : "Android",
+      "history" : [],
+      "img" : "assets/img/transformer.jpg"
     },
     "sm02" : {
       "inUse" : false,
@@ -29,36 +21,8 @@
       "name" : "HTC Inspire",
       "password" : "",
       "os" : "Android",
-      "history" : [ {
-        "date" : 20130802,
-        "user" : "Porras",
-        "status" : "Checked-out"
-      }, {
-        "date" : 20130802,
-        "user" : "Porras",
-        "status" : "Checked-in"
-      } ],
+      "history" : [],
       "img" : "assets/img/inspire.jpg"
-    },
-    "tb01" : {
-      "inUse" : false,
-      "displaySize" : "10\"",
-      "lockPhrase" : "",
-      "osVersion" : "6.1.3",
-      "user" : "",
-      "name" : "iPad (1)",
-      "password" : "",
-      "os" : "iOS",
-      "history" : [ {
-        "date" : 20130802,
-        "user" : "Mario",
-        "status" : "Checked-out"
-      }, {
-        "date" : 20130802,
-        "user" : "Mario",
-        "status" : "Checked-in"
-      } ],
-      "img" : "assets/img/ipad.jpg"
     },
     "tb02" : {
       "inUse" : false,
@@ -69,44 +33,20 @@
       "name" : "iPad (2)",
       "password" : "",
       "os" : "iOS",
-      "history" : [ {
-        "date" : 20130802,
-        "user" : "Mario",
-        "status" : "Checked-out"
-      }, {
-        "date" : 20130802,
-        "user" : "Mario",
-        "status" : "Checked-in"
-      } ],
+      "history" : [],
       "img" : "assets/img/ipad.jpg"
     },
-    "tb03" : {
+    "sm01" : {
       "inUse" : false,
-      "displaySize" : "10\"",
+      "displaySize" : "3.5\"",
       "lockPhrase" : "",
-      "osVersion" : "4.0.3",
+      "osVersion" : "6.1.3",
       "user" : "",
-      "name" : "Asus Transformer",
+      "name" : "iPod",
       "password" : "",
-      "os" : "Android",
-      "history" : [ {
-        "date" : 20130802,
-        "user" : "Alonso",
-        "status" : "Checked-out"
-      }, {
-        "date" : 20130802,
-        "user" : "Alonso",
-        "status" : "Checked-in"
-      }, {
-        "date" : 20130809,
-        "user" : "Erick",
-        "status" : "Checked-out"
-      }, {
-        "date" : 20130809,
-        "user" : "Erick",
-        "status" : "Checked-in"
-      } ],
-      "img" : "assets/img/transformer.jpg"
+      "os" : "iOS",
+      "history" : [],
+      "img" : "assets/img/ipod.jpg"
     },
     "tb04" : {
       "inUse" : false,
@@ -117,24 +57,20 @@
       "name" : "Galaxy Tab 7",
       "password" : "",
       "os" : "Android",
-      "history" : [ {
-        "date" : 20130802,
-        "user" : "Alonso",
-        "status" : "Checked-out"
-      }, {
-        "date" : 20130802,
-        "user" : "Alonso",
-        "status" : "Checked-in"
-      }, {
-        "date" : 20130809,
-        "user" : "Erick",
-        "status" : "Checked-out"
-      }, {
-        "date" : 20130809,
-        "user" : "Erick",
-        "status" : "Checked-in"
-      } ],
+      "history" : [],
       "img" : "assets/img/galaxy-tab.jpg"
+    },
+    "tb01" : {
+      "inUse" : false,
+      "displaySize" : "10\"",
+      "lockPhrase" : "",
+      "osVersion" : "6.1.3",
+      "user" : "",
+      "name" : "iPad (1)",
+      "password" : "",
+      "os" : "iOS",
+      "history" : [],
+      "img" : "assets/img/ipad.jpg"
     }
   }
 }
