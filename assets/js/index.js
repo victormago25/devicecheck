@@ -1,5 +1,5 @@
 /*jslint sloppy: true */
-/*global angular, window, console, Firebase, CryptoJS */
+/*global angular, window, console, Firebase, CryptoJS, moment */
 angular.module('devicechecker.directives', [])
     .directive('activeTable', function () {
         return {
@@ -11,7 +11,7 @@ angular.module('devicechecker.directives', [])
                         { "mData": "status" },
                         { "mData": "date" }],
                         "aaSorting": [[ 2, "desc" ]]});
-                    if(scope.stocks[attrs.activeTable].history) {
+                    if (scope.stocks[attrs.activeTable].history) {
                         element.dataTable().fnAddData(scope.stocks[attrs.activeTable].history);
                     }
                 }
@@ -41,7 +41,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                     newRecord = {
                         user: $scope.stocks[index].user,
                         status: 'Checked-in',
-                        date: new Date().toString()
+                        date: moment().format("YYYY-MM-DD hh:mm:ss a")
                     };
                 if (!$scope.stocks[index].history) {
                     $scope.stocks[index].history = [];
