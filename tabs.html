@@ -16,7 +16,7 @@
             <accordion-group heading="Request Device">
                 <form name="checkForm">
                     <div class="control-group" ng-class="{error: checkForm.user.$invalid}">
-                        <label>Accenture ID: (i.e juan.perez)</label>
+                        <label>Accenture ID: (i.e. juan.perez)</label>
                         <input type="text" name="user" ng-model="device.user" required>
                         <span ng-show="checkForm.user.$error.required" class="help-inline">
                             Required</span>
@@ -32,8 +32,8 @@
                         <span class="bold">Current time is:</span> {{ time.now | date:'short' }}
                     </p>
                     <br>
-                    <button ng-click="send($index)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-show="device.inUse">Checked-in</button>
-                    <button ng-click="send($index)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-hide="device.inUse">Checked-out</button>
+                    <button ng-click="send($index)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-show="device.inUse">Check-in</button>
+                    <button ng-click="send($index)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-hide="device.inUse">Check-out</button>
                 </form>
             </accordion-group>
             <accordion-group heading="History">

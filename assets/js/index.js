@@ -68,6 +68,6 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
     }]).
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.
-            when('/', {controller: 'ListCtrl', templateUrl: '../../tabs.html'}).
+            when('/', {controller: 'ListCtrl', templateUrl: '/devicetracker/tabs.html'}).
             otherwise({redirectTo: '/'});
     }]);

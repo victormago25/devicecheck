@@ -62,3 +62,12 @@ a:hover {
     min-width: 46%;
     float: left;
 }
+
+.nav-tabs > li {
+    cursor: pointer;
+}
+
+.dataTables_length {
+    margin-right: 10px;
+}
+
