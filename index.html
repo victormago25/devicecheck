@@ -4,25 +4,31 @@
         <title>Device Checker</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <link type="text/css" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link type="text/css" href="//cdn.jsdelivr.net/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
         <link href="assets/css/jquery.dataTables.css" type="text/css" rel="stylesheet">
         <link href="assets/css/index.css" type="text/css" rel="stylesheet">
         <script src="//cdn.jsdelivr.net/jquery/1.10.2/jquery-1.10.2.min.js"></script>
         <script src="//cdn.jsdelivr.net/angularjs/1.1.5/angular.min.js"></script>
-        <script src="assets/js/lib/ui-bootstrap-tpls-0.5.0.min.js"></script>
+        <script src="assets/js/lib/ui-bootstrap-tpls-0.6.0.min.js"></script>
         <script src="https://cdn.firebase.com/v0/firebase.js"></script>
         <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/md5.js"></script>
         <script src="assets/js/lib/angularFire.js"></script>
         <script src="assets/js/lib/jquery.dataTables.min.js"></script>
-        <script src="assets/js/lib/moment.min.js"></script>
+        <script src="//cdn.jsdelivr.net/momentjs/2.2.1/moment.min.js"></script>
         <script src="assets/js/index.js"></script>
     </head>
     <body>
-        <div class="header">
-            <img src="assets/img/logo_yahoo.png" alt="Yahoo!" />
-            <h1>Select the device to check for availability</h1>
-            <hr />
-            <div ng-view><progress percent="100" class="progress-striped active"></progress></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="header">
+                        <img src="assets/img/logo_yahoo.png" alt="Yahoo!" />
+                        <h1>Select the device to check for availability</h1>
+                        <hr />
+                        <div ng-view><progress percent="100" class="progress-striped active"></progress></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

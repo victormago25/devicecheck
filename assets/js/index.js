@@ -20,7 +20,7 @@ angular.module('devicechecker.directives', [])
     });
 
 angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives']).
-    value('fbURL', 'https://device-checker.firebaseio.com/').
+    value('fbURL', 'https://devicetrack.firebaseio.com/').
     value('deviceBasePath', 'stock/').
     factory('time', function () {
         var time = {};
@@ -65,9 +65,13 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 }
             });
         };
+        $scope.loadDevice = function (group, index) {
+            console.log(group);
+            console.log(index);
+        };
     }]).
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.
-            when('/', {controller: 'ListCtrl', templateUrl: '/devicetracker/tabs.html'}).
+            when('/', {controller: 'ListCtrl', templateUrl: '/tabs.html'}).
             otherwise({redirectTo: '/'});
     }]);

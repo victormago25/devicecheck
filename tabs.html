@@ -1,54 +1,14 @@
 <tabset>
-    <tab ng-repeat="device in stocks" heading="{{device.name}}">
-        <h2>{{device.name}}</h2>
-        <div class="alert ng-scope alert-error" ng-show="device.inUse">Device in use by {{device.user}}</div>
-        <div class="alert ng-scope alert-success" ng-hide="device.inUse">Device ready to use</div>
-        <img alt="{{device.name}}" ng-src="{{device.img}}" />
-        <div class="well well-large info">
-            <h3>Device Information:</h3>
-            <ul>
-                <li><span class="bold">Operative System: </span>{{device.os}}</li>
-                <li><span class="bold">Version: </span>{{device.osVersion}}</li>
-                <li><span class="bold">Display Size: </span>{{device.displaySize}}</li>
-            </ul>
-        </div>
-        <accordion close-others="true">
-            <accordion-group heading="Request Device">
-                <form name="checkForm">
-                    <div class="control-group" ng-class="{error: checkForm.user.$invalid}">
-                        <label>Accenture ID: (i.e. juan.perez)</label>
-                        <input type="text" name="user" ng-model="device.user" required>
-                        <span ng-show="checkForm.user.$error.required" class="help-inline">
-                            Required</span>
-                    </div>
-
-                    <div class="control-group" ng-class="{error: checkForm.password.$invalid}">
-                        <label>Passcode:</label>
-                        <input type="password" name="password" ng-model="device.password" required ngMinlength="6">
-                        <span ng-show="checkForm.password.$error.required" class="help-inline">
-                            Required</span>
-                    </div>
-                    <p>
-                        <span class="bold">Current time is:</span> {{ time.now | date:'short' }}
-                    </p>
-                    <br>
-                    <button ng-click="send($index)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-show="device.inUse">Check-in</button>
-                    <button ng-click="send($index)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-hide="device.inUse">Check-out</button>
-                </form>
-            </accordion-group>
-            <accordion-group heading="History">
-                <table id="tableHistory{{$index}}" class="table" active-table="{{$index}}">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Status</th>
-                            <th>Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </accordion-group>
-        </accordion>
+    <tab ng-repeat="group in stocks" heading="{{group.$id}}">
+       <div class="btn-group">
+           <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+               Select a device <span class="caret"></span>
+           </button>
+           <ul class="dropdown-menu" role="menu" ng-init="groupIndex = $index">
+               <li ng-repeat="device in group"><a ng-click="loadDevice(groupIndex, $index)">{{device.name}}</a></li>
+           </ul>
+       </div>
+       <hr/>
+       <div class="device-animate-container" ng-animate="{enter: 'device-enter', leave: 'device-leave'}"></div>
     </tab>
 </tabset>
