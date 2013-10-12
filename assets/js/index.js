@@ -70,8 +70,13 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
             console.log(index);
         };
     }]).
+    controller('TabsCtrl', ['$routeParams', function ($routeParams) {
+    }]).
+    controller('SmartCtrl', ['$routeParams', function ($routeParams) {
+    }]).
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.
-            when('/', {controller: 'ListCtrl', templateUrl: '/tabs.html'}).
+            when('/smartphones/:smartId', {controller: 'SmartCtrl', templateUrl: 'device.html'}).
+            when('/tablets/:tabId', {controller: 'TabsCtrl', templateUrl: 'device.html'}).
             otherwise({redirectTo: '/'});
     }]);
