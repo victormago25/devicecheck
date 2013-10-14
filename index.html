@@ -21,25 +21,24 @@
         <div class="container" ng-controller="ListCtrl">
             <div class="row">
                 <div class="col-12">
-                    <div class="header">
-                        <img src="assets/img/logo_yahoo.png" alt="Yahoo!" />
-                        <h1>Select the device to check for availability</h1>
-                        <hr />
-                        <tabset>
-                            <tab ng-repeat="group in stocks" heading="{{group.$id}}">
-                               <div class="btn-group">
-                                   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                       Select a device <span class="caret"></span>
-                                   </button>
-                                   <ul class="dropdown-menu" role="menu" ng-init="groupIndex = $index">
-                                       <li ng-repeat="device in group"><a ng-click="loadDevice(groupIndex, $index)">{{device.name}}</a></li>
-                                   </ul>
-                               </div>
-                               <hr/>
-                               <div class="device-animate-container" ng-animate="{enter: 'device-enter', leave: 'device-leave'}" ng-view></div>
-                            </tab>
-                        </tabset>
-                    </div>
+                    <img src="assets/img/logo_yahoo.png" alt="Yahoo" />
+                    <h1>Select the device to check for availability</h1>
+                    <hr />
+                    <tabset>
+                        <tab ng-repeat="group in stocks" heading="{{group.$id}}">
+                           <div class="btn-group">
+                               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                   Select a device <span class="caret"></span>
+                               </button>
+                               <ul class="dropdown-menu" role="menu">
+                                   <li ng-repeat="device in group"><a href="#/{{group.$id}}/{{$index}}">{{device.name}}</a></li>
+                               </ul>
+                           </div>
+                        </tab>
+                    </tabset>
+                </div>
+                <div class="col-12 over-hide">
+                    <div class="device-animate-container" ng-animate="{enter: 'device-enter', leave: 'device-leave'}" ng-view></div>
                 </div>
             </div>
         </div>

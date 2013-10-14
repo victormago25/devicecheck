@@ -6,14 +6,15 @@ angular.module('devicechecker.directives', [])
             restrict: 'A',
             link: function (scope, element, attrs) {
                 if (angular.isString(attrs.activeTable)) {
+                    console.log(element);
                     element.dataTable({"aoColumns": [
                         { "mData": "user" },
                         { "mData": "status" },
                         { "mData": "date" }],
                         "aaSorting": [[ 2, "desc" ]]});
-                    if (scope.stocks[attrs.activeTable].history) {
-                        element.dataTable().fnAddData(scope.stocks[attrs.activeTable].history);
-                    }
+//                    if (scope.stocks[attrs.activeTable].history) {
+//                        element.dataTable().fnAddData(scope.stocks[attrs.activeTable].history);
+//                    }
                 }
             }
         };
@@ -29,54 +30,50 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
         }());
         return time;
     }).
-    controller('ListCtrl', ['$scope', 'time', 'angularFireCollection', 'fbURL', 'deviceBasePath', function ($scope, time, angularFireCollection, fbURL, deviceBasePath) {
-        $scope.stocks = angularFireCollection(new Firebase(fbURL + deviceBasePath));
-        window.stocks = $scope.stocks;
-        $scope.time = time;
-        $scope.fbURL = fbURL;
-        $scope.send = function (index) {
-            var deviceRef = new Firebase($scope.fbURL + deviceBasePath + $scope.stocks[index].$id);
+    controller('ListCtrl', ['$rootScope', 'angularFireCollection', 'fbURL', 'deviceBasePath', function ($rootScope, angularFireCollection, fbURL, deviceBasePath) {
+        $rootScope.stocks = angularFireCollection(new Firebase(fbURL + deviceBasePath));
+        window.stocks = $rootScope.stocks;
+        $rootScope.fbURL = fbURL;
+    }]).
+    controller('DeviceCtrl', ['$rootScope', 'time', '$routeParams', 'deviceBasePath', function ($rootScope, time, $routeParams, deviceBasePath) {
+        this.actual = $rootScope.stocks.getByName($routeParams.groupId)[$routeParams.deviceId];
+        this.time = time;
+        this.$routeParams = $routeParams;
+        this.send = function ($routeParams) {
+            var actualInfo = $rootScope.stocks.getByName($routeParams.groupId)[$routeParams.deviceId],
+                deviceRef = new Firebase($rootScope.fbURL + deviceBasePath + actualInfo.$id);
             deviceRef.once('value', function (dataSnapshot) {
-                var currentEncryptPass = CryptoJS.MD5($scope.stocks[index].password).toString(),
+                var currentEncryptPass = CryptoJS.MD5(actualInfo.password).toString(),
                     newRecord = {
-                        user: $scope.stocks[index].user,
+                        user: actualInfo.user,
                         status: 'Checked-in',
                         date: moment().format("YYYY-MM-DD hh:mm:ss a")
                     };
-                if (!$scope.stocks[index].history) {
-                    $scope.stocks[index].history = [];
+                if (!actualInfo.history) {
+                    actualInfo.history = [];
                 } else {
-                    $scope.stocks[index].history = dataSnapshot.child('history').val();
+                    actualInfo.history = dataSnapshot.child('history').val();
                 }
-                if (dataSnapshot.child('inUse').val() && (dataSnapshot.child('lockPhrase').val() === currentEncryptPass) && (dataSnapshot.child('user').val() === $scope.stocks[index].user)) {
-                    $scope.stocks[index].password = '';
-                    $scope.stocks[index].user = '';
-                    $scope.stocks[index].lockPhrase = '';
-                    $scope.stocks[index].history.push(newRecord);
-                    $scope.stocks[index].inUse = false;
-                    $scope.stocks.update($scope.stocks[index].$id);
+                if (dataSnapshot.child('inUse').val() && (dataSnapshot.child('lockPhrase').val() === currentEncryptPass) && (dataSnapshot.child('user').val() === actualInfo.user)) {
+                    actualInfo.password = '';
+                    actualInfo.user = '';
+                    actualInfo.lockPhrase = '';
+                    actualInfo.history.push(newRecord);
+                    actualInfo.inUse = false;
+                    $rootScope.stocks.update(actualInfo.$id);
                 } else if (!dataSnapshot.child('inUse').val() && (dataSnapshot.child('lockPhrase').val() === '') && (dataSnapshot.child('user').val() === '')) {
                     newRecord.status = 'Checked-out';
-                    $scope.stocks[index].inUse = true;
-                    $scope.stocks[index].lockPhrase = currentEncryptPass;
-                    $scope.stocks[index].history.push(newRecord);
-                    $scope.stocks[index].password = '';
-                    $scope.stocks.update($scope.stocks[index].$id);
+                    actualInfo.inUse = true;
+                    actualInfo.lockPhrase = currentEncryptPass;
+                    actualInfo.history.push(newRecord);
+                    actualInfo.password = '';
+                    $rootScope.stocks.update(actualInfo.$id);
                 }
             });
         };
-        $scope.loadDevice = function (group, index) {
-            console.log(group);
-            console.log(index);
-        };
-    }]).
-    controller('TabsCtrl', ['$routeParams', function ($routeParams) {
-    }]).
-    controller('SmartCtrl', ['$routeParams', function ($routeParams) {
     }]).
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.
-            when('/smartphones/:smartId', {controller: 'SmartCtrl', templateUrl: 'device.html'}).
-            when('/tablets/:tabId', {controller: 'TabsCtrl', templateUrl: 'device.html'}).
+            when('/:groupId/:deviceId', {controller: 'DeviceCtrl', templateUrl: '/device.html', controllerAs: 'device'}).
             otherwise({redirectTo: '/'});
     }]);
