@@ -1,0 +1,383 @@
+{
+  "stock" : {
+    "Smartphones" : [ {
+      "inUse" : false,
+      "displaySize" : "3.5\"",
+      "lockPhrase" : "",
+      "osVersion" : "6.1.3",
+      "user" : "",
+      "name" : "iPod",
+      "password" : "",
+      "os" : "iOS",
+      "history" : [ {
+        "date" : "2013-09-12 08:54:43 pm",
+        "user" : "asalas",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-12 08:56:59 pm",
+        "user" : "asalas",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-12 09:00:36 pm",
+        "user" : "cledy",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-12 09:25:52 pm",
+        "user" : "cledy",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-12 09:26:14 pm",
+        "user" : "asalas",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-13 09:58:15 am",
+        "user" : "asalas",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-17 01:30:05 pm",
+        "user" : "adriana.chacon",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-17 04:23:11 pm",
+        "user" : "adriana.chacon",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-18 01:38:24 pm",
+        "user" : "adriana.chacon",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-18 04:34:13 pm",
+        "user" : "adriana.chacon",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-19 02:58:00 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-19 03:38:00 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-23 11:59:57 am",
+        "user" : "adriana.chacon",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-23 01:59:45 pm",
+        "user" : "adriana.chacon",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-25 10:30:56 am",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-25 03:12:22 pm",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-26 04:42:16 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-26 05:51:18 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-02 10:21:09 am",
+        "user" : "adriana.chacon",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-02 11:59:36 am",
+        "user" : "adriana.chacon",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-02 12:01:09 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-02 03:37:38 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-03 10:57:09 am",
+        "user" : "mario.cordero",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-03 11:44:01 am",
+        "user" : "mario.cordero",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-04 09:36:54 am",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-04 11:18:18 am",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-in"
+      } ],
+      "img" : "assets/img/ipod.jpg"
+    }, {
+      "inUse" : false,
+      "displaySize" : "4\"",
+      "lockPhrase" : "",
+      "osVersion" : "2.3.3",
+      "user" : "",
+      "name" : "HTC Inspire",
+      "password" : "",
+      "os" : "Android",
+      "history" : [ {
+        "date" : "2013-09-13 04:15:21 pm",
+        "user" : "jose.campos",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-17 02:18:58 pm",
+        "user" : "jose.campos",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-19 02:58:54 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-19 03:38:00 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-25 10:32:07 am",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-25 03:12:04 pm",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-26 04:52:20 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-26 04:56:06 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-03 10:57:22 am",
+        "user" : "mario.cordero",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-03 11:43:54 am",
+        "user" : "mario.cordero",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-04 09:37:17 am",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-04 11:18:29 am",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-in"
+      } ],
+      "img" : "assets/img/inspire.jpg"
+    } ],
+    "Tablets" : [ {
+      "inUse" : false,
+      "displaySize" : "10\"",
+      "lockPhrase" : "",
+      "osVersion" : "4.0.3",
+      "user" : "",
+      "name" : "Asus Transformer",
+      "password" : "",
+      "os" : "Android",
+      "history" : [ {
+        "date" : "2013-09-17 02:03:02 pm",
+        "user" : "jose.montero",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-17 02:19:36 pm",
+        "user" : "jose.montero",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-19 02:59:44 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-19 03:37:28 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-25 10:32:43 am",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-25 03:12:35 pm",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-02 10:20:07 am",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-02 01:28:01 pm",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-02 01:30:56 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-02 03:37:15 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-02 03:37:58 pm",
+        "user" : "jorge.e.ramirez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-02 04:57:20 pm",
+        "user" : "jorge.e.ramirez",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-03 04:31:27 pm",
+        "user" : "jose.ajoy",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-03 04:49:23 pm",
+        "user" : "jose.ajoy",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-04 08:49:22 am",
+        "user" : "jose.ajoy",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-04 12:29:51 pm",
+        "user" : "jose.ajoy",
+        "status" : "Checked-in"
+      } ],
+      "img" : "assets/img/transformer.jpg"
+    }, {
+      "inUse" : false,
+      "displaySize" : "7\"",
+      "lockPhrase" : "",
+      "osVersion" : "2.3",
+      "user" : "",
+      "name" : "Galaxy Tab 7",
+      "password" : "",
+      "os" : "Android",
+      "img" : "assets/img/galaxy-tab.jpg"
+    }, {
+      "inUse" : false,
+      "displaySize" : "10\"",
+      "lockPhrase" : "",
+      "osVersion" : "6.1.3",
+      "user" : "",
+      "name" : "iPad (1)",
+      "password" : "",
+      "os" : "iOS",
+      "history" : [ {
+        "date" : "2013-09-17 02:02:14 pm",
+        "user" : "jose.montero",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-17 02:18:59 pm",
+        "user" : "jose.montero",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-19 01:27:35 pm",
+        "user" : "adriana.chacon",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-19 04:28:18 pm",
+        "user" : "adriana.chacon",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-23 02:03:09 pm",
+        "user" : "adriana.chacon",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-23 02:30:17 pm",
+        "user" : "adriana.chacon",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-25 10:32:26 am",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-25 03:12:13 pm",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-26 04:42:38 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-26 05:51:27 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-27 02:40:58 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-27 04:17:13 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-02 10:19:47 am",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-02 01:27:55 pm",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-02 01:30:39 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-02 03:37:57 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-in"
+      } ],
+      "img" : "assets/img/ipad.jpg"
+    }, {
+      "inUse" : false,
+      "displaySize" : "10\"",
+      "lockPhrase" : "",
+      "osVersion" : "6.1.3",
+      "user" : "",
+      "name" : "iPad (2)",
+      "password" : "",
+      "os" : "iOS",
+      "history" : [ {
+        "date" : "2013-09-17 02:02:40 pm",
+        "user" : "jose.montero",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-17 02:19:22 pm",
+        "user" : "jose.montero",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-19 02:59:29 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-19 03:37:03 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-02 03:33:07 pm",
+        "user" : "jorge.e.ramirez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-02 04:57:09 pm",
+        "user" : "jorge.e.ramirez",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-04 08:51:53 am",
+        "user" : "jorge.e.ramirez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-04 12:33:45 pm",
+        "user" : "jorge.e.ramirez",
+        "status" : "Checked-in"
+      } ],
+      "img" : "assets/img/ipad.jpg"
+    } ]
+  }
+}

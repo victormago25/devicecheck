@@ -1,0 +1,72 @@
+<div>
+    <h2>{{device.actual.name}}</h2>
+    <div class="alert ng-scope alert-error" ng-show="device.actual.inUse">Device in use by {{device.actual.user}}</div>
+    <div class="alert ng-scope alert-success" ng-hide="device.actual.inUse">Device ready to use</div>
+    <img alt="{{device.actual.name}}" ng-src="{{device.actual.img}}" />
+    <div class="well well-large info">
+        <h3>Device Information:</h3>
+        <ul>
+            <li><span class="bold">Operative System: </span>{{device.actual.os}}</li>
+            <li><span class="bold">Version: </span>{{device.actual.osVersion}}</li>
+            <li><span class="bold">Display Size: </span>{{device.actual.displaySize}}</li>
+        </ul>
+    </div>
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                        Request Device
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <form name="checkForm">
+                        <div class="control-group" ng-class="{error: checkForm.user.$invalid}">
+                            <label>Accenture ID: (i.e. juan.perez)</label>
+                            <input type="text" name="user" ng-model="device.actual.user" required>
+                            <span ng-show="checkForm.user.$error.required" class="help-inline">Required</span>
+                        </div>
+
+                        <div class="control-group" ng-class="{error: checkForm.password.$invalid}">
+                            <label>Passcode:</label>
+                            <input type="password" name="password" ng-model="device.actual.password" required ngMinlength="6">
+                            <span ng-show="checkForm.password.$error.required" class="help-inline">Required</span>
+                        </div>
+                        <p>
+                            <span class="bold">Current time is:</span> {{ device.time.now | date:'short' }}
+                        </p>
+                        <br>
+                        <button ng-click="send(device.$routeParams)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-show="device.actual.inUse">Check-in</button>
+                        <button ng-click="send(device.$routeParams)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-hide="device.actual.inUse">Check-out</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                        History
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <table id="tableHistory{{device.$routeParams.deviceId}}" class="table" active-table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
