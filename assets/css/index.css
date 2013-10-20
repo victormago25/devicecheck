@@ -23,17 +23,12 @@ a:hover {
     clear: both;
 }
 
-.device-animate-container img {
-    max-width: 195px;
-    height: auto;
-    margin: 0 20px 20px 0;
-}
-
-.device-animate-container .nav {
+ul.nav {
     margin: 0;
 }
 
-.tab-content {
+div.tab-content {
+    overflow: visible;
     padding: 15px;
     border-left: 1px solid #DDD;
     border-right: 1px solid #DDD;
@@ -42,22 +37,30 @@ a:hover {
     background-clip: padding-box; /* Android 2.2+, Chrome, Firefox 4+, IE 9+, iOS 4+, Opera 10.50+, Safari 4+ */
 }
 
-.over-hide {
-    overflow: hidden;
+.device-animate-container {
+    padding: 15px;
 }
 
-.accordion {
-    min-width: 50%;
+.device-animate-container img {
+    max-width: 195px;
+    height: auto;
+    margin: 0 20px 20px 0;
     float: left;
 }
 
+/*.over-hide {
+    overflow: hidden;
+}*/
+
+div.accordion {
+    clear: both;
+}
 .accordion .accordion-heading {
     background: url(../img/close.png) center right no-repeat;
 }
 
 .info {
-    min-width: 46%;
-    float: left;
+    margin-left: 215px;
 }
 
 .nav-tabs > li {
@@ -67,7 +70,7 @@ a:hover {
 .dataTables_length {
     margin-right: 10px;
 }
-
+/*
 .device-leave, .device-enter {
     -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
     -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
@@ -103,4 +106,4 @@ a:hover {
 .device-leave { }
 .device-leave.device-leave-active {
     left:-100%;
-}
+}*/
