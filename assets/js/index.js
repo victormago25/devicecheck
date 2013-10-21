@@ -1,20 +1,19 @@
 /*jslint sloppy: true */
-/*global angular, window, console, Firebase, CryptoJS, moment */
+/*global angular, window, console, Firebase, CryptoJS, moment, $ */
 angular.module('devicechecker.directives', [])
     .directive('activeTable', function () {
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
                 if (angular.isString(attrs.activeTable)) {
-                    console.log(element);
                     element.dataTable({"aoColumns": [
                         { "mData": "user" },
                         { "mData": "status" },
                         { "mData": "date" }],
                         "aaSorting": [[ 2, "desc" ]]});
-//                    if (scope.stocks[attrs.activeTable].history) {
-//                        element.dataTable().fnAddData(scope.stocks[attrs.activeTable].history);
-//                    }
+                    if (scope.device && scope.device.actual && scope.device.actual.history) {
+                        element.dataTable().fnAddData(scope.device.actual.history);
+                    }
                 }
             }
         };
@@ -38,10 +37,12 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
     controller('DeviceCtrl', ['$rootScope', 'time', '$routeParams', 'deviceBasePath', function ($rootScope, time, $routeParams, deviceBasePath) {
         this.actual = $rootScope.stocks.getByName($routeParams.groupId)[$routeParams.deviceId];
         this.time = time;
+        this.activeTab = $('ul.nav-tabs li.active');
         this.$routeParams = $routeParams;
         this.send = function ($routeParams) {
             var actualInfo = $rootScope.stocks.getByName($routeParams.groupId)[$routeParams.deviceId],
-                deviceRef = new Firebase($rootScope.fbURL + deviceBasePath + actualInfo.$id);
+                devicePath = $routeParams.groupId + '/' + $routeParams.deviceId,
+                deviceRef = new Firebase($rootScope.fbURL + deviceBasePath + devicePath);
             deviceRef.once('value', function (dataSnapshot) {
                 var currentEncryptPass = CryptoJS.MD5(actualInfo.password).toString(),
                     newRecord = {
@@ -60,14 +61,14 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                     actualInfo.lockPhrase = '';
                     actualInfo.history.push(newRecord);
                     actualInfo.inUse = false;
-                    $rootScope.stocks.update(actualInfo.$id);
+                    deviceRef.update({inUse: false, user: '', password: '', lockPhrase: '', history: actualInfo.history});
                 } else if (!dataSnapshot.child('inUse').val() && (dataSnapshot.child('lockPhrase').val() === '') && (dataSnapshot.child('user').val() === '')) {
                     newRecord.status = 'Checked-out';
                     actualInfo.inUse = true;
                     actualInfo.lockPhrase = currentEncryptPass;
                     actualInfo.history.push(newRecord);
                     actualInfo.password = '';
-                    $rootScope.stocks.update(actualInfo.$id);
+                    deviceRef.update({inUse: true, user: actualInfo.user, password: '', lockPhrase: currentEncryptPass, history: actualInfo.history});
                 }
             });
         };
