@@ -1,4 +1,4 @@
-<div>
+<div ng-if="device.actual">
     <h2>{{device.actual.name}}</h2>
     <div class="alert ng-scope alert-error" ng-show="device.actual.inUse">Device in use by {{device.actual.user}}</div>
     <div class="alert ng-scope alert-success" ng-hide="device.actual.inUse">Device ready to use</div>

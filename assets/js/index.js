@@ -40,9 +40,10 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
         this.activeTab = $('ul.nav-tabs li.active');
         this.$routeParams = $routeParams;
         this.send = function ($routeParams) {
-            var actualInfo = $rootScope.stocks.getByName($routeParams.groupId)[$routeParams.deviceId],
+            var actualInfo = this.actual,
                 devicePath = $routeParams.groupId + '/' + $routeParams.deviceId,
-                deviceRef = new Firebase($rootScope.fbURL + deviceBasePath + devicePath);
+                deviceRef = new Firebase($rootScope.fbURL + deviceBasePath + devicePath),
+                updateFields = {};
             deviceRef.once('value', function (dataSnapshot) {
                 var currentEncryptPass = CryptoJS.MD5(actualInfo.password).toString(),
                     newRecord = {
@@ -61,16 +62,17 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                     actualInfo.lockPhrase = '';
                     actualInfo.history.push(newRecord);
                     actualInfo.inUse = false;
-                    deviceRef.update({inUse: false, user: '', password: '', lockPhrase: '', history: actualInfo.history});
+                    updateFields = {inUse: false, user: '', password: '', lockPhrase: '', history: actualInfo.history};
                 } else if (!dataSnapshot.child('inUse').val() && (dataSnapshot.child('lockPhrase').val() === '') && (dataSnapshot.child('user').val() === '')) {
                     newRecord.status = 'Checked-out';
                     actualInfo.inUse = true;
                     actualInfo.lockPhrase = currentEncryptPass;
                     actualInfo.history.push(newRecord);
                     actualInfo.password = '';
-                    deviceRef.update({inUse: true, user: actualInfo.user, password: '', lockPhrase: currentEncryptPass, history: actualInfo.history});
+                    updateFields = {inUse: true, user: actualInfo.user, password: '', lockPhrase: currentEncryptPass, history: actualInfo.history};
                 }
             });
+            deviceRef.update(updateFields);
         };
     }]).
     config(['$routeProvider', function ($routeProvider) {
