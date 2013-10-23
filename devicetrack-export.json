@@ -209,6 +209,22 @@
         "date" : "2013-10-21 04:52:22 pm",
         "user" : "guiselle.gonzalez",
         "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-22 02:09:20 pm",
+        "user" : "jose.ajoy",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-22 02:35:39 pm",
+        "user" : "jose.ajoy",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-22 02:50:58 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-22 03:07:11 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-in"
       } ],
       "img" : "assets/img/transformer.jpg"
     },
@@ -392,6 +408,22 @@
       }, {
         "date" : "2013-10-21 04:52:04 pm",
         "user" : "guiselle.gonzalez",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-22 02:50:44 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-22 03:07:16 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-23 11:08:25 am",
+        "user" : "luis.monge",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-23 01:31:50 pm",
+        "user" : "luis.monge",
         "status" : "Checked-in"
       } ],
       "img" : "assets/img/ipad.jpg"
@@ -620,11 +652,11 @@
       "img" : "assets/img/galaxy-tab.jpg"
     },
     "tb01" : {
-      "inUse" : true,
+      "inUse" : false,
       "displaySize" : "10\"",
-      "lockPhrase" : "8ee2027983915ec78acc45027d874316",
+      "lockPhrase" : "",
       "osVersion" : "7.0.2",
-      "user" : "luis.monge",
+      "user" : "",
       "name" : "iPad (1)",
       "password" : "",
       "os" : "iOS",
@@ -792,6 +824,34 @@
         "date" : "2013-10-22 10:35:41 am",
         "user" : "luis.monge",
         "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-22 04:54:20 pm",
+        "user" : "luis.monge",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-22 05:39:26 pm",
+        "user" : "mahe.garces",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-22 06:10:50 pm",
+        "user" : "mahe.garces",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-23 11:01:38 am",
+        "user" : "manrique.barrantes",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-23 11:02:14 am",
+        "user" : "manrique.barrantes",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-23 11:04:13 am",
+        "user" : "manrique.barrantes",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-23 11:37:32 am",
+        "user" : "manrique.barrantes",
+        "status" : "Checked-in"
       } ],
       "img" : "assets/img/ipad.jpg"
     }
