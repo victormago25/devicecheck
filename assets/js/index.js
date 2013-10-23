@@ -11,6 +11,10 @@ angular.module('devicechecker.directives', [])
                         { "mData": "status" },
                         { "mData": "date" }],
                         "aaSorting": [[ 2, "desc" ]]});
+                    scope.$watchCollection('device.actual.history', function (newNames) {
+                        element.dataTable().fnClearTable();
+                        element.dataTable().fnAddData(newNames);
+                    });
                     if (scope.device && scope.device.actual && scope.device.actual.history) {
                         element.dataTable().fnAddData(scope.device.actual.history);
                     }
@@ -35,7 +39,10 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
         $rootScope.fbURL = fbURL;
     }]).
     controller('DeviceCtrl', ['$rootScope', 'time', '$routeParams', 'deviceBasePath', function ($rootScope, time, $routeParams, deviceBasePath) {
-        this.actual = $rootScope.stocks.getByName($routeParams.groupId)[$routeParams.deviceId];
+        var currentGroup = $rootScope.stocks.getByName($routeParams.groupId);
+        if (currentGroup) {
+            this.actual = currentGroup[$routeParams.deviceId];
+        }
         this.time = time;
         this.activeTab = $('ul.nav-tabs li.active');
         this.$routeParams = $routeParams;

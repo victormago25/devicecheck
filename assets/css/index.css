@@ -60,6 +60,7 @@ div.accordion {
 }
 
 .info {
+    min-width: 140px;
     margin-left: 215px;
 }
 
@@ -70,40 +71,25 @@ div.accordion {
 .dataTables_length {
     margin-right: 10px;
 }
-/*
-.device-leave, .device-enter {
-    -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
-    -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
-    -ms-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
-    -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
-    transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+
+.animate-enter {
+    -webkit-transition: 1s linear all; /* Safari/Chrome */
+    -moz-transition: 1s linear all; /* Firefox */
+    -o-transition: 1s linear all; /* Opera */
+    transition: 1s linear all; /* IE10+ and Future Browsers */
+
+    /* The animation preparation code */
+    opacity: 0;
 }
 
-.device-animate-container {
-    position:relative;
-    min-height: 500px;
+.animate-enter.animate-enter-active {
+    /* The animation code itself */
+    opacity: 1;
 }
 
-.device-animate-container > div {
-    display:block;
-    width:100%;
-
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    padding:10px;
+@media (max-width: 767px) {
+    .info {
+        min-width: 140px;
+        margin-left: 0;
+    }
 }
-
-.device-enter {
-    left:100%;
-}
-.device-enter.device-enter-active {
-    left:0;
-}
-
-.device-leave { }
-.device-leave.device-leave-active {
-    left:-100%;
-}*/

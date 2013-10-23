@@ -1,8 +1,8 @@
-<div ng-if="device.actual">
+<div ng-if="device.actual" ng-animate="{enter: 'animate-enter'}">
     <h2>{{device.actual.name}}</h2>
     <div class="alert ng-scope alert-error" ng-show="device.actual.inUse">Device in use by {{device.actual.user}}</div>
     <div class="alert ng-scope alert-success" ng-hide="device.actual.inUse">Device ready to use</div>
-    <img alt="{{device.actual.name}}" ng-src="{{device.actual.img}}" />
+    <img alt="{{device.actual.name}}" ng-src="{{device.actual.img}}" class="hidden-phone"/>
     <div class="well well-large info">
         <h3>Device Information:</h3>
         <ul>
