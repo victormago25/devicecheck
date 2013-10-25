@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <link type="text/css" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="assets/css/jquery.dataTables-min.css" type="text/css" rel="stylesheet">
-        <link href="assets/css/index-min.css" type="text/css" rel="stylesheet">
+        <link href="assets/css/index.css" type="text/css" rel="stylesheet">
         <script src="//cdn.jsdelivr.net/jquery/1.10.2/jquery-1.10.2.min.js"></script>
         <script src="//cdn.jsdelivr.net/angularjs/1.1.5/angular.min.js"></script>
         <script src="assets/js/lib/ui-bootstrap-tpls-0.6.0.min.js"></script>
@@ -34,26 +34,25 @@
                                     <li ng-repeat="device in group"><a href="#/{{group.$id}}/{{$index}}">{{device.name}}</a></li>
                                 </ul>
                             </div>
-                            <accordion>
-                                <accordion-group heading="Device Status">
-                                    <table id="tableStatus{{group.$id}}" class="table dataTable">
-                                        <thead>
-                                            <tr>
-                                                <th>SN</th>
-                                                <th>Name</th>
-                                                <th>Status</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr ng-repeat="device in group" ng-class-odd="'odd'" ng-class-even="'even'">
-                                                <td></td>
-                                                <td>{{device.name}}</td>
-                                                <td><span ng-show="device.inUse" class="bold-{{device.inUse}}">In Use</span><span ng-hide="device.inUse">Available</span></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </accordion-group>
-                            </accordion>
+                            <button class="btn btn-primary pull-right" ng-click="isCollapsed = !isCollapsed">[+]</button>
+                            <div collapse="isCollapsed">
+                                <table id="tableStatus{{group.$id}}" class="table dataTable">
+                                    <thead>
+                                        <tr>
+                                            <th>SN</th>
+                                            <th>Name</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="device in group" ng-class-odd="'odd'" ng-class-even="'even'">
+                                            <td></td>
+                                            <td>{{device.name}}</td>
+                                            <td><span ng-show="device.inUse" class="bold-{{device.inUse}} icon-ban-circle"></span><span class="bold-{{device.inUse}} icon-ok-circle" ng-hide="device.inUse"></span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </tab>
                     </tabset>
                 </div>

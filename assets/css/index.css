@@ -52,9 +52,9 @@ div.tab-content {
     float: left;
 }
 
-.bold-true {
-    color: #782B90;
-    font-weight: bold;
+span.icon-ok-circle,
+span.icon-ban-circle {
+     background-image: url(../img/glyphicons-halflings.png);
 }
 
 div.accordion {
