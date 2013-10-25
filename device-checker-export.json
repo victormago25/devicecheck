@@ -1,7 +1,317 @@
 {
   "stock" : {
-      "Tablets": [
-          {
+    "Smartphones" : [ {
+      "inUse" : false,
+      "displaySize" : "3.5\"",
+      "lockPhrase" : "",
+      "osVersion" : "6.1.3",
+      "user" : "",
+      "name" : "iPod",
+      "password" : "",
+      "os" : "iOS",
+      "history" : [ {
+        "date" : "2013-09-12 08:54:43 pm",
+        "user" : "asalas",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-12 08:56:59 pm",
+        "user" : "asalas",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-12 09:00:36 pm",
+        "user" : "cledy",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-12 09:25:52 pm",
+        "user" : "cledy",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-12 09:26:14 pm",
+        "user" : "asalas",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-13 09:58:15 am",
+        "user" : "asalas",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-17 01:30:05 pm",
+        "user" : "adriana.chacon",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-17 04:23:11 pm",
+        "user" : "adriana.chacon",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-18 01:38:24 pm",
+        "user" : "adriana.chacon",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-18 04:34:13 pm",
+        "user" : "adriana.chacon",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-19 02:58:00 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-19 03:38:00 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-23 11:59:57 am",
+        "user" : "adriana.chacon",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-23 01:59:45 pm",
+        "user" : "adriana.chacon",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-25 10:30:56 am",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-25 03:12:22 pm",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-26 04:42:16 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-26 05:51:18 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-02 10:21:09 am",
+        "user" : "adriana.chacon",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-02 11:59:36 am",
+        "user" : "adriana.chacon",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-02 12:01:09 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-02 03:37:38 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-03 10:57:09 am",
+        "user" : "mario.cordero",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-03 11:44:01 am",
+        "user" : "mario.cordero",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-04 09:36:54 am",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-04 11:18:18 am",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-07 09:54:20 am",
+        "user" : "jose.ajoy",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-07 02:44:43 pm",
+        "user" : "jose.ajoy",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-08 01:41:53 pm",
+        "user" : "mario.chacon",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-08 02:48:19 pm",
+        "user" : "mario.chacon",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-08 02:56:10 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-08 04:05:37 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-10 10:33:22 am",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-10 11:08:09 am",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-10 11:30:35 am",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-10 12:10:24 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-10 01:59:40 pm",
+        "user" : "adriana.chacon",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-10 02:52:32 pm",
+        "user" : "adriana.chacon",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-10 04:03:27 pm",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-11 08:43:56 am",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-11 09:21:18 am",
+        "user" : "mario.cordero",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-11 12:20:38 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-11 02:56:35 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-14 09:03:31 am",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-15 10:00:28 am",
+        "user" : "adriana.chacon",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-15 10:23:29 am",
+        "user" : "adriana.chacon",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-16 11:31:07 am",
+        "user" : "jorge.e.ramirez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-16 04:48:12 pm",
+        "user" : "jorge.e.ramirez",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-21 10:46:58 am",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-21 11:55:36 am",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-24 08:21:09 am",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-24 04:36:57 pm",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-in"
+      } ],
+      "img" : "assets/img/ipod.jpg"
+    }, {
+      "inUse" : false,
+      "displaySize" : "4\"",
+      "lockPhrase" : "",
+      "osVersion" : "2.3.3",
+      "user" : "",
+      "name" : "HTC Inspire",
+      "password" : "",
+      "os" : "Android",
+      "history" : [ {
+        "date" : "2013-09-13 04:15:21 pm",
+        "user" : "jose.campos",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-17 02:18:58 pm",
+        "user" : "jose.campos",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-19 02:58:54 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-19 03:38:00 pm",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-25 10:32:07 am",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-25 03:12:04 pm",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-09-26 04:52:20 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-09-26 04:56:06 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-03 10:57:22 am",
+        "user" : "mario.cordero",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-03 11:43:54 am",
+        "user" : "mario.cordero",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-04 09:37:17 am",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-04 11:18:29 am",
+        "user" : "guiselle.gonzalez",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-08 03:35:45 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-08 03:37:02 pm",
+        "user" : "mario.cordero",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-16 11:31:25 am",
+        "user" : "jorge.e.ramirez",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-16 12:37:54 pm",
+        "user" : "jorge.e.ramirez",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-24 02:19:06 pm",
+        "user" : "alonso.salas",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-24 02:19:40 pm",
+        "user" : "alonso.salas",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-24 03:53:10 pm",
+        "user" : "roberto.ramos",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-24 04:53:18 pm",
+        "user" : "roberto.ramos",
+        "status" : "Checked-in"
+      } ],
+      "img" : "assets/img/inspire.jpg"
+    } ],
+    "Tablets" : [ {
       "inUse" : false,
       "displaySize" : "10\"",
       "lockPhrase" : "",
@@ -226,10 +536,17 @@
         "date" : "2013-10-22 03:07:11 pm",
         "user" : "mario.cordero",
         "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-24 08:22:01 am",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-24 02:39:55 pm",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-in"
       } ],
       "img" : "assets/img/transformer.jpg"
-    },
-    {
+    }, {
       "inUse" : false,
       "displaySize" : "7\"",
       "lockPhrase" : "",
@@ -238,15 +555,23 @@
       "name" : "Galaxy Tab 7",
       "password" : "",
       "os" : "Android",
+      "history" : [ {
+        "date" : "2013-10-23 02:00:19 pm",
+        "user" : "alonso.salas",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-23 02:00:51 pm",
+        "user" : "alonso.salas",
+        "status" : "Checked-in"
+      } ],
       "img" : "assets/img/galaxy-tab.jpg"
-    },
-    {
+    }, {
       "inUse" : false,
       "displaySize" : "10\"",
       "lockPhrase" : "",
-      "osVersion" : "7.0.2",
+      "osVersion" : "7.0.3",
       "user" : "",
-      "name" : "iPad (1)",
+      "name" : "iPad (calcomanía)",
       "password" : "",
       "os" : "iOS",
       "history" : [ {
@@ -441,16 +766,23 @@
         "date" : "2013-10-23 11:37:32 am",
         "user" : "manrique.barrantes",
         "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-24 08:22:40 am",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-24 02:40:30 pm",
+        "user" : "a.morales.villalobos",
+        "status" : "Checked-in"
       } ],
       "img" : "assets/img/ipad.jpg"
-    },
-    {
+    }, {
       "inUse" : false,
       "displaySize" : "10\"",
       "lockPhrase" : "",
       "osVersion" : "6.1.3",
       "user" : "",
-      "name" : "iPad (2)",
+      "name" : "iPad",
       "password" : "",
       "os" : "iOS",
       "history" : [ {
@@ -565,300 +897,24 @@
         "date" : "2013-10-23 01:31:50 pm",
         "user" : "luis.monge",
         "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-24 11:36:22 am",
+        "user" : "jose.montero",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-24 12:43:17 pm",
+        "user" : "jose.montero",
+        "status" : "Checked-in"
+      }, {
+        "date" : "2013-10-24 02:34:14 pm",
+        "user" : "jose.montero",
+        "status" : "Checked-out"
+      }, {
+        "date" : "2013-10-24 04:35:14 pm",
+        "user" : "jose.montero",
+        "status" : "Checked-in"
       } ],
       "img" : "assets/img/ipad.jpg"
-    }
-    
-  ],
-    "Smartphones": [
-    {
-      "inUse" : false,
-      "displaySize" : "3.5\"",
-      "lockPhrase" : "",
-      "osVersion" : "6.1.3",
-      "user" : "",
-      "name" : "iPod",
-      "password" : "",
-      "os" : "iOS",
-      "history" : [ {
-        "date" : "2013-09-12 08:54:43 pm",
-        "user" : "asalas",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-09-12 08:56:59 pm",
-        "user" : "asalas",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-09-12 09:00:36 pm",
-        "user" : "cledy",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-09-12 09:25:52 pm",
-        "user" : "cledy",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-09-12 09:26:14 pm",
-        "user" : "asalas",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-09-13 09:58:15 am",
-        "user" : "asalas",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-09-17 01:30:05 pm",
-        "user" : "adriana.chacon",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-09-17 04:23:11 pm",
-        "user" : "adriana.chacon",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-09-18 01:38:24 pm",
-        "user" : "adriana.chacon",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-09-18 04:34:13 pm",
-        "user" : "adriana.chacon",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-09-19 02:58:00 pm",
-        "user" : "guiselle.gonzalez",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-09-19 03:38:00 pm",
-        "user" : "guiselle.gonzalez",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-09-23 11:59:57 am",
-        "user" : "adriana.chacon",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-09-23 01:59:45 pm",
-        "user" : "adriana.chacon",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-09-25 10:30:56 am",
-        "user" : "a.morales.villalobos",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-09-25 03:12:22 pm",
-        "user" : "a.morales.villalobos",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-09-26 04:42:16 pm",
-        "user" : "mario.cordero",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-09-26 05:51:18 pm",
-        "user" : "mario.cordero",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-10-02 10:21:09 am",
-        "user" : "adriana.chacon",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-10-02 11:59:36 am",
-        "user" : "adriana.chacon",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-10-02 12:01:09 pm",
-        "user" : "guiselle.gonzalez",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-10-02 03:37:38 pm",
-        "user" : "guiselle.gonzalez",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-10-03 10:57:09 am",
-        "user" : "mario.cordero",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-10-03 11:44:01 am",
-        "user" : "mario.cordero",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-10-04 09:36:54 am",
-        "user" : "guiselle.gonzalez",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-10-04 11:18:18 am",
-        "user" : "guiselle.gonzalez",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-10-07 09:54:20 am",
-        "user" : "jose.ajoy",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-10-07 02:44:43 pm",
-        "user" : "jose.ajoy",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-10-08 01:41:53 pm",
-        "user" : "mario.chacon",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-10-08 02:48:19 pm",
-        "user" : "mario.chacon",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-10-08 02:56:10 pm",
-        "user" : "mario.cordero",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-10-08 04:05:37 pm",
-        "user" : "mario.cordero",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-10-10 10:33:22 am",
-        "user" : "guiselle.gonzalez",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-10-10 11:08:09 am",
-        "user" : "guiselle.gonzalez",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-10-10 11:30:35 am",
-        "user" : "guiselle.gonzalez",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-10-10 12:10:24 pm",
-        "user" : "guiselle.gonzalez",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-10-10 01:59:40 pm",
-        "user" : "adriana.chacon",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-10-10 02:52:32 pm",
-        "user" : "adriana.chacon",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-10-10 04:03:27 pm",
-        "user" : "a.morales.villalobos",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-10-11 08:43:56 am",
-        "user" : "a.morales.villalobos",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-10-11 09:21:18 am",
-        "user" : "mario.cordero",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-10-11 12:20:38 pm",
-        "user" : "mario.cordero",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-10-11 02:56:35 pm",
-        "user" : "guiselle.gonzalez",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-10-14 09:03:31 am",
-        "user" : "guiselle.gonzalez",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-10-15 10:00:28 am",
-        "user" : "adriana.chacon",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-10-15 10:23:29 am",
-        "user" : "adriana.chacon",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-10-16 11:31:07 am",
-        "user" : "jorge.e.ramirez",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-10-16 04:48:12 pm",
-        "user" : "jorge.e.ramirez",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-10-21 10:46:58 am",
-        "user" : "guiselle.gonzalez",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-10-21 11:55:36 am",
-        "user" : "guiselle.gonzalez",
-        "status" : "Checked-in"
-      } ],
-      "img" : "assets/img/ipod.jpg"
-    },
-    {
-      "inUse" : false,
-      "displaySize" : "4\"",
-      "lockPhrase" : "",
-      "osVersion" : "2.3.3",
-      "user" : "",
-      "name" : "HTC Inspire",
-      "password" : "",
-      "os" : "Android",
-      "history" : [ {
-        "date" : "2013-09-13 04:15:21 pm",
-        "user" : "jose.campos",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-09-17 02:18:58 pm",
-        "user" : "jose.campos",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-09-19 02:58:54 pm",
-        "user" : "guiselle.gonzalez",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-09-19 03:38:00 pm",
-        "user" : "guiselle.gonzalez",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-09-25 10:32:07 am",
-        "user" : "a.morales.villalobos",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-09-25 03:12:04 pm",
-        "user" : "a.morales.villalobos",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-09-26 04:52:20 pm",
-        "user" : "mario.cordero",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-09-26 04:56:06 pm",
-        "user" : "mario.cordero",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-10-03 10:57:22 am",
-        "user" : "mario.cordero",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-10-03 11:43:54 am",
-        "user" : "mario.cordero",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-10-04 09:37:17 am",
-        "user" : "guiselle.gonzalez",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-10-04 11:18:29 am",
-        "user" : "guiselle.gonzalez",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-10-08 03:35:45 pm",
-        "user" : "mario.cordero",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-10-08 03:37:02 pm",
-        "user" : "mario.cordero",
-        "status" : "Checked-in"
-      }, {
-        "date" : "2013-10-16 11:31:25 am",
-        "user" : "jorge.e.ramirez",
-        "status" : "Checked-out"
-      }, {
-        "date" : "2013-10-16 12:37:54 pm",
-        "user" : "jorge.e.ramirez",
-        "status" : "Checked-in"
-      } ],
-      "img" : "assets/img/inspire.jpg"
-    }
-          ]
+    } ]
   }
 }
