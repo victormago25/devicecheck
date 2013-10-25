@@ -13,6 +13,7 @@ table.dataTable thead th {
 	border-bottom: 1px solid black;
 	font-weight: bold;
 	cursor: pointer;
+        color: #555555;
 	*cursor: hand;
 }
 

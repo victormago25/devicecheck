@@ -23,6 +23,10 @@ a:hover {
     clear: both;
 }
 
+.btn-group {
+    margin-bottom: 20px;
+}
+
 ul.nav {
     margin: 0;
 }
@@ -48,9 +52,10 @@ div.tab-content {
     float: left;
 }
 
-/*.over-hide {
-    overflow: hidden;
-}*/
+.bold-true {
+    color: #782B90;
+    font-weight: bold;
+}
 
 div.accordion {
     clear: both;
