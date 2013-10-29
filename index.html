@@ -42,13 +42,15 @@
                                             <th>SN</th>
                                             <th>Name</th>
                                             <th>Status</th>
+                                            <th>Used by</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="device in group" ng-class-odd="'odd'" ng-class-even="'even'">
                                             <td></td>
                                             <td>{{device.name}}</td>
-                                            <td><span ng-show="device.inUse" class="bold-{{device.inUse}} icon-ban-circle"></span><span class="bold-{{device.inUse}} icon-ok-circle" ng-hide="device.inUse"></span></td>
+                                            <td><span ng-show="device.inUse" class="bold-{{device.inUse}}"><span class="icon-ban-circle"></span> In use</span><span class="bold-{{device.inUse}}" ng-hide="device.inUse"><span class="icon-ok-circle" ></span> Available</span></td>
+                                            <td>{{device.user}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

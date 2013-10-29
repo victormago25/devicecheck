@@ -15,6 +15,16 @@ a:hover {
     font-weight: bold;
 }
 
+.bold-true {
+    font-weight: bold;
+    color: #B94A48;
+}
+
+.bold-false {
+    font-weight: bold;
+    color: #468847;
+}
+
 .header {
     margin: 10px 40px 0;
 }

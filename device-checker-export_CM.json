@@ -1,0 +1,28 @@
+{
+  "stock" : {
+    "Smartphones" : [ {
+      "inUse" : false,
+      "displaySize" : "3.5\"",
+      "lockPhrase" : "",
+      "osVersion" : "6.1.3",
+      "user" : "",
+      "name" : "iPod",
+      "password" : "",
+      "os" : "iOS",
+      "history" : [],
+      "img" : "assets/img/ipod.jpg"
+    }],
+    "Tablets" : [ {
+      "inUse" : false,
+      "displaySize" : "10\"",
+      "lockPhrase" : "",
+      "osVersion" : "4.0.3",
+      "user" : "",
+      "name" : "Asus Transformer",
+      "password" : "",
+      "os" : "Android",
+      "history" : [],
+      "img" : "assets/img/transformer.jpg"
+    }]
+  }
+}
