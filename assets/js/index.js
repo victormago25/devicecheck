@@ -24,7 +24,7 @@ angular.module('devicechecker.directives', [])
     });
 
 angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives']).
-    value('fbURL', 'https://devicetrack.firebaseio.com/').
+    value('fbURL', 'https://device-checker.firebaseio.com/').
     value('deviceBasePath', 'stock/').
     factory('time', function () {
         var time = {};
@@ -38,7 +38,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
         window.stocks = $rootScope.stocks;
         $rootScope.fbURL = fbURL;
     }]).
-    controller('DeviceCtrl', ['$rootScope', 'time', '$routeParams', 'deviceBasePath', function ($rootScope, time, $routeParams, deviceBasePath) {
+    controller('DeviceCtrl', ['$rootScope', '$location', 'time', '$routeParams', 'deviceBasePath', function ($rootScope, $location, time, $routeParams, deviceBasePath) {
         var currentGroup = $rootScope.stocks.getByName($routeParams.groupId);
         if (currentGroup) {
             this.actual = currentGroup[$routeParams.deviceId];
@@ -46,7 +46,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
         this.time = time;
         this.activeTab = $('ul.nav-tabs li.active');
         this.$routeParams = $routeParams;
-        this.send = function ($routeParams) {
+        this.send = function ($routeParams, error) {
             var actualInfo = this.actual,
                 devicePath = $routeParams.groupId + '/' + $routeParams.deviceId,
                 deviceRef = new Firebase($rootScope.fbURL + deviceBasePath + devicePath),
@@ -57,20 +57,28 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                         user: actualInfo.user,
                         status: 'Checked-in',
                         date: moment().format("YYYY-MM-DD hh:mm:ss a")
-                    };
+                    },
+                    historyLng,
+                    inUse = dataSnapshot.child('inUse').val(),
+                    lockPhrase = dataSnapshot.child('lockPhrase').val(),
+                    user = dataSnapshot.child('user').val();
                 if (!actualInfo.history) {
                     actualInfo.history = [];
                 } else {
                     actualInfo.history = dataSnapshot.child('history').val();
+                    historyLng = actualInfo.history.length;
+                    if (historyLng >= 80) {
+                        actualInfo.history = actualInfo.history.slice(historyLng - 79, historyLng);
+                    }
                 }
-                if (dataSnapshot.child('inUse').val() && (dataSnapshot.child('lockPhrase').val() === currentEncryptPass) && (dataSnapshot.child('user').val() === actualInfo.user)) {
+                if (inUse && (lockPhrase === currentEncryptPass) && (user === actualInfo.user)) {
                     actualInfo.password = '';
                     actualInfo.user = '';
                     actualInfo.lockPhrase = '';
                     actualInfo.history.push(newRecord);
                     actualInfo.inUse = false;
                     updateFields = {inUse: false, user: '', password: '', lockPhrase: '', history: actualInfo.history};
-                } else if (!dataSnapshot.child('inUse').val() && (dataSnapshot.child('lockPhrase').val() === '') && (dataSnapshot.child('user').val() === '')) {
+                } else if (!inUse && (lockPhrase === '') && (user === '')) {
                     newRecord.status = 'Checked-out';
                     actualInfo.inUse = true;
                     actualInfo.lockPhrase = currentEncryptPass;
@@ -81,9 +89,13 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
             });
             deviceRef.update(updateFields);
         };
+        if (!this.actual) {
+            $location.path('/');
+        }
     }]).
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.
-            when('/:groupId/:deviceId', {controller: 'DeviceCtrl', templateUrl: '/devicetracker/device.html', controllerAs: 'device'}).
+//            when('/:groupId/:deviceId', {controller: 'DeviceCtrl', templateUrl: '/devicetracker/device.html', controllerAs: 'device'}).
+            when('/:groupId/:deviceId', {controller: 'DeviceCtrl', templateUrl: '/device.html', controllerAs: 'device'}).
             otherwise({redirectTo: '/'});
     }]);
