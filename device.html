@@ -25,13 +25,13 @@
                     <label>Passcode:</label>
                     <input type="text" name="password" ng-model="device.actual.password" required ng-minlength="3">
                     <span ng-show="checkForm.password.$error.required" class="help-inline">Required</span>
-                    <span ng-show="checkForm.password.$error.pattern" class="help-inline">Invalid Password</span>
+                    <span ng-show="checkForm.password.$error.invalid" class="help-inline">Invalid Password</span>
                 </div>
                 <p>
                     <span class="bold">Current time is:</span> {{ device.time.now | date:'short' }}
                 </p>
                 <br>
-                <button ng-click="device.send(device.$routeParams, checkForm.password.$error)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-show="device.actual.inUse">Check-in</button>
+                <button ng-click="device.send(device.$routeParams, checkForm.password)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-show="device.actual.inUse">Check-in</button>
                 <button ng-click="device.send(device.$routeParams)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-hide="device.actual.inUse">Check-out</button>
             </form>
         </accordion-group>

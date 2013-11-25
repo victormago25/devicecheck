@@ -46,7 +46,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
         this.time = time;
         this.activeTab = $('ul.nav-tabs li.active');
         this.$routeParams = $routeParams;
-        this.send = function ($routeParams, error) {
+        this.send = function ($routeParams, input) {
             var actualInfo = this.actual,
                 devicePath = $routeParams.groupId + '/' + $routeParams.deviceId,
                 deviceRef = new Firebase($rootScope.fbURL + deviceBasePath + devicePath),
@@ -71,13 +71,22 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                         actualInfo.history = actualInfo.history.slice(historyLng - 79, historyLng);
                     }
                 }
-                if (inUse && (lockPhrase === currentEncryptPass) && (user === actualInfo.user)) {
-                    actualInfo.password = '';
-                    actualInfo.user = '';
-                    actualInfo.lockPhrase = '';
-                    actualInfo.history.push(newRecord);
-                    actualInfo.inUse = false;
-                    updateFields = {inUse: false, user: '', password: '', lockPhrase: '', history: actualInfo.history};
+                if (inUse && (user === actualInfo.user)) {
+                    if (lockPhrase !== currentEncryptPass) {
+                        input.$error.invalid = true;
+                        input.$valid = false;
+                        input.$invalid = true;
+                    } else {
+                        input.$error.invalid = false;
+                        input.$valid = true;
+                        input.$invalid = false;
+                        actualInfo.password = '';
+                        actualInfo.user = '';
+                        actualInfo.lockPhrase = '';
+                        actualInfo.history.push(newRecord);
+                        actualInfo.inUse = false;
+                        updateFields = {inUse: false, user: '', password: '', lockPhrase: '', history: actualInfo.history};
+                    }
                 } else if (!inUse && (lockPhrase === '') && (user === '')) {
                     newRecord.status = 'Checked-out';
                     actualInfo.inUse = true;
