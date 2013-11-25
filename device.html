@@ -25,7 +25,7 @@
                     <label>Passcode:</label>
                     <input type="text" name="password" ng-model="device.actual.password" required ng-minlength="3">
                     <span ng-show="checkForm.password.$error.required" class="help-inline">Required</span>
-                    <span ng-show="checkForm.password.$error.invalid" class="help-inline">Invalid Password</span>
+                    <span ng-show="checkForm.password.$error.invalid" class="help-inline">Invalid Passcode</span>
                 </div>
                 <p>
                     <span class="bold">Current time is:</span> {{ device.time.now | date:'short' }}

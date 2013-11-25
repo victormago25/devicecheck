@@ -24,7 +24,7 @@ angular.module('devicechecker.directives', [])
     });
 
 angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives']).
-    value('fbURL', 'https://device-checker.firebaseio.com/').
+    value('fbURL', 'https://devicetrack.firebaseio.com/').
     value('deviceBasePath', 'stock/').
     factory('time', function () {
         var time = {};
@@ -104,7 +104,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
     }]).
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.
-//            when('/:groupId/:deviceId', {controller: 'DeviceCtrl', templateUrl: '/devicetracker/device.html', controllerAs: 'device'}).
-            when('/:groupId/:deviceId', {controller: 'DeviceCtrl', templateUrl: '/device.html', controllerAs: 'device'}).
+            when('/:groupId/:deviceId', {controller: 'DeviceCtrl', templateUrl: '/devicetracker/device.html', controllerAs: 'device'}).
+//            when('/:groupId/:deviceId', {controller: 'DeviceCtrl', templateUrl: '/device.html', controllerAs: 'device'}).
             otherwise({redirectTo: '/'});
     }]);
