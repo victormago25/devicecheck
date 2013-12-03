@@ -38,7 +38,7 @@
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="device in group" ng-class-odd="'odd'" ng-class-even="'even'">
-                                            <td></td>
+                                            <td>{{device.sn}}</td>
                                             <td>{{device.name}}</td>
                                             <td><span ng-show="device.inUse" class="bold-{{device.inUse}}"><span class="icon-ban-circle"></span> In use</span><span class="bold-{{device.inUse}}" ng-hide="device.inUse"><span class="icon-ok-circle" ></span> Available</span></td>
                                             <td>{{device.user}}</td>
@@ -62,6 +62,6 @@
         <script src="https://cdn.firebase.com/libs/angularfire/0.3.0/angularfire.min.js"></script>
         <script src="assets/js/lib/jquery.dataTables.min.js"></script>
         <script src="//cdn.jsdelivr.net/momentjs/2.2.1/moment.min.js"></script>
-        <script src="assets/js/index.js"></script>
+        <script src="assets/js/index-min.js"></script>
     </body>
 </html>
