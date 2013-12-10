@@ -33,6 +33,14 @@ a:hover {
     clear: both;
 }
 
+.full-width {
+    width: 100%;
+}
+
+.underscore {
+    text-decoration: underline;
+}
+
 .btn-group {
     margin-bottom: 20px;
 }
