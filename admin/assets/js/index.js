@@ -24,7 +24,8 @@ angular.module('devicechecker.directives', [])
     });
 
 angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives']).
-    value('fbURL', 'https://devicetrack.firebaseio.com/').
+//    value('fbURL', 'https://devicetrack.firebaseio.com/').
+    value('fbURL', 'https://cl-device-control.firebaseio.com/').
     value('deviceBasePath', 'stock/').
     factory('time', function () {
         var time = {};
