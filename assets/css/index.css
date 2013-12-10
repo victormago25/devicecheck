@@ -49,6 +49,10 @@ ul.nav {
     margin: 0;
 }
 
+div.tab-pane {
+    padding-top: 1px;
+}
+
 div.tab-content {
     overflow: visible;
     padding: 15px;
