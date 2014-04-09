@@ -24,8 +24,10 @@ angular.module('devicechecker.directives', [])
     });
 
 angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives']).
-    value('fbURL', 'https://devicetrack.firebaseio.com/').
+    /*value('fbURL', 'https://devicetrack.firebaseio.com/').*/
+    value('fbURL', 'https://devicetrack-bu.firebaseio.com/').
     value('deviceBasePath', 'stock/').
+    value('teamsBasePath', 'teams/').
     factory('time', function () {
         var time = {};
         (function tick() {
@@ -33,10 +35,16 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
         }());
         return time;
     }).
-    controller('ListCtrl', ['$rootScope', 'angularFireCollection', 'fbURL', 'deviceBasePath',
-        function ($rootScope, angularFireCollection, fbURL, deviceBasePath) {
+    controller('ListCtrl', ['$rootScope', 'angularFireCollection', 'fbURL', 'deviceBasePath', 'teamsBasePath',
+        function ($rootScope, angularFireCollection, fbURL, deviceBasePath, teamsBasePath) {
             $rootScope.stocks = angularFireCollection(new Firebase(fbURL + deviceBasePath));
+            $rootScope.teams = angularFireCollection(new Firebase(fbURL + teamsBasePath));
         }]).
+    filter('ownerTeam', function () {
+        return function (teamId, teams) {
+            return teams[teamId] ? teams[teamId].name : 'Free Device';
+        };
+    }).
     controller('DeviceCtrl', ['$rootScope', '$location', 'time', '$routeParams', 'fbURL', 'deviceBasePath',
         function ($rootScope, $location, time, $routeParams, fbURL, deviceBasePath) {
             var currentGroup = $routeParams.groupId === 'Smartphones' ?  $rootScope.stocks[0] : $rootScope.stocks[1];

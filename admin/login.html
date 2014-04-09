@@ -14,9 +14,13 @@
 
                 <div class="control-group" ng-class="{error: loginForm.password.$invalid}">
                     <label>Contrasena:</label>
-                    <input type="password" name="password" required ng-minlength="3" ng-model="password" required>
+                    <input type="password" name="password" required ng-minlength="6" ng-model="password" required>
                     <span ng-show="loginForm.password.$error.required" class="help-inline">Required</span>
                     <span ng-show="loginForm.password.$error.invalid" class="help-inline">Invalid Passcode</span>
+                </div>
+
+                <div class="control-group" ng-class="{error: loginForm.password.$invalid}">
+                    <label class="error">{{msgtxt}}</label>
                 </div>
                 <br>
                 <button type="submit" ng-disabled="isClean() || loginForm.$invalid" class="btn btn-primary">Ingresar</button>
