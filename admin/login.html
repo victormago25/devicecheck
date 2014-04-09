@@ -1,0 +1,26 @@
+<div class="container" ng-controller="loginCtrl">
+    <div class="row">
+        <div class="col-12">
+            <img src="assets/img/logo_yahoo.png" height="50" width="207" alt="Yahoo" />
+            <h1>Ingreso al Sistema</h1>
+            <hr />
+            <form name="loginForm" class="well" ng-submit="login(user, password)">
+                <div class="control-group" ng-class="{error: loginForm.user.$invalid}">
+                    <label>Accenture ID: (i.e. juan.perez)</label>
+                    <input type="text" name="user" ng-pattern="/[a-z]+(\.[a-z]+){1,}/"  ng-model="user" required>
+                    <span ng-show="loginForm.user.$error.required" class="help-inline">Required</span>
+                    <span ng-show="loginForm.user.$error.pattern" class="help-inline">Invalid ID</span>
+                </div>
+
+                <div class="control-group" ng-class="{error: loginForm.password.$invalid}">
+                    <label>Contrasena:</label>
+                    <input type="password" name="password" required ng-minlength="3" ng-model="password" required>
+                    <span ng-show="loginForm.password.$error.required" class="help-inline">Required</span>
+                    <span ng-show="loginForm.password.$error.invalid" class="help-inline">Invalid Passcode</span>
+                </div>
+                <br>
+                <button type="submit" ng-disabled="isClean() || loginForm.$invalid" class="btn btn-primary">Ingresar</button>
+            </form>
+        </div>
+    </div>
+</div>

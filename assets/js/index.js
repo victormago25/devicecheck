@@ -112,6 +112,6 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
         }]).
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.
-            when('/:groupId/:deviceId', {controller: 'DeviceCtrl', templateUrl: '/devicetracker/device.html', controllerAs: 'device'}).
+            when('/:groupId/:deviceId', {controller: 'DeviceCtrl', templateUrl: '/device.html', controllerAs: 'device'}).
             otherwise({redirectTo: '/'});
     }]);
