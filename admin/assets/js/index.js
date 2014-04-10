@@ -1,11 +1,11 @@
 /*jslint sloppy: true */
 /*global angular, window, console, Firebase, CryptoJS, moment, $ */
-angular.module('devicechecker.directives', [])
-    .directive('activeTable', function () {
+angular.module('devicechecker.directives', []).
+    directive('activeTable', function () {
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
-                console.log(scope);
+                console.log(scope.actual);
                 if (angular.isString(attrs.activeTable)) {
                     element.dataTable({"aoColumns": [
                         { "mData": "user" },
@@ -22,26 +22,46 @@ angular.module('devicechecker.directives', [])
                 }
             }
         };
-    })
-    .directive('deviceTable', function () {
+    }).
+    directive('deviceTable', function () {
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
                 if (angular.isString(attrs.deviceTable)) {
                     element.dataTable({"aoColumns": [
-                        { "mData": "name" },
-                        { "mData": "type" },
-                        { "mData": "inUse" },
-                        { "mData": "teamId" },
-                        { "mData": "user" }],
+                            { "mData": function (oObj) {
+                                console.log(name);
+                                return '<a ng-click="includeDevice(\'/Devices/'+oObj.$id+'\')">' + oObj.name + '</a>'
+                            }},
+                            { "mData": "type" },
+                            { "mData": "os" },
+                            { "mData": function (oObj) {
+                                return oObj.inUse ? "<span ng-show=\"" + oObj.inUse + "\" class=\"bold-{{" + oObj.inUse + "}}\"><span class=\"icon-ban-circle\"></span> In use</span>" : "<span class=\"bold-{{" + oObj.inUse + "}}\" ng-hide=\"" + oObj.inUse + "\"><span class=\"icon-ok-circle\" ></span> Available</span>"
+                            }},
+                            { "mData": function (oObj) {
+                                /*angular.forEach(scope.teams, function (team) {
+                                    console.log(team);
+                                }, this);
+                                console.log(oObj.teamId);
+                                console.log(scope.teams);
+                                var pos = oObj.teamId;
+                                console.log(scope.teams['0']);*/
+                                return oObj.teamId || 'Free Device'
+                            }},
+                            { "mData": "user" },
+                            { "mData": "displaySize", "bVisible": false },
+                            { "mData": "history", "bVisible": false },
+                            { "mData": "img", "bVisible": false },
+                            { "mData": "lockPhrase", "bVisible": false },
+                            { "mData": "osVersion", "bVisible": false },
+                            { "mData": "password", "bVisible": false }
+                        ],
                         "aaSorting": [[ 2, "desc" ]]});
                     scope.$watchCollection('stocks', function (newNames) {
                         element.dataTable().fnClearTable();
                         element.dataTable().fnAddData(newNames);
                     });
-                    if (scope.stocks && scope.stocks[0]) {
-                        element.dataTable().fnAddData(scope.stocks[0]);
-                    }
+                    element.dataTable().fnAddData(scope.stocks);
                 }
             }
         };
@@ -52,7 +72,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
     // value('fbURL', 'https://cl-device-control.firebaseio.com/').
     value('fbURL', 'https://devicetrack-bu.firebaseio.com/').
     // value('fbURL', 'https://device-checker-bu.firebaseio.com/').
-    value('deviceBasePath', 'stock/').
+    value('deviceBasePath', 'stock/Devices/').
     value('teamsPath', 'teams/').
     value('usersPath', 'users/').
     factory('time', function () {
@@ -71,26 +91,26 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 $location.path('/mainView').replace();
                 $rootScope.msgtxt = '';
             } else {*/
-                $rootScope.users = angularFireCollection(new Firebase(fbURL + usersPath));
-                $rootScope.stocks = angularFireCollection(new Firebase(fbURL + deviceBasePath));
-                $rootScope.login = function (userName, password) {
-                    var found = false;
-                    angular.forEach($rootScope.users, function (user) {
-                        if (user.accId == userName && user.pass == password) {
-                            $rootScope.actualUser = user;
-                            /*$cookieStore.put('actualUser', user);
-                            $cookieStore.put('users', $rootScope.users);
-                            $cookieStore.put('stocks', $rootScope.stocks);*/
-                            found = true;
-                        }
-                    }, this);
-                    if ($rootScope.actualUser && found) {
-                        $location.path('/mainView').replace();
-                        $rootScope.msgtxt = '';
-                    } else {
-                        $rootScope.msgtxt = 'Usuario Invalido';
+            $rootScope.users = angularFireCollection(new Firebase(fbURL + usersPath));
+            $rootScope.stocks = angularFireCollection(new Firebase(fbURL + deviceBasePath));
+            $rootScope.login = function (userName, password) {
+                var found = false;
+                angular.forEach($rootScope.users, function (user) {
+                    if (user.accId == userName && user.pass == password) {
+                        $rootScope.actualUser = user;
+                        /*$cookieStore.put('actualUser', user);
+                        $cookieStore.put('users', $rootScope.users);
+                        $cookieStore.put('stocks', $rootScope.stocks);*/
+                        found = true;
                     }
-                };
+                }, this);
+                if ($rootScope.actualUser && found) {
+                    $location.path('/mainView').replace();
+                    $rootScope.msgtxt = '';
+                } else {
+                    $rootScope.msgtxt = 'Usuario Invalido';
+                }
+            };
             /*}*/
         }]).
     controller('ListCtrl', ['$rootScope', 'angularFireCollection', 'fbURL', 'teamsPath', 'usersPath', '$location',
@@ -106,11 +126,6 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 $location.path('mainView' + url);
             };
         }]).
-    filter('ownerTeam', function () {
-        return function (teamId, teams) {
-            return teams[teamId] ? teams[teamId].name : 'Free Device';
-        };
-    }).
     controller('DeviceCtrl', ['$rootScope', '$location', 'time', '$routeParams', 'fbURL', 'deviceBasePath',
         function ($rootScope, $location, time, $routeParams, fbURL, deviceBasePath) {
             var currentGroup = $rootScope.stocks[0];

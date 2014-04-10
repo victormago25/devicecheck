@@ -8,25 +8,17 @@
             <div class="well">
                 <button class="btn btn-primary pull-right" ng-click="isCollapsed = !isCollapsed">[+]</button>
                 <div collapse="isCollapsed">
-                    <table id="tableStatus{{stocks.$id}}" class="table dataTable">
+                    <table id="tableStatusDevices" class="table dataTable" index="devices" device-table="devices">
                         <thead>
                             <tr>
                                 <th>Name</th>
                                 <th>Device Type</th>
+                                <th>OS</th>
                                 <th>Status</th>
                                 <th>Owned by</th>
                                 <th>Used by</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr ng-repeat="device in stocks[0]" ng-class-odd="'odd'" ng-class-even="'even'">
-                                <td><a ng-click="includeDevice('/' + stocks.$id + '/' + $index)">{{device.name}}</a></td>
-                                <td>{{device.type}}</td>
-                                <td><span ng-show="device.inUse" class="bold-{{device.inUse}}"><span class="icon-ban-circle"></span> In use</span><span class="bold-{{device.inUse}}" ng-hide="device.inUse"><span class="icon-ok-circle" ></span> Available</span></td>
-                                <td>{{device.teamId | ownerTeam:teams}}</td>
-                                <td>{{device.user}}</td>
-                            </tr>
-                        </tbody>
                     </table>
                 </div>
             </div>
