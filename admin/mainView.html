@@ -5,31 +5,13 @@
             <button ng-click="logout()" ng-controller="logoutCtrl" id="logout" class="btn btn-primary pull-right ng-scope">Logout</button>
             <h1>Select the device to check for availability</h1>
             <hr />
-            <tabset>
-                    <button class="btn btn-primary pull-right" ng-click="isCollapsed = !isCollapsed">[+]</button>
-                    <div collapse="isCollapsed">
-                        <table id="tableStatus{{group.$id}}" class="table dataTable">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Device Type</th>
-                                    <th>Status</th>
-                                    <th>Owned by</th>
-                                    <th>Used by</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="device in group" ng-class-odd="'odd'" ng-class-even="'even'">
-                                    <td><a ng-click="includeDevice('/' + group.$id + '/' + $index)">{{device.name}}</a></td>
-                                    <td>{{device.type}}</td>
-                                    <td><span ng-show="device.inUse" class="bold-{{device.inUse}}"><span class="icon-ban-circle"></span> In use</span><span class="bold-{{device.inUse}}" ng-hide="device.inUse"><span class="icon-ok-circle" ></span> Available</span></td>
-                                    <td>{{device.teamId | ownerTeam:teams}}</td>
-                                    <td>{{device.user}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-            </tabset>
+            <div class="well">
+                <button class="btn btn-primary pull-right" ng-click="isCollapsed = !isCollapsed">[+]</button>
+                <div collapse="isCollapsed">
+                    <table id="tableStatus{{stocks[0].$id}}" class="table dataTable" device-table="{{stocks[0]}}">
+                    </table>
+                </div>
+            </div>
         </div>
         <div class="col-12 over-hide">
             <div ng-if="urlDevice" ng-include="'device.html'" class="device-animate-container"></div>

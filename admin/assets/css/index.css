@@ -6,6 +6,9 @@
     display: inline-block;
     margin-top: 25px;
 }
+.container .row .col-12 .well > div {
+    clear: both;
+}
 h1 {
     font-size: 150%
 }

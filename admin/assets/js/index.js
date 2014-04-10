@@ -5,6 +5,7 @@ angular.module('devicechecker.directives', [])
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
+                console.log(scope);
                 if (angular.isString(attrs.activeTable)) {
                     element.dataTable({"aoColumns": [
                         { "mData": "user" },
@@ -26,7 +27,7 @@ angular.module('devicechecker.directives', [])
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
-                if (angular.isString(attrs.activeTable)) {
+                if (angular.isString(attrs.deviceTable)) {
                     element.dataTable({"aoColumns": [
                         { "mData": "name" },
                         { "mData": "type" },
@@ -34,12 +35,12 @@ angular.module('devicechecker.directives', [])
                         { "mData": "teamId" },
                         { "mData": "user" }],
                         "aaSorting": [[ 2, "desc" ]]});
-                    scope.$watchCollection('actual.history', function (newNames) {
+                    scope.$watchCollection('stocks', function (newNames) {
                         element.dataTable().fnClearTable();
                         element.dataTable().fnAddData(newNames);
                     });
-                    if (scope.device && scope.actual && scope.actual.history) {
-                        element.dataTable().fnAddData(scope.actual.history);
+                    if (scope.stocks && scope.stocks[0]) {
+                        element.dataTable().fnAddData(scope.stocks[0]);
                     }
                 }
             }
@@ -50,7 +51,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
     // value('fbURL', 'https://devicetrack.firebaseio.com/').
     // value('fbURL', 'https://cl-device-control.firebaseio.com/').
     value('fbURL', 'https://devicetrack-bu.firebaseio.com/').
-    /*value('fbURL', 'https://device-checker-bu.firebaseio.com/').*/
+    // value('fbURL', 'https://device-checker-bu.firebaseio.com/').
     value('deviceBasePath', 'stock/').
     value('teamsPath', 'teams/').
     value('usersPath', 'users/').
