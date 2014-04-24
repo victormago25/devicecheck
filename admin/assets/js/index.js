@@ -30,7 +30,7 @@ angular.module('devicechecker.directives', []).
                 if (angular.isString(attrs.deviceTable)) {
                     element.dataTable({"aoColumns": [
                             { "mData": function (oObj) {
-                                return '<a href= "#/mainView/' + oObj.$id + '" data-device="/' + oObj.$id + '" ng-click="includeDevice(\'/'+oObj.$id+'\')">' + oObj.name + '</a>'
+                                return '<a href="#/'+oObj.$id+'">' + oObj.name + '</a>';
                             }},
                             { "mData": "type" },
                             { "mData": "os" },
@@ -58,13 +58,8 @@ angular.module('devicechecker.directives', []).
                     scope.$watchCollection('stocks', function (newNames) {
                         element.dataTable().fnClearTable();
                         element.dataTable().fnAddData(newNames);
-                        element.on('click', 'a[data-device]', function (e) {
-                            var url = 'mainView' + this.getAttribute('data-device');
-                            $location.path(url);
-                        });
                     });
                     element.dataTable().fnAddData(scope.stocks);
-                    $compile(element.contents())(scope);
                 }
             }
         };
@@ -117,19 +112,12 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
             };
             /*}*/
         }]).
-    controller('ListCtrl', ['$rootScope', '$location',
-        function ($rootScope, $location) {
-            if (!$rootScope.actualUser) {
-                $location.path('/').replace();
-            }
-            $rootScope.includeDevice = function (url) {
-                $rootScope.urlDevice = 'mainView' + url;
-                $location.path('mainView' + url);
-            };
-        }]).
     controller('DeviceCtrl', ['$rootScope', '$location', 'time', '$routeParams', 'fbURL', 'deviceBasePath',
         function ($rootScope, $location, time, $routeParams, fbURL, deviceBasePath) {
             var currentGroup = $rootScope.stocks;
+            if (!$rootScope.actualUser) {
+                $location.path('/').replace();
+            }
             if (currentGroup) {
                 $rootScope.actual = currentGroup[$routeParams.deviceId];
             }
@@ -147,9 +135,9 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
             $rootScope.$routeParams = $routeParams;
             $rootScope.send = function ($routeParams, input) {
                 var actualInfo = $rootScope.actual,
-                    devicePath = $routeParams.deviceId,
-                    deviceRef = new Firebase(fbURL + deviceBasePath + devicePath),
+                    deviceRef = new Firebase(fbURL + deviceBasePath + $routeParams.deviceId),
                     updateFields = {};
+                console.log('entra aqui');
                 deviceRef.once('value', function (dataSnapshot) {
                     var currentEncryptPass = CryptoJS.MD5(actualInfo.password).toString();
                         actualInfo.lockPhrase = currentEncryptPass;
@@ -157,9 +145,6 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 });
                 deviceRef.update(updateFields);
             };
-            if (!$rootScope.actual) {
-                $location.path('/');
-            }
         }]).
     controller('logoutCtrl', ['$rootScope', '$location',
         function ($rootScope, $location) {
@@ -171,7 +156,6 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.
             when('/', {templateUrl: '/admin/login.html', controllerAs: 'device'}).
-            when('/mainView', {controller:'ListCtrl', templateUrl: '/admin/mainView.html', controllerAs: 'device'}).
-            when('/mainView/:deviceId', {controller: 'DeviceCtrl', templateUrl: '/admin/mainView.html', controllerAs: 'device'}).
-            otherwise({redirectTo: '/'});
+            when('/mainView', {templateUrl: '/admin/mainView.html', controllerAs: 'device'}).
+            when('/:deviceId', {controller: 'DeviceCtrl', templateUrl: '/admin/device.html', controllerAs: 'device'});
     }]);
