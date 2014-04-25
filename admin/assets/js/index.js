@@ -137,7 +137,6 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 var actualInfo = $rootScope.actual,
                     deviceRef = new Firebase(fbURL + deviceBasePath + $routeParams.deviceId),
                     updateFields = {};
-                console.log('entra aqui');
                 deviceRef.once('value', function (dataSnapshot) {
                     var currentEncryptPass = CryptoJS.MD5(actualInfo.password).toString();
                         actualInfo.lockPhrase = currentEncryptPass;

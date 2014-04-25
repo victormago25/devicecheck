@@ -23,59 +23,57 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 over-hide">
-            <div ng-animate="{enter: 'animate-enter'}">
-                <h2>{{actual.name}}</h2>
-                <div class="alert ng-scope alert-error" ng-show="actual.inUse">Device in use by {{actual.user}}</div>
-                <div class="alert ng-scope alert-success" ng-hide="actual.inUse">Device ready to use</div>
-                <img alt="{{actual.name}}" ng-src="{{actual.img}}" class="hidden-phone"/>
-                <div class="well well-large info">
-                    <h3>Device Information:</h3>
-                    <ul>
-                        <li><span class="bold">Operative System: </span>{{actual.os}}</li>
-                        <li><span class="bold">Version: </span>{{actual.osVersion}}</li>
-                        <li><span class="bold">Display Size: </span>{{actual.displaySize}}</li>
-                    </ul>
-                </div>
-                <accordion close-others="true">
-                    <accordion-group heading="Request Device">
-                        <form name="checkForm">
-                            <div class="control-group" ng-class="{error: checkForm.user.$invalid}">
-                                <label>Accenture ID: (i.e. juan.perez)</label>
-                                <input type="text" name="user" ng-pattern="/[a-z]+(\.[a-z]+){1,}/" ng-model="actual.user" required>
-                                <span ng-show="checkForm.user.$error.required" class="help-inline">Required</span>
-                                <span ng-show="checkForm.user.$error.pattern" class="help-inline">Invalid ID</span>
-                            </div>
-
-                            <div class="control-group" ng-class="{error: checkForm.password.$invalid}">
-                                <label>Passcode:</label>
-                                <input type="text" name="password" ng-model="actual.password" required ng-minlength="3">
-                                <span ng-show="checkForm.password.$error.required" class="help-inline">Required</span>
-                                <span ng-show="checkForm.password.$error.invalid" class="help-inline">Invalid Passcode</span>
-                            </div>
-                            <p>
-                                <span class="bold">Current time is:</span> {{ time.now | date:'short' }}
-                            </p>
-                            <br>
-                            <button ng-click="send($routeParams, checkForm.password)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-show="actual.inUse">Check-in</button>
-                            <button ng-click="send($routeParams)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-hide="actual.inUse">Check-out</button>
-                        </form>
-                    </accordion-group>
-                    <accordion-group heading="History">
-                        <table id="tableHistory{{$routeParams.deviceId}}" index="{{$routeParams.deviceId}}" class="table" active-table="{{$routeParams.groupId}}">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </accordion-group>
-                </accordion>
+        <div ng-if="actual" ng-animate="{enter: 'animate-enter'}" class="col-12">
+            <h2>{{actual.name}}</h2>
+            <div class="alert ng-scope alert-error" ng-show="actual.inUse">Device in use by {{actual.user}}</div>
+            <div class="alert ng-scope alert-success" ng-hide="actual.inUse">Device ready to use</div>
+            <img alt="{{actual.name}}" ng-src="{{actual.img}}" class="hidden-phone"/>
+            <div class="well well-large info">
+                <h3>Device Information:</h3>
+                <ul>
+                    <li><span class="bold">Operative System: </span>{{actual.os}}</li>
+                    <li><span class="bold">Version: </span>{{actual.osVersion}}</li>
+                    <li><span class="bold">Display Size: </span>{{actual.displaySize}}</li>
+                </ul>
             </div>
+            <accordion close-others="true">
+                <accordion-group heading="Request Device">
+                    <form name="checkForm">
+                        <div class="control-group" ng-class="{error: checkForm.user.$invalid}">
+                            <label>Accenture ID: (i.e. juan.perez)</label>
+                            <input type="text" name="user" ng-pattern="/[a-z]+(\.[a-z]+){1,}/" ng-model="actual.user" required>
+                            <span ng-show="checkForm.user.$error.required" class="help-inline">Required</span>
+                            <span ng-show="checkForm.user.$error.pattern" class="help-inline">Invalid ID</span>
+                        </div>
+
+                        <div class="control-group" ng-class="{error: checkForm.password.$invalid}">
+                            <label>Passcode:</label>
+                            <input type="text" name="password" ng-model="actual.password" required ng-minlength="3">
+                            <span ng-show="checkForm.password.$error.required" class="help-inline">Required</span>
+                            <span ng-show="checkForm.password.$error.invalid" class="help-inline">Invalid Passcode</span>
+                        </div>
+                        <p>
+                            <span class="bold">Current time is:</span> {{ time.now | date:'short' }}
+                        </p>
+                        <br>
+                        <button ng-click="send($routeParams, checkForm.password)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-show="actual.inUse">Check-in</button>
+                        <button ng-click="send($routeParams)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-hide="actual.inUse">Check-out</button>
+                    </form>
+                </accordion-group>
+                <accordion-group heading="History">
+                    <table id="tableHistory{{$routeParams.deviceId}}" index="{{$routeParams.deviceId}}" class="table" active-table="{{$routeParams.groupId}}">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </accordion-group>
+            </accordion>
         </div>
     </div>
 </div>
