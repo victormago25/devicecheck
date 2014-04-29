@@ -1,7 +1,7 @@
 /*jslint sloppy: true */
 /*global angular, window, console, Firebase, CryptoJS, moment, $ */
-angular.module('devicechecker.directives', [])
-    .directive('activeTable', function () {
+angular.module('devicechecker.directives', []).
+    directive('activeTable', function () {
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
@@ -22,14 +22,14 @@ angular.module('devicechecker.directives', [])
             }
         };
     }).
-    directive('deviceTable', function () {
+    directive('deviceTable', function ($location, $compile, $routeParams) {
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
                 if (angular.isString(attrs.deviceTable)) {
                     element.dataTable({"aoColumns": [
                             { "mData": function (oObj) {
-                                return '<a href="#/'+oObj.$id+'">' + oObj.name + '</a>';
+                                return '<a href="#/' + $routeParams.teamId + '/' + oObj.$id + '">' + oObj.name + '</a>';
                             }},
                             { "mData": "type" },
                             { "mData": "os" },
@@ -54,11 +54,11 @@ angular.module('devicechecker.directives', [])
                             { "mData": "password", "bVisible": false }
                         ],
                         "aaSorting": [[ 2, "desc" ]]});
-                    scope.$watchCollection('stocks', function (newNames) {
+                    scope.$watchCollection('stocksByTeam', function (newNames) {
                         element.dataTable().fnClearTable();
                         element.dataTable().fnAddData(newNames);
                     });
-                    element.dataTable().fnAddData(scope.stocks);
+                    element.dataTable().fnAddData(scope.stocksByTeam);
                 }
             }
         };
@@ -66,11 +66,11 @@ angular.module('devicechecker.directives', [])
 
 angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives']).
     // value('fbURL', 'https://devicetrack.firebaseio.com/').
-    // value('fbURL', 'https://device-checker-bu.firebaseio.com/').
+    // value('fbURL', 'https://cl-device-control.firebaseio.com/').
     value('fbURL', 'https://devicetrack-bu.firebaseio.com/').
+    // value('fbURL', 'https://device-checker-bu.firebaseio.com/').
     value('deviceBasePath', 'stock/Devices/').
     value('teamsPath', 'teams/').
-    value('usersPath', 'users/').
     factory('time', function () {
         var time = {};
         (function tick() {
@@ -78,18 +78,30 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
         }());
         return time;
     }).
-    controller('ListCtrl', ['$rootScope', 'angularFireCollection', 'fbURL', 'deviceBasePath', 'teamsPath', 'usersPath',
-        function ($rootScope, angularFireCollection, fbURL, deviceBasePath, teamsPath, usersPath) {
-            $rootScope.stocks = angularFireCollection(new Firebase(fbURL + deviceBasePath));
+    controller('selectTeamCtrl', ['$rootScope', 'angularFireCollection', 'fbURL', 'deviceBasePath', 'teamsPath', '$location',
+        function ($rootScope, angularFireCollection, fbURL, deviceBasePath, teamsPath, $location) {
             $rootScope.teams = angularFireCollection(new Firebase(fbURL + teamsPath));
-            $rootScope.users = angularFireCollection(new Firebase(fbURL + usersPath));
+            $rootScope.stocks = angularFireCollection(new Firebase(fbURL + deviceBasePath));
+            $rootScope.selectTeam = function (selectedItem) {
+                var newTeams = [];
+                angular.forEach($rootScope.stocks, function (device) {
+                    if (device.teamId === selectedItem.id) {
+                        newTeams.push(device);
+                    }
+                }, this);
+                $rootScope.stocksByTeam = newTeams;
+                $location.path('/' + selectedItem.id).replace();
+            };
+        }]).
+    controller('ListCtrl', ['$rootScope', 'angularFireCollection', 'fbURL', '$location',
+        function ($rootScope, angularFireCollection, fbURL, $routeParams, $location) {
+            $rootScope.changeTeam = function () {
+                $location.path('/').replace();
+            }
         }]).
     controller('DeviceCtrl', ['$rootScope', '$location', 'time', '$routeParams', 'fbURL', 'deviceBasePath',
         function ($rootScope, $location, time, $routeParams, fbURL, deviceBasePath) {
             var currentGroup = $rootScope.stocks;
-            if (!$rootScope.actualUser) {
-                $location.path('/').replace();
-            }
             if (currentGroup) {
                 $rootScope.actual = currentGroup[$routeParams.deviceId];
             }
@@ -154,13 +166,22 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                     }
                 });
                 deviceRef.update(updateFields);
+                $location.path('/' + $routeParams.teamId);
             };
             if (!$rootScope.actual) {
+                $location.path('/' + $routeParams.teamId);
+            }
+        }]).
+    controller('teamsCtrl', ['$rootScope', '$location',
+        function ($rootScope, $location) {
+            $rootScope.changeTeam = function () {
+                delete $rootScope['actual'];
                 $location.path('/');
             }
         }]).
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.
-            when('/', {templateUrl: '/mainView.html', controllerAs: 'device'}).
-            when('/:deviceId', {controller: 'DeviceCtrl', templateUrl: '/device.html', controllerAs: 'device'});
+            when('/', {templateUrl: '/selectTeam.html', controllerAs: 'device'}).
+            when('/:teamId', {templateUrl: '/mainView.html', controllerAs: 'device'}).
+            when('/:teamId/:deviceId', {templateUrl: '/device.html', controllerAs: 'device'});
     }]);

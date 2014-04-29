@@ -6,7 +6,7 @@
             <h1>Select the device to check for availability</h1>
             <hr />
             <div class="well">
-                <button class="btn btn-primary pull-right" ng-click="isCollapsed = !isCollapsed">[+]</button>
+                <button class="btn btn-primary pull-right" ng-click="isCollapsed = !isCollapsed"><span ng-if="isCollapsed">[+]</span><span ng-if="!isCollapsed">[-]</span></button>
                 <div collapse="isCollapsed">
                     <table id="tableStatusDevices" class="table dataTable" index="devices" device-table="devices">
                         <thead>

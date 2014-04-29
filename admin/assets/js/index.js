@@ -5,7 +5,6 @@ angular.module('devicechecker.directives', []).
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
-                console.log(scope.actual);
                 if (angular.isString(attrs.activeTable)) {
                     element.dataTable({"aoColumns": [
                         { "mData": "user" },
@@ -115,9 +114,9 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
     controller('DeviceCtrl', ['$rootScope', '$location', 'time', '$routeParams', 'fbURL', 'deviceBasePath',
         function ($rootScope, $location, time, $routeParams, fbURL, deviceBasePath) {
             var currentGroup = $rootScope.stocks;
-            if (!$rootScope.actualUser) {
-                $location.path('/').replace();
-            }
+            // if (!$rootScope.actualUser) {
+            //     $location.path('/').replace();
+            // }
             if (currentGroup) {
                 $rootScope.actual = currentGroup[$routeParams.deviceId];
             }
@@ -156,5 +155,6 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
         $routeProvider.
             when('/', {templateUrl: '/admin/login.html', controllerAs: 'device'}).
             when('/mainView', {templateUrl: '/admin/mainView.html', controllerAs: 'device'}).
-            when('/:deviceId', {controller: 'DeviceCtrl', templateUrl: '/admin/device.html', controllerAs: 'device'});
+            when('/:deviceId', {templateUrl: '/admin/device.html', controllerAs: 'device'}).
+            when('/addDevice', {templateUrl: '/admin/addDevice.html', controllerAs: 'device'});
     }]);

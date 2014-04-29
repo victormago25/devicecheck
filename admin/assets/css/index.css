@@ -73,8 +73,11 @@ div.accordion {
     background: url(../img/close.png) center right no-repeat;
 }
 .info {
+    position: absolute;
+    display: inline-block;
     min-width: 140px;
-    margin-left: 215px;
+    width: 56%;
+    margin-left: 20px;
 }
 .nav-tabs>li {
     cursor: pointer;

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-12">
             <img src="" height="50" width="207" alt="Accenture" />
-            <h1>Ingreso al Sistema</h1>
+            <h1>Device Tracker System</h1>
             <hr />
             <form name="loginForm" class="well" ng-submit="login(user, password)">
                 <div class="control-group" ng-class="{error: loginForm.user.$invalid}">
@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="control-group" ng-class="{error: loginForm.password.$invalid}">
-                    <label>Contrasena:</label>
+                    <label>Password:</label>
                     <input type="password" name="password" required ng-minlength="6" ng-model="password" required>
                     <span ng-show="loginForm.password.$error.required" class="help-inline">Required</span>
                     <span ng-show="loginForm.password.$error.invalid" class="help-inline">Invalid Passcode</span>
@@ -23,7 +23,7 @@
                     <label class="error">{{msgtxt}}</label>
                 </div>
                 <br>
-                <button type="submit" ng-disabled="isClean() || loginForm.$invalid" class="btn btn-primary">Ingresar</button>
+                <button type="submit" ng-disabled="isClean() || loginForm.$invalid" class="btn btn-primary">Login</button>
             </form>
         </div>
     </div>

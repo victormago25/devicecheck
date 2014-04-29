@@ -2,12 +2,12 @@
     <div class="row">
         <div class="col-12">
             <img src="" height="50" width="207" alt="Accenture" />
-            <!-- <button ng-click="logout()" ng-controller="logoutCtrl" id="logout" class="btn btn-primary pull-right ng-scope">Logout</button> -->
+            <button ng-click="changeTeam()" ng-controller="teamsCtrl" id="changeTeam" class="btn btn-primary pull-right ng-scope">Back to Teams</button>
             <h1>Select the device to check for availability</h1>
             <hr />
             <div class="well">
                 <button class="btn btn-primary pull-right" ng-click="isCollapsed = !isCollapsed"><span ng-if="isCollapsed">[+]</span><span ng-if="!isCollapsed">[-]</span></button>
-                <div collapse="isCollapsed">
+                <div collapse="isCollapsed" class="full-width">
                     <table id="tableStatusDevices" class="table dataTable" index="devices" device-table="devices">
                         <thead>
                             <tr>
@@ -22,9 +22,6 @@
                     </table>
                 </div>
             </div>
-        </div>
-        <div class="col-12 over-hide">
-            <div ng-if="urlDevice" ng-include="'device.html'" class="device-animate-container"></div>
         </div>
     </div>
 </div>
