@@ -1,0 +1,91 @@
+<div class="container" ng-controller="DeviceManagerCtrl">
+    <div class="row">
+        <div class="col-12">
+            <img src="" height="50" width="207" alt="Accenture" />
+            <button ng-click="logout()" ng-controller="logoutCtrl" id="logout" class="btn btn-primary pull-right ng-scope">Logout</button>
+            <button ng-click="mainPage()" ng-controller="devicesCtrl" id="mainPage" class="btn btn-primary pull-right ng-scope">Devices</button>
+            <h1>Add new device</h1>
+            <hr />
+            <form name="newDeviceForm" class="well" ng-submit="addDevice(name, os, osVersion, type, displaySize, img, teamId)" enctype='multipart/form-data'>
+                <div class="control-group" ng-class="{error: newDeviceForm.name.$invalid}">
+                    <label>Device Name:</label>
+                    <input type="text" name="name" ng-model="name" required>
+                    <span ng-show="newDeviceForm.name.$error.required" class="help-inline">Required</span>
+                    <span ng-show="newDeviceForm.name.$error.pattern" class="help-inline">Invalid Name</span>
+                </div>
+
+                <div class="control-group" ng-class="{error: newDeviceForm.os.$invalid}">
+                    <label>Operative System:</label>
+                    <input type="text" name="os" ng-model="os" required>
+                    <span ng-show="newDeviceForm.os.$error.required" class="help-inline">Required</span>
+                    <span ng-show="newDeviceForm.os.$error.invalid" class="help-inline">Invalid OS</span>
+                </div>
+
+                <div class="control-group" ng-class="{error: newDeviceForm.osVersion.$invalid}">
+                    <label>Operative System Version:</label>
+                    <input type="text" name="osVersion" ng-model="osVersion" required>
+                    <span ng-show="newDeviceForm.osVersion.$error.required" class="help-inline">Required</span>
+                    <span ng-show="newDeviceForm.osVersion.$error.invalid" class="help-inline">Invalid OS Version</span>
+                </div>
+
+                <div class="control-group" ng-class="{error: newDeviceForm.type.$invalid}">
+                    <label>Device Type:</label>
+                    <input type="text" name="type" ng-model="type" required>
+                    <span ng-show="newDeviceForm.type.$error.required" class="help-inline">Required</span>
+                    <span ng-show="newDeviceForm.type.$error.invalid" class="help-inline">Set the Device Type</span>
+                </div>
+
+                <div class="control-group" ng-class="{error: newDeviceForm.displaySize.$invalid}">
+                    <label>Device Display Size:</label>
+                    <input type="text" name="displaySize" ng-model="displaySize" required>
+                    <span ng-show="newDeviceForm.displaySize.$error.required" class="help-inline">Required</span>
+                    <span ng-show="newDeviceForm.displaySize.$error.invalid" class="help-inline">Set a Display Size</span>
+                </div>
+
+                <div class="control-group" ng-class="{error: newDeviceForm.img.$invalid}">
+                    <label>Device Image:</label>
+                    <input type="file" name="img" file-model="img">
+                    <span ng-show="newDeviceForm.img.$error.required" class="help-inline">Required</span>
+                    <span ng-show="newDeviceForm.img.$error.invalid" class="help-inline">Choose an Image</span>
+                </div>
+
+                <div class="control-group" ng-class="{error: newDeviceForm.teamId.$invalid}">
+                    <label>Owner Team:</label>
+                    <select name="teamId" ng-model="teamId" ng-options="team as team.name for team in teams" required></select>
+                    <span ng-show="newDeviceForm.teamId.$error.required" class="help-inline">Required</span>
+                    <span ng-show="newDeviceForm.teamId.$error.invalid" class="help-inline">Select a Team</span>
+                </div>
+
+                <div class="control-group" ng-class="{error: newDeviceForm.name.$invalid}">
+                    <label class="error">{{msgtxt}}</label>
+                </div>
+
+                <div class="control-group" ng-class="{error: newDeviceForm.os.$invalid}">
+                    <label class="error">{{msgtxt}}</label>
+                </div>
+
+                <div class="control-group" ng-class="{error: newDeviceForm.osVersion.$invalid}">
+                    <label class="error">{{msgtxt}}</label>
+                </div>
+
+                <div class="control-group" ng-class="{error: newDeviceForm.type.$invalid}">
+                    <label class="error">{{msgtxt}}</label>
+                </div>
+
+                <div class="control-group" ng-class="{error: newDeviceForm.displaySize.$invalid}">
+                    <label class="error">{{msgtxt}}</label>
+                </div>
+
+                <div class="control-group" ng-class="{error: newDeviceForm.img.$invalid}">
+                    <label class="error">{{msgtxt}}</label>
+                </div>
+
+                <div class="control-group" ng-class="{error: newDeviceForm.teamId.$invalid}">
+                    <label class="error">{{msgtxt}}</label>
+                </div>
+                <br>
+                <button type="submit" ng-disabled="isClean() || newDeviceForm.$invalid" class="btn btn-primary">New Device</button>
+            </form>
+        </div>
+    </div>
+</div>

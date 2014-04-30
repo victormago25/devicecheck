@@ -62,7 +62,22 @@ angular.module('devicechecker.directives', []).
                 }
             }
         };
-    });
+    }).
+    directive('fileModel', ['$parse', function ($parse) {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attrs) {
+                var model = $parse(attrs.fileModel);
+                var modelSetter = model.assign;
+
+                element.bind('change', function(){
+                    scope.$apply(function(){
+                        modelSetter(scope, element[0].files[0]);
+                    });
+                });
+            }
+        }
+    }]);
 
 angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives']).
     // value('fbURL', 'https://devicetrack.firebaseio.com/').
@@ -79,6 +94,19 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
         }());
         return time;
     }).
+    service('fileUpload', ['$http', function ($http) {
+        this.uploadFileToUrl = function(file, uploadUrl){
+            var fd = new FormData();
+            fd.append('file', file);
+            $http.post(uploadUrl, fd, {
+                transformRequest: angular.identity, headers: {'Content-Type': undefined}
+            })
+            .success(function(){
+            })
+            .error(function(){
+            });
+        };
+    }]).
     controller('loginCtrl', ['$rootScope', 'angularFireCollection', 'fbURL', 'usersPath', '$location', 'deviceBasePath', 'teamsPath',
         function ($rootScope, angularFireCollection, fbURL, usersPath, $location, deviceBasePath, teamsPath) {
             /*if ($cookieStore.actual) {
@@ -144,6 +172,33 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 deviceRef.update(updateFields);
             };
         }]).
+    controller('DeviceManagerCtrl', ['$rootScope', '$location', '$routeParams', 'fbURL', 'deviceBasePath', 'fileUpload',
+        function ($rootScope, $location, $routeParams, fbURL, deviceBasePath, fileUpload) {
+            $rootScope.addDevice = function (name, os, osVersion, type, displaySize, img, teamId) {
+                var file = $rootScope.img;
+                console.log('file is ' + JSON.stringify(file));
+                var uploadUrl = "/fileUpload";
+                fileUpload.uploadFileToUrl(file, uploadUrl);
+                console.log(name + ', ' + os + ', ' + osVersion + ', ' + type + ', ' + displaySize + ', ' + img + ', ' + teamId.id);
+                // var deviceRef = new Firebase(fbURL + deviceBasePath);
+                // deviceRef.once('value', function (dataSnapshot) {});
+            };
+            $rootScope.addDevicePage = function () {
+                $location.path('/addDevice');
+            };
+            $rootScope.mainPage = function () {
+                $location.path('/mainView');
+            };
+        }]).
+    controller('devicesCtrl', ['$rootScope', '$location',
+        function ($rootScope, $location) {
+            $rootScope.addDevicePage = function () {
+                $location.path('/addDevice');
+            };
+            $rootScope.mainPage = function () {
+                $location.path('/mainView');
+            };
+        }]).
     controller('logoutCtrl', ['$rootScope', '$location',
         function ($rootScope, $location) {
             $rootScope.logout = function () {
@@ -155,6 +210,6 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
         $routeProvider.
             when('/', {templateUrl: '/admin/login.html', controllerAs: 'device'}).
             when('/mainView', {templateUrl: '/admin/mainView.html', controllerAs: 'device'}).
-            when('/:deviceId', {templateUrl: '/admin/device.html', controllerAs: 'device'}).
-            when('/addDevice', {templateUrl: '/admin/addDevice.html', controllerAs: 'device'});
+            when('/addDevice', {templateUrl: '/admin/addDevice.html', controllerAs: 'device'}).
+            when('/:deviceId', {templateUrl: '/admin/device.html', controllerAs: 'device'});
     }]);

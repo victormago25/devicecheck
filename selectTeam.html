@@ -1,0 +1,11 @@
+<div class="container" ng-controller="selectTeamCtrl">
+    <div class="row">
+        <div class="col-12">
+            <img src="" height="50" width="207" alt="Accenture" />
+            <h1>Device Tracker System</h1>
+            <hr />
+            <label>Select your team:</label>
+            <select id="teamsSelect" ng-model="selectedItem" ng-options="team as team.name for team in teams" ng-change="selectTeam(selectedItem)"></select>
+        </div>
+    </div>
+</div>
