@@ -6,7 +6,7 @@
             <button ng-click="mainPage()" ng-controller="devicesCtrl" id="mainPage" class="btn btn-primary pull-right ng-scope">Devices</button>
             <h1>Add new device</h1>
             <hr />
-            <form name="newDeviceForm" class="well" ng-submit="addDevice(name, os, osVersion, type, displaySize, img, teamId)" enctype='multipart/form-data'>
+            <form name="newDeviceForm" class="well" ng-submit="addDevice(name, os, osVersion, type, displaySize, teamId)" enctype='multipart/form-data'>
                 <div class="control-group" ng-class="{error: newDeviceForm.name.$invalid}">
                     <label>Device Name:</label>
                     <input type="text" name="name" ng-model="name" required>
@@ -44,7 +44,7 @@
 
                 <div class="control-group" ng-class="{error: newDeviceForm.img.$invalid}">
                     <label>Device Image:</label>
-                    <input type="file" name="img" file-model="img">
+                    <input type="file" name="img" file-model="img" ng-file-select="onFileSelect($file)">
                     <span ng-show="newDeviceForm.img.$error.required" class="help-inline">Required</span>
                     <span ng-show="newDeviceForm.img.$error.invalid" class="help-inline">Choose an Image</span>
                 </div>

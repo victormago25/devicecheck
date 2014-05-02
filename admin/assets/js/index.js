@@ -22,37 +22,37 @@ angular.module('devicechecker.directives', []).
             }
         };
     }).
-    directive('deviceTable', function ($location, $compile) {
+    directive('deviceTable', function () {
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
                 if (angular.isString(attrs.deviceTable)) {
                     element.dataTable({"aoColumns": [
-                            { "mData": function (oObj) {
-                                return '<a href="#/'+oObj.$id+'">' + oObj.name + '</a>';
-                            }},
-                            { "mData": "type" },
-                            { "mData": "os" },
-                            { "mData": function (oObj) {
-                                return oObj.inUse ? "<span ng-show=\"" + oObj.inUse + "\" class=\"bold-{{" + oObj.inUse + "}}\"><span class=\"icon-ban-circle\"></span> In use</span>" : "<span class=\"bold-{{" + oObj.inUse + "}}\" ng-hide=\"" + oObj.inUse + "\"><span class=\"icon-ok-circle\" ></span> Available</span>"
-                            }},
-                            { "mData": function (oObj) {
-                                var found = {};
-                                angular.forEach(scope.teams, function (team) {
-                                    if (team.id === oObj.teamId) {
-                                        found = team;
-                                    }
-                                });
-                                return found.name;
-                            }},
-                            { "mData": "user" },
-                            { "mData": "displaySize", "bVisible": false },
-                            { "mData": "history", "bVisible": false },
-                            { "mData": "img", "bVisible": false },
-                            { "mData": "lockPhrase", "bVisible": false },
-                            { "mData": "osVersion", "bVisible": false },
-                            { "mData": "password", "bVisible": false }
-                        ],
+                        { "mData": function (oObj) {
+                            return '<a href="#/' + oObj.$id + '">' + oObj.name + '</a>';
+                        }},
+                        { "mData": "type" },
+                        { "mData": "os" },
+                        { "mData": function (oObj) {
+                            return oObj.inUse ? "<span ng-show=\"" + oObj.inUse + "\" class=\"bold-{{" + oObj.inUse + "}}\"><span class=\"icon-ban-circle\"></span> In use</span>" : "<span class=\"bold-{{" + oObj.inUse + "}}\" ng-hide=\"" + oObj.inUse + "\"><span class=\"icon-ok-circle\" ></span> Available</span>";
+                        }},
+                        { "mData": function (oObj) {
+                            var found = {};
+                            angular.forEach(scope.teams, function (team) {
+                                if (team.id === oObj.teamId) {
+                                    found = team;
+                                }
+                            });
+                            return found.name;
+                        }},
+                        { "mData": "user" },
+                        { "mData": "displaySize", "bVisible": false },
+                        { "mData": "history", "bVisible": false },
+                        { "mData": "img", "bVisible": false },
+                        { "mData": "lockPhrase", "bVisible": false },
+                        { "mData": "osVersion", "bVisible": false },
+                        { "mData": "password", "bVisible": false }
+                    ],
                         "aaSorting": [[ 2, "desc" ]]});
                     scope.$watchCollection('stocks', function (newNames) {
                         element.dataTable().fnClearTable();
@@ -67,19 +67,19 @@ angular.module('devicechecker.directives', []).
         return {
             restrict: 'A',
             link: function(scope, element, attrs) {
-                var model = $parse(attrs.fileModel);
-                var modelSetter = model.assign;
+                var model = $parse(attrs.fileModel),
+                    modelSetter = model.assign;
 
-                element.bind('change', function(){
-                    scope.$apply(function(){
+                element.bind('change', function() {
+                    scope.$apply(function() {
                         modelSetter(scope, element[0].files[0]);
                     });
                 });
             }
-        }
+        };
     }]);
 
-angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives']).
+angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives', 'angularFileUpload']).
     // value('fbURL', 'https://devicetrack.firebaseio.com/').
     // value('fbURL', 'https://cl-device-control.firebaseio.com/').
     value('fbURL', 'https://devicetrack-bu.firebaseio.com/').
@@ -94,19 +94,6 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
         }());
         return time;
     }).
-    service('fileUpload', ['$http', function ($http) {
-        this.uploadFileToUrl = function(file, uploadUrl){
-            var fd = new FormData();
-            fd.append('file', file);
-            $http.post(uploadUrl, fd, {
-                transformRequest: angular.identity, headers: {'Content-Type': undefined}
-            })
-            .success(function(){
-            })
-            .error(function(){
-            });
-        };
-    }]).
     controller('loginCtrl', ['$rootScope', 'angularFireCollection', 'fbURL', 'usersPath', '$location', 'deviceBasePath', 'teamsPath',
         function ($rootScope, angularFireCollection, fbURL, usersPath, $location, deviceBasePath, teamsPath) {
             /*if ($cookieStore.actual) {
@@ -139,8 +126,8 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
             };
             /*}*/
         }]).
-    controller('DeviceCtrl', ['$rootScope', '$location', 'time', '$routeParams', 'fbURL', 'deviceBasePath',
-        function ($rootScope, $location, time, $routeParams, fbURL, deviceBasePath) {
+    controller('DeviceCtrl', ['$rootScope', 'time', '$routeParams', 'fbURL', 'deviceBasePath',
+        function ($rootScope, time, $routeParams, fbURL, deviceBasePath) {
             var currentGroup = $rootScope.stocks;
             // if (!$rootScope.actualUser) {
             //     $location.path('/').replace();
@@ -148,7 +135,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
             if (currentGroup) {
                 $rootScope.actual = currentGroup[$routeParams.deviceId];
             }
-            $rootScope.$watchCollection('stocks', function (newNames) {
+            $rootScope.$watchCollection('stocks', function () {
                 if (!$routeParams.checkItOut) {
                     var currentGroup = $rootScope.stocks;
                     if (currentGroup) {
@@ -160,26 +147,41 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
             });
             $rootScope.time = time;
             $rootScope.$routeParams = $routeParams;
-            $rootScope.send = function ($routeParams, input) {
+            $rootScope.send = function ($routeParams) {
                 var actualInfo = $rootScope.actual,
                     deviceRef = new Firebase(fbURL + deviceBasePath + $routeParams.deviceId),
                     updateFields = {};
-                deviceRef.once('value', function (dataSnapshot) {
+                deviceRef.once('value', function () {
                     var currentEncryptPass = CryptoJS.MD5(actualInfo.password).toString();
-                        actualInfo.lockPhrase = currentEncryptPass;
-                        updateFields = {lockPhrase: currentEncryptPass};
+                    actualInfo.lockPhrase = currentEncryptPass;
+                    updateFields = {lockPhrase: currentEncryptPass};
                 });
                 deviceRef.update(updateFields);
             };
         }]).
-    controller('DeviceManagerCtrl', ['$rootScope', '$location', '$routeParams', 'fbURL', 'deviceBasePath', 'fileUpload',
-        function ($rootScope, $location, $routeParams, fbURL, deviceBasePath, fileUpload) {
-            $rootScope.addDevice = function (name, os, osVersion, type, displaySize, img, teamId) {
-                var file = $rootScope.img;
-                console.log('file is ' + JSON.stringify(file));
-                var uploadUrl = "/fileUpload";
-                fileUpload.uploadFileToUrl(file, uploadUrl);
-                console.log(name + ', ' + os + ', ' + osVersion + ', ' + type + ', ' + displaySize + ', ' + img + ', ' + teamId.id);
+    controller('DeviceManagerCtrl', ['$rootScope', '$location', '$upload',
+        function ($rootScope, $location, $upload) {
+            $rootScope.onFileSelect = function($file) {
+                $rootScope.upload = $upload.upload({
+                    url: './assets',
+                    method: "POST",
+                    file: $file
+                }).progress(function(evt) {
+                    console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total, 10));
+                }).success(function(data, status, headers, config) {
+                    console.log(data);
+                    console.log(status);
+                    console.log(headers);
+                    console.log(config);
+                });
+            };
+            $rootScope.addDevice = function (name, os, osVersion, type, displaySize, teamId) {
+                // var file = $rootScope.img;
+                // console.log('file is ' + JSON.stringify(file));
+                // var uploadUrl = "/admin/#/assets/img/";
+                // fileUpload.uploadFileToUrl(file, uploadUrl);
+                console.log(name + ', ' + os + ', ' + osVersion + ', ' + type + ', ' + displaySize + ', ' + teamId.id);
+
                 // var deviceRef = new Firebase(fbURL + deviceBasePath);
                 // deviceRef.once('value', function (dataSnapshot) {});
             };
@@ -202,9 +204,9 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
     controller('logoutCtrl', ['$rootScope', '$location',
         function ($rootScope, $location) {
             $rootScope.logout = function () {
-                delete $rootScope['actual'];
+                delete $rootScope.actual;
                 $location.path('/');
-            }
+            };
         }]).
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.
