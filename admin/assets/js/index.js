@@ -69,7 +69,8 @@ angular.module('devicechecker.directives', []).
             link: function(scope, element, attrs) {
                 var model = $parse(attrs.fileModel),
                     modelSetter = model.assign;
-
+                console.log(model);
+                console.log(modelSetter);
                 element.bind('change', function() {
                     scope.$apply(function() {
                         modelSetter(scope, element[0].files[0]);
@@ -126,6 +127,22 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
             };
             /*}*/
         }]).
+    service('fileUpload', ['$http', function ($http) {
+        this.uploadFileToUrl = function (file, uploadUrl) {
+            var fd = new FormData();
+            fd.append('file', file);
+            $http.post(uploadUrl, fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            })
+            .success(function (ev) {
+                console.log(ev);
+            })
+            .error(function (ev) {
+                console.log(ev);
+            });
+        };
+    }]).
     controller('DeviceCtrl', ['$rootScope', 'time', '$routeParams', 'fbURL', 'deviceBasePath',
         function ($rootScope, time, $routeParams, fbURL, deviceBasePath) {
             var currentGroup = $rootScope.stocks;
@@ -159,31 +176,93 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 deviceRef.update(updateFields);
             };
         }]).
-    controller('DeviceManagerCtrl', ['$rootScope', '$location', '$upload',
-        function ($rootScope, $location, $upload) {
-            $rootScope.onFileSelect = function($file) {
-                $rootScope.upload = $upload.upload({
-                    url: './assets',
-                    method: "POST",
-                    file: $file
-                }).progress(function(evt) {
-                    console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total, 10));
-                }).success(function(data, status, headers, config) {
-                    console.log(data);
-                    console.log(status);
-                    console.log(headers);
-                    console.log(config);
-                });
+    controller('DeviceManagerCtrl', ['$rootScope', 'fbURL', 'deviceBasePath', '$location', '$upload', 'fileUpload',
+        function ($rootScope, fbURL, deviceBasePath, $location, $upload, fileUpload) {
+            $rootScope.onFileSelect = function() {
+                console.log($rootScope);
+                var file = $rootScope.myFile;
+                console.log('file is ' + JSON.stringify(file));
+                var uploadUrl = "/";
+                fileUpload.uploadFileToUrl(file, uploadUrl);
+                // var file = $file;
+                // console.log($file);
+                // console.log($rootScope);
+                // console.log($rootScope.file);
+                // console.log($rootScope.$file);
+                // var uploader = $rootScope.uploader = $fileUploader.create({
+                //     scope: $rootScope,
+                //     url: 'upload.php'
+                // });
+                // uploader.filters.push(function ($file) {
+                //     var type = uploader.isHTML5 ? $file.type : '/' + $file.value.slice($file.value.lastIndexOf('.') + 1);
+                //     type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
+                //     return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+                // });
+                // uploader.bind('afteraddingfile', function (event, $file) {
+                //     console.info('After adding a file', $file);
+                // });
+                // uploader.bind('whenaddingfilefailed', function (event, $file) {
+                //     console.info('When adding a file failed', $file);
+                // });
+                // uploader.bind('afteraddingall', function (event, items) {
+                //     console.info('After adding all files', items);
+                // });
+                // uploader.bind('beforeupload', function (event, $file) {
+                //     console.info('Before upload', $file);
+                // });
+                // uploader.bind('progress', function (event, $file, progress) {
+                //     console.info('Progress: ' + progress, $file);
+                // });
+                // uploader.bind('success', function (event, xhr, $file, response) {
+                //     console.info('Success', xhr, $file, response);
+                // });
+                // uploader.bind('cancel', function (event, xhr, $file) {
+                //     console.info('Cancel', xhr, $file);
+                // });
+                // uploader.bind('error', function (event, xhr, $file, response) {
+                //     console.info('Error', xhr, $file, response);
+                // });
+                // uploader.bind('complete', function (event, xhr, $file, response) {
+                //     console.info('Complete', xhr, $file, response);
+                // });
+                // uploader.bind('progressall', function (event, progress) {
+                //     console.info('Total progress: ' + progress);
+                // });
+                // uploader.bind('completeall', function (event, items) {
+                //     console.info('Complete all', items);
+                // });
+                // $rootScope.upload = $upload.upload({
+                //     url: 'upload.php',
+                //     method: "POST",
+                //     file: file
+                // }).progress(function(evt) {
+                //     console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total, 10));
+                // }).success(function(data, status, headers, config) {
+                //     console.log(data);
+                //     console.log(status);
+                //     console.log(headers);
+                //     console.log(config);
+                // });
             };
             $rootScope.addDevice = function (name, os, osVersion, type, displaySize, teamId) {
-                // var file = $rootScope.img;
-                // console.log('file is ' + JSON.stringify(file));
-                // var uploadUrl = "/admin/#/assets/img/";
-                // fileUpload.uploadFileToUrl(file, uploadUrl);
                 console.log(name + ', ' + os + ', ' + osVersion + ', ' + type + ', ' + displaySize + ', ' + teamId.id);
-
-                // var deviceRef = new Firebase(fbURL + deviceBasePath);
-                // deviceRef.once('value', function (dataSnapshot) {});
+                var deviceRef = new Firebase(fbURL + deviceBasePath + '/' + $rootScope.stocks.length),
+                    newDevice = {
+                        displaySize: displaySize,
+                        history: {},
+                        img: '',
+                        inUse: false,
+                        lockPhrase: '',
+                        name: name,
+                        os: os,
+                        osVersion: osVersion,
+                        password: '',
+                        teamId: teamId.id,
+                        type: type,
+                        user: ''
+                    };
+                deviceRef.set(newDevice);
+                $location.path('/mainView');
             };
             $rootScope.addDevicePage = function () {
                 $location.path('/addDevice');

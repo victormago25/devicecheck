@@ -42,12 +42,14 @@
                     <span ng-show="newDeviceForm.displaySize.$error.invalid" class="help-inline">Set a Display Size</span>
                 </div>
 
-                <div class="control-group" ng-class="{error: newDeviceForm.img.$invalid}">
+                <!-- <div class="control-group" ng-class="{error: newDeviceForm.img.$invalid}">
                     <label>Device Image:</label>
-                    <input type="file" name="img" file-model="img" ng-file-select="onFileSelect($file)">
+                    <input type="file" file-model="myFile">
+                    <button ng-click="onFileSelect()">upload me</button>
+                    <input type="file" name="img" file-model="img" ng-file-select="onFileSelect($img)">
                     <span ng-show="newDeviceForm.img.$error.required" class="help-inline">Required</span>
                     <span ng-show="newDeviceForm.img.$error.invalid" class="help-inline">Choose an Image</span>
-                </div>
+                </div> -->
 
                 <div class="control-group" ng-class="{error: newDeviceForm.teamId.$invalid}">
                     <label>Owner Team:</label>
