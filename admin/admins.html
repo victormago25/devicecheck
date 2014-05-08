@@ -1,1 +1,59 @@
-admins.html
+<div class="container" ng-controller="AdminManagerCtrl">
+    <div class="row">
+        <div class="col-12">
+            <img src="" height="50" width="207" alt="Accenture" />
+            <button ng-click="logout()" ng-controller="pagesCtrl" id="logout" class="btn btn-primary pull-right ng-scope">Logout</button>
+            <button ng-click="mainPage()" ng-controller="pagesCtrl" id="mainPage" class="btn btn-primary pull-right ng-scope">Devices</button>
+            <button ng-click="addDevicePage()" ng-controller="pagesCtrl" id="addDevice" class="btn btn-primary pull-right ng-scope">Add Device</button>
+            <h1>Add new Administrator</h1>
+            <hr />
+            <form name="newAdminForm" class="well" ng-submit="addAdmin(accId, teamId, password)" enctype='multipart/form-data'>
+                <div class="control-group" ng-class="{error: newAdminForm.accId.$invalid}">
+                    <label>Accenture Id:</label>
+                    <input type="text" name="accId" ng-model="accId" required>
+                    <span ng-show="newAdminForm.accId.$error.required" class="help-inline">Required</span>
+                    <span ng-show="newAdminForm.accId.$error.pattern" class="help-inline">Invalid Name</span>
+                </div>
+
+                <div class="control-group" ng-class="{error: newAdminForm.teamId.$invalid}">
+                    <label>Team:</label>
+                    <select name="teamId" ng-model="teamId" ng-options="team as team.name for team in teams" required></select>
+                    <span ng-show="newAdminForm.teamId.$error.required" class="help-inline">Required</span>
+                    <span ng-show="newAdminForm.teamId.$error.invalid" class="help-inline">Select a Team</span>
+                </div>
+
+                <div class="control-group" ng-class="{error: newAdminForm.password.$invalid}">
+                    <label>Password:</label>
+                    <input type="text" name="password" ng-model="password" required>
+                    <span ng-show="newAdminForm.password.$error.required" class="help-inline">Required</span>
+                    <span ng-show="newAdminForm.password.$error.invalid" class="help-inline">Invalid OS Version</span>
+                </div>
+
+                <!-- <div class="control-group" ng-class="{error: newAdminForm.cPassword.$invalid}">
+                    <label>Confirm Password:</label>
+                    <input type="text" name="cPassword" ng-model="cPassword" required>
+                    <span ng-show="newAdminForm.cPassword.$error.required" class="help-inline">Required</span>
+                    <span ng-show="newAdminForm.cPassword.$error.invalid" class="help-inline">Set the Device Type</span>
+                </div> -->
+
+                <div class="control-group" ng-class="{error: newAdminForm.accId.$invalid}">
+                    <label class="error">{{msgtxt}}</label>
+                </div>
+
+                <div class="control-group" ng-class="{error: newAdminForm.teamId.$invalid}">
+                    <label class="error">{{msgtxt}}</label>
+                </div>
+
+                <div class="control-group" ng-class="{error: newAdminForm.password.$invalid}">
+                    <label class="error">{{msgtxt}}</label>
+                </div>
+
+                <!-- <div class="control-group" ng-class="{error: newAdminForm.cPassword.$invalid}">
+                    <label class="error">{{msgtxt}}</label>
+                </div> -->
+                <br>
+                <button type="submit" ng-disabled="isClean() || newAdminForm.$invalid" class="btn btn-primary">New Admin</button>
+            </form>
+        </div>
+    </div>
+</div>

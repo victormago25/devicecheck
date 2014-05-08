@@ -2,8 +2,9 @@
     <div class="row">
         <div class="col-12">
             <img src="" height="50" width="207" alt="Accenture" />
-            <button ng-click="logout()" ng-controller="logoutCtrl" id="logout" class="btn btn-primary pull-right ng-scope">Logout</button>
-            <button ng-click="mainPage()" ng-controller="devicesCtrl" id="mainPage" class="btn btn-primary pull-right ng-scope">Devices</button>
+            <button ng-click="logout()" ng-controller="pagesCtrl" id="logout" class="btn btn-primary pull-right ng-scope">Logout</button>
+            <button ng-click="mainPage()" ng-controller="pagesCtrl" id="mainPage" class="btn btn-primary pull-right ng-scope">Devices</button>
+            <button ng-click="adminPage()" ng-controller="pagesCtrl" id="adminPage" class="btn btn-primary pull-right ng-scope">Administrators</button>
             <h1>Add new device</h1>
             <hr />
             <form name="newDeviceForm" class="well" ng-submit="addDevice(name, os, osVersion, type, displaySize, teamId)" enctype='multipart/form-data'>

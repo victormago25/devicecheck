@@ -264,14 +264,23 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 deviceRef.set(newDevice);
                 $location.path('/mainView');
             };
-            $rootScope.addDevicePage = function () {
-                $location.path('/addDevice');
-            };
-            $rootScope.mainPage = function () {
+        }]).
+    controller('AdminManagerCtrl', ['$rootScope', 'fbURL', 'usersPath', '$location',
+        function ($rootScope, fbURL, usersPath, $location) {
+            $rootScope.addAdmin = function (accId, teamId, password) {
+                var adminRef = new Firebase(fbURL + usersPath + '/' + $rootScope.users.length),
+                    newAdmin = {
+                        accId: accId,
+                        admin: true,
+                        id: $rootScope.users.length,
+                        pass: password,
+                        teamId: teamId.id
+                    };
+                adminRef.set(newAdmin);
                 $location.path('/mainView');
             };
         }]).
-    controller('devicesCtrl', ['$rootScope', '$location',
+    controller('pagesCtrl', ['$rootScope', '$location',
         function ($rootScope, $location) {
             $rootScope.addDevicePage = function () {
                 $location.path('/addDevice');
@@ -279,12 +288,13 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
             $rootScope.mainPage = function () {
                 $location.path('/mainView');
             };
-        }]).
-    controller('logoutCtrl', ['$rootScope', '$location',
-        function ($rootScope, $location) {
             $rootScope.logout = function () {
                 delete $rootScope.actual;
                 $location.path('/');
+            };
+            $rootScope.adminPage = function () {
+                delete $rootScope.actual;
+                $location.path('/addAdmin');
             };
         }]).
     config(['$routeProvider', function ($routeProvider) {
@@ -292,5 +302,6 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
             when('/', {templateUrl: '/admin/login.html', controllerAs: 'device'}).
             when('/mainView', {templateUrl: '/admin/mainView.html', controllerAs: 'device'}).
             when('/addDevice', {templateUrl: '/admin/addDevice.html', controllerAs: 'device'}).
+            when('/addAdmin', {templateUrl: '/admin/admins.html', controllerAs: 'device'}).
             when('/:deviceId', {templateUrl: '/admin/device.html', controllerAs: 'device'});
     }]);
