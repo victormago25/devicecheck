@@ -95,37 +95,39 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
         }());
         return time;
     }).
-    controller('loginCtrl', ['$rootScope', 'angularFireCollection', 'fbURL', 'usersPath', '$location', 'deviceBasePath', 'teamsPath',
-        function ($rootScope, angularFireCollection, fbURL, usersPath, $location, deviceBasePath, teamsPath) {
-            /*if ($cookieStore.actual) {
-                $rootScope.actualUser = $cookieStore.get('actualUser');
-                $rootScope.users = $cookieStore.get('users');
-                $rootScope.stocks = $cookieStore.get('stocks');
+    controller('loginCtrl', ['$rootScope', 'angularFireCollection', 'fbURL', 'usersPath', '$location', 'deviceBasePath', 'teamsPath', '$cacheFactory',
+        function ($rootScope, angularFireCollection, fbURL, usersPath, $location, deviceBasePath, teamsPath, $cacheFactory) {
+            if ($cookies.actual) {
+                $rootScope.actualUser = $cookies.actualUser;
+                $rootScope.users = $cookies.users;
+                $rootScope.stocks = $cookies.stocks;
+                $rootScope.teams = $cookies.teams;
                 $location.path('/mainView').replace();
                 $rootScope.msgtxt = '';
-            } else {*/
-            $rootScope.users = angularFireCollection(new Firebase(fbURL + usersPath));
-            $rootScope.stocks = angularFireCollection(new Firebase(fbURL + deviceBasePath));
-            $rootScope.teams = angularFireCollection(new Firebase(fbURL + teamsPath));
-            $rootScope.login = function (userName, password) {
-                var found = false;
-                angular.forEach($rootScope.users, function (user) {
-                    if (user.accId == userName && user.pass == password) {
-                        $rootScope.actualUser = user;
-                        /*$cookieStore.put('actualUser', user);
-                        $cookieStore.put('users', $rootScope.users);
-                        $cookieStore.put('stocks', $rootScope.stocks);*/
-                        found = true;
+            } else {
+                $rootScope.users = angularFireCollection(new Firebase(fbURL + usersPath));
+                $rootScope.stocks = angularFireCollection(new Firebase(fbURL + deviceBasePath));
+                $rootScope.teams = angularFireCollection(new Firebase(fbURL + teamsPath));
+                $rootScope.login = function (userName, password) {
+                    var found = false;
+                    angular.forEach($rootScope.users, function (user) {
+                        if (user.accId == userName && user.pass == password) {
+                            $rootScope.actualUser = user;
+                            $cookies.actualUser = $rootScope.actualUser = user;
+                            $cookies.users = $rootScope.users;
+                            $cookies.stocks = $rootScope.stocks;
+                            $cookies.teams = $rootScope.teams;
+                            found = true;
+                        }
+                    }, this);
+                    if ($rootScope.actualUser && found) {
+                        $location.path('/mainView').replace();
+                        $rootScope.msgtxt = '';
+                    } else {
+                        $rootScope.msgtxt = 'Usuario Invalido';
                     }
-                }, this);
-                if ($rootScope.actualUser && found) {
-                    $location.path('/mainView').replace();
-                    $rootScope.msgtxt = '';
-                } else {
-                    $rootScope.msgtxt = 'Usuario Invalido';
-                }
-            };
-            /*}*/
+                };
+            }
         }]).
     service('fileUpload', ['$http', function ($http) {
         this.uploadFileToUrl = function (file, uploadUrl) {
