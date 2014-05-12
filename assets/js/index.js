@@ -64,7 +64,7 @@ angular.module('devicechecker.directives', []).
         };
     });
 
-angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives']).
+angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives', 'ngRoute']).
     // value('fbURL', 'https://devicetrack.firebaseio.com/').
     // value('fbURL', 'https://cl-device-control.firebaseio.com/').
     value('fbURL', 'https://devicetrack-bu.firebaseio.com/').

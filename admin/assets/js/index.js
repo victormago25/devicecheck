@@ -62,25 +62,9 @@ angular.module('devicechecker.directives', []).
                 }
             }
         };
-    }).
-    directive('fileModel', ['$parse', function ($parse) {
-        return {
-            restrict: 'A',
-            link: function(scope, element, attrs) {
-                var model = $parse(attrs.fileModel),
-                    modelSetter = model.assign;
-                console.log(model);
-                console.log(modelSetter);
-                element.bind('change', function() {
-                    scope.$apply(function() {
-                        modelSetter(scope, element[0].files[0]);
-                    });
-                });
-            }
-        };
-    }]);
+    });
 
-angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives', 'angularFileUpload']).
+angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives', 'ngRoute']).
     // value('fbURL', 'https://devicetrack.firebaseio.com/').
     // value('fbURL', 'https://cl-device-control.firebaseio.com/').
     value('fbURL', 'https://devicetrack-bu.firebaseio.com/').
@@ -95,16 +79,16 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
         }());
         return time;
     }).
-    controller('loginCtrl', ['$rootScope', 'angularFireCollection', 'fbURL', 'usersPath', '$location', 'deviceBasePath', 'teamsPath', '$cacheFactory',
-        function ($rootScope, angularFireCollection, fbURL, usersPath, $location, deviceBasePath, teamsPath, $cacheFactory) {
-            if ($cookies.actual) {
-                $rootScope.actualUser = $cookies.actualUser;
-                $rootScope.users = $cookies.users;
-                $rootScope.stocks = $cookies.stocks;
-                $rootScope.teams = $cookies.teams;
-                $location.path('/mainView').replace();
-                $rootScope.msgtxt = '';
-            } else {
+    controller('loginCtrl', ['$rootScope', 'angularFireCollection', 'fbURL', 'usersPath', '$location', 'deviceBasePath', 'teamsPath',
+        function ($rootScope, angularFireCollection, fbURL, usersPath, $location, deviceBasePath, teamsPath) {
+            // if ($cookies.actual) {
+            //     $rootScope.actualUser = $cookies.actualUser;
+            //     $rootScope.users = $cookies.users;
+            //     $rootScope.stocks = $cookies.stocks;
+            //     $rootScope.teams = $cookies.teams;
+            //     $location.path('/mainView').replace();
+            //     $rootScope.msgtxt = '';
+            // } else {
                 $rootScope.users = angularFireCollection(new Firebase(fbURL + usersPath));
                 $rootScope.stocks = angularFireCollection(new Firebase(fbURL + deviceBasePath));
                 $rootScope.teams = angularFireCollection(new Firebase(fbURL + teamsPath));
@@ -113,10 +97,10 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                     angular.forEach($rootScope.users, function (user) {
                         if (user.accId == userName && user.pass == password) {
                             $rootScope.actualUser = user;
-                            $cookies.actualUser = $rootScope.actualUser = user;
-                            $cookies.users = $rootScope.users;
-                            $cookies.stocks = $rootScope.stocks;
-                            $cookies.teams = $rootScope.teams;
+                            // $cookies.actualUser = $rootScope.actualUser = user;
+                            // $cookies.users = $rootScope.users;
+                            // $cookies.stocks = $rootScope.stocks;
+                            // $cookies.teams = $rootScope.teams;
                             found = true;
                         }
                     }, this);
@@ -126,25 +110,9 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                     } else {
                         $rootScope.msgtxt = 'Usuario Invalido';
                     }
-                };
+                // };
             }
         }]).
-    service('fileUpload', ['$http', function ($http) {
-        this.uploadFileToUrl = function (file, uploadUrl) {
-            var fd = new FormData();
-            fd.append('file', file);
-            $http.post(uploadUrl, fd, {
-                transformRequest: angular.identity,
-                headers: {'Content-Type': undefined}
-            })
-            .success(function (ev) {
-                console.log(ev);
-            })
-            .error(function (ev) {
-                console.log(ev);
-            });
-        };
-    }]).
     controller('DeviceCtrl', ['$rootScope', 'time', '$routeParams', 'fbURL', 'deviceBasePath',
         function ($rootScope, time, $routeParams, fbURL, deviceBasePath) {
             var currentGroup = $rootScope.stocks;
@@ -178,80 +146,14 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 deviceRef.update(updateFields);
             };
         }]).
-    controller('DeviceManagerCtrl', ['$rootScope', 'fbURL', 'deviceBasePath', '$location', '$upload', 'fileUpload',
-        function ($rootScope, fbURL, deviceBasePath, $location, $upload, fileUpload) {
-            $rootScope.onFileSelect = function() {
-                console.log($rootScope);
-                var file = $rootScope.myFile;
-                console.log('file is ' + JSON.stringify(file));
-                var uploadUrl = "/";
-                fileUpload.uploadFileToUrl(file, uploadUrl);
-                // var file = $file;
-                // console.log($file);
-                // console.log($rootScope);
-                // console.log($rootScope.file);
-                // console.log($rootScope.$file);
-                // var uploader = $rootScope.uploader = $fileUploader.create({
-                //     scope: $rootScope,
-                //     url: 'upload.php'
-                // });
-                // uploader.filters.push(function ($file) {
-                //     var type = uploader.isHTML5 ? $file.type : '/' + $file.value.slice($file.value.lastIndexOf('.') + 1);
-                //     type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
-                //     return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-                // });
-                // uploader.bind('afteraddingfile', function (event, $file) {
-                //     console.info('After adding a file', $file);
-                // });
-                // uploader.bind('whenaddingfilefailed', function (event, $file) {
-                //     console.info('When adding a file failed', $file);
-                // });
-                // uploader.bind('afteraddingall', function (event, items) {
-                //     console.info('After adding all files', items);
-                // });
-                // uploader.bind('beforeupload', function (event, $file) {
-                //     console.info('Before upload', $file);
-                // });
-                // uploader.bind('progress', function (event, $file, progress) {
-                //     console.info('Progress: ' + progress, $file);
-                // });
-                // uploader.bind('success', function (event, xhr, $file, response) {
-                //     console.info('Success', xhr, $file, response);
-                // });
-                // uploader.bind('cancel', function (event, xhr, $file) {
-                //     console.info('Cancel', xhr, $file);
-                // });
-                // uploader.bind('error', function (event, xhr, $file, response) {
-                //     console.info('Error', xhr, $file, response);
-                // });
-                // uploader.bind('complete', function (event, xhr, $file, response) {
-                //     console.info('Complete', xhr, $file, response);
-                // });
-                // uploader.bind('progressall', function (event, progress) {
-                //     console.info('Total progress: ' + progress);
-                // });
-                // uploader.bind('completeall', function (event, items) {
-                //     console.info('Complete all', items);
-                // });
-                // $rootScope.upload = $upload.upload({
-                //     url: 'upload.php',
-                //     method: "POST",
-                //     file: file
-                // }).progress(function(evt) {
-                //     console.log('percent: ' + parseInt(100.0 * evt.loaded / evt.total, 10));
-                // }).success(function(data, status, headers, config) {
-                //     console.log(data);
-                //     console.log(status);
-                //     console.log(headers);
-                //     console.log(config);
-                // });
-            };
+    controller('DeviceManagerCtrl', ['$rootScope', 'fbURL', 'deviceBasePath', '$location',
+        function ($rootScope, fbURL, deviceBasePath, $location) {
             $rootScope.addDevice = function (name, os, osVersion, type, displaySize, teamId) {
                 console.log(name + ', ' + os + ', ' + osVersion + ', ' + type + ', ' + displaySize + ', ' + teamId.id);
                 var deviceRef = new Firebase(fbURL + deviceBasePath + '/' + $rootScope.stocks.length),
                     newDevice = {
                         displaySize: displaySize,
-                        history: {},
+                        history: '',
                         img: '',
                         inUse: false,
                         lockPhrase: '',
@@ -298,6 +200,10 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 delete $rootScope.actual;
                 $location.path('/addAdmin');
             };
+            $rootScope.adminPage = function () {
+                delete $rootScope.actual;
+                $location.path('/addTeam');
+            };
         }]).
     config(['$routeProvider', function ($routeProvider) {
         $routeProvider.
@@ -305,5 +211,6 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
             when('/mainView', {templateUrl: '/admin/mainView.html', controllerAs: 'device'}).
             when('/addDevice', {templateUrl: '/admin/addDevice.html', controllerAs: 'device'}).
             when('/addAdmin', {templateUrl: '/admin/admins.html', controllerAs: 'device'}).
+            when('/addTeam', {templateUrl: '/admin/teams.html', controllerAs: 'device'}).
             when('/:deviceId', {templateUrl: '/admin/device.html', controllerAs: 'device'});
     }]);
