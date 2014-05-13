@@ -116,9 +116,9 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
     controller('DeviceCtrl', ['$rootScope', 'time', '$routeParams', 'fbURL', 'deviceBasePath',
         function ($rootScope, time, $routeParams, fbURL, deviceBasePath) {
             var currentGroup = $rootScope.stocks;
-            // if (!$rootScope.actualUser) {
-            //     $location.path('/').replace();
-            // }
+            if (!$rootScope.actualUser) {
+                $location.path('/').replace();
+            }
             if (currentGroup) {
                 $rootScope.actual = currentGroup[$routeParams.deviceId];
             }
@@ -146,8 +146,11 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 deviceRef.update(updateFields);
             };
         }]).
-    controller('DeviceManagerCtrl', ['$rootScope', 'fbURL', 'deviceBasePath', '$location',
-        function ($rootScope, fbURL, deviceBasePath, $location) {
+    controller('upManagerCtrl', ['$rootScope', 'fbURL', 'deviceBasePath', 'usersPath', 'teamsPath', '$location',
+        function ($rootScope, fbURL, deviceBasePath, usersPath, teamsPath, $location) {
+            if (!$rootScope.actualUser) {
+                $location.path('/').replace();
+            }
             $rootScope.addDevice = function (name, os, osVersion, type, displaySize, teamId) {
                 console.log(name + ', ' + os + ', ' + osVersion + ', ' + type + ', ' + displaySize + ', ' + teamId.id);
                 var deviceRef = new Firebase(fbURL + deviceBasePath + '/' + $rootScope.stocks.length),
@@ -168,9 +171,6 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 deviceRef.set(newDevice);
                 $location.path('/mainView');
             };
-        }]).
-    controller('AdminManagerCtrl', ['$rootScope', 'fbURL', 'usersPath', '$location',
-        function ($rootScope, fbURL, usersPath, $location) {
             $rootScope.addAdmin = function (accId, teamId, password) {
                 var adminRef = new Firebase(fbURL + usersPath + '/' + $rootScope.users.length),
                     newAdmin = {
@@ -181,6 +181,16 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                         teamId: teamId.id
                     };
                 adminRef.set(newAdmin);
+                $location.path('/mainView');
+            };
+            $rootScope.addTeam = function (name, shortName) {
+                var teamRef = new Firebase(fbURL + teamsPath + '/' + $rootScope.teams.length),
+                    newTeam = {
+                        id: $rootScope.teams.length,
+                        name: name,
+                        shortName: shortName
+                    };
+                teamRef.set(newTeam);
                 $location.path('/mainView');
             };
         }]).
@@ -200,12 +210,12 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 delete $rootScope.actual;
                 $location.path('/addAdmin');
             };
-            $rootScope.adminPage = function () {
+            $rootScope.teamPage = function () {
                 delete $rootScope.actual;
                 $location.path('/addTeam');
             };
         }]).
-    config(['$routeProvider', function ($routeProvider) {
+    config(function ($routeProvider) {
         $routeProvider.
             when('/', {templateUrl: '/admin/login.html', controllerAs: 'device'}).
             when('/mainView', {templateUrl: '/admin/mainView.html', controllerAs: 'device'}).
@@ -213,4 +223,4 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
             when('/addAdmin', {templateUrl: '/admin/admins.html', controllerAs: 'device'}).
             when('/addTeam', {templateUrl: '/admin/teams.html', controllerAs: 'device'}).
             when('/:deviceId', {templateUrl: '/admin/device.html', controllerAs: 'device'});
-    }]);
+    });

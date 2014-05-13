@@ -1,8 +1,9 @@
-<div class="container" ng-controller="DeviceManagerCtrl">
+<div class="container" ng-controller="upManagerCtrl" ng-if="actualUser">
     <div class="row">
         <div class="col-12">
             <img src="" height="50" width="207" alt="Accenture" />
             <button ng-click="logout()" ng-controller="pagesCtrl" id="logout" class="btn btn-primary pull-right ng-scope">Logout</button>
+            <button ng-click="teamPage()" ng-controller="pagesCtrl" id="teamPage" class="btn btn-primary pull-right ng-scope">Teams</button>
             <button ng-click="mainPage()" ng-controller="pagesCtrl" id="mainPage" class="btn btn-primary pull-right ng-scope">Devices</button>
             <button ng-click="adminPage()" ng-controller="pagesCtrl" id="adminPage" class="btn btn-primary pull-right ng-scope">Administrators</button>
             <h1>Add new device</h1>
