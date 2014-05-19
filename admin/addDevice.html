@@ -8,12 +8,19 @@
             <button ng-click="adminPage()" ng-controller="pagesCtrl" id="adminPage" class="btn btn-primary pull-right ng-scope">Administrators</button>
             <h1>Add new device</h1>
             <hr />
-            <form name="newDeviceForm" class="well" ng-submit="addDevice(name, os, osVersion, type, displaySize, teamId)" enctype='multipart/form-data'>
+            <form name="newDeviceForm" class="well" ng-submit="addDevice(name, tagDevice, os, osVersion, type, displaySize, teamId)" enctype='multipart/form-data'>
                 <div class="control-group" ng-class="{error: newDeviceForm.name.$invalid}">
                     <label>Device Name:</label>
                     <input type="text" name="name" ng-model="name" required>
                     <span ng-show="newDeviceForm.name.$error.required" class="help-inline">Required</span>
                     <span ng-show="newDeviceForm.name.$error.pattern" class="help-inline">Invalid Name</span>
+                </div>
+
+                <div class="control-group" ng-class="{error: newDeviceForm.tagDevice.$invalid}">
+                    <label>Device Name:</label>
+                    <input type="text" name="tagDevice" ng-model="tagDevice" required>
+                    <span ng-show="newDeviceForm.tagDevice.$error.required" class="help-inline">Required</span>
+                    <span ng-show="newDeviceForm.tagDevice.$error.pattern" class="help-inline">Invalid Name</span>
                 </div>
 
                 <div class="control-group" ng-class="{error: newDeviceForm.os.$invalid}">

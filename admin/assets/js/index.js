@@ -113,6 +113,11 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 // };
             }
         }]).
+    filter('ownerTeam', function () {
+        return function (teamId, teams) {
+            return teams[teamId] ? teams[teamId].name : 'Free Device';
+        };
+    }).
     controller('DeviceCtrl', ['$rootScope', 'time', '$routeParams', 'fbURL', 'deviceBasePath',
         function ($rootScope, time, $routeParams, fbURL, deviceBasePath) {
             var currentGroup = $rootScope.stocks;
@@ -151,7 +156,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
             if (!$rootScope.actualUser) {
                 $location.path('/').replace();
             }
-            $rootScope.addDevice = function (name, os, osVersion, type, displaySize, teamId) {
+            $rootScope.addDevice = function (name, tagDevice, os, osVersion, type, displaySize, teamId) {
                 console.log(name + ', ' + os + ', ' + osVersion + ', ' + type + ', ' + displaySize + ', ' + teamId.id);
                 var deviceRef = new Firebase(fbURL + deviceBasePath + '/' + $rootScope.stocks.length),
                     newDevice = {
@@ -164,6 +169,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                         os: os,
                         osVersion: osVersion,
                         password: '',
+                        tagDevice: tagDevice,
                         teamId: teamId.id,
                         type: type,
                         user: ''

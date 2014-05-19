@@ -8,6 +8,26 @@
             <button ng-click="addDevicePage()" ng-controller="pagesCtrl" id="addDevice" class="btn btn-primary pull-right ng-scope">Add Device</button>
             <h1>Add new Administrator</h1>
             <hr />
+            <div collapse="isCollapsed" class="full-width">
+                <table id="tableAdmins" class="table dataTable">
+                    <thead>
+                        <tr>
+                            <th>Accenture ID</th>
+                            <th>Team</th>
+                            <th>Edit</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in users" ng-class-odd="'odd'" ng-class-even="'even'">
+                            <td>{{user.accId}}</td>
+                            <td>{{user.teamId | ownerTeam:teams}}</td>
+                            <td><button  class="btn btn-primary" ng-click="editUser()">Edit</button></td>
+                            <td><button class="btn btn-primary" ng-click="deleteUser()">Delete</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <form name="newAdminForm" class="well" ng-submit="addAdmin(accId, teamId, password)" enctype='multipart/form-data'>
                 <div class="control-group" ng-class="{error: newAdminForm.accId.$invalid}">
                     <label>Accenture Id:</label>
