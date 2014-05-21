@@ -153,6 +153,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
         }]).
     controller('upManagerCtrl', ['$rootScope', 'fbURL', 'deviceBasePath', 'usersPath', 'teamsPath', '$location',
         function ($rootScope, fbURL, deviceBasePath, usersPath, teamsPath, $location) {
+            console.log($rootScope.editable);
             if (!$rootScope.actualUser) {
                 $location.path('/').replace();
             }
@@ -178,6 +179,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 $location.path('/mainView');
             };
             $rootScope.addAdmin = function (accId, teamId, password) {
+                // $rootScope.form = true;
                 var adminRef = new Firebase(fbURL + usersPath + '/' + $rootScope.users.length),
                     newAdmin = {
                         accId: accId,
@@ -188,6 +190,25 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                     };
                 adminRef.set(newAdmin);
                 $location.path('/mainView');
+            };
+            $rootScope.editUserFn = function (userId) {
+                    console.log(userId);
+                $rootScope.editUser = function (userId) {
+                    console.log('ejecuta');
+                    var editUser;
+                    angular.forEach($rootScope.users, function (user) {
+                        console.log('entra al for');
+                        if (user.id === userId) {
+                            editUser = user;
+                        }
+                    }, this);
+                    console.log(editUser);
+                    return editUser;
+                };
+                $location.path('/editUser');
+            };
+            $rootScope.deleteUser = function (userId) {
+                console.log(userId);
             };
             $rootScope.addTeam = function (name, shortName) {
                 var teamRef = new Firebase(fbURL + teamsPath + '/' + $rootScope.teams.length),
@@ -227,6 +248,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
             when('/mainView', {templateUrl: '/admin/mainView.html', controllerAs: 'device'}).
             when('/addDevice', {templateUrl: '/admin/addDevice.html', controllerAs: 'device'}).
             when('/addAdmin', {templateUrl: '/admin/admins.html', controllerAs: 'device'}).
+            when('/editUser', {templateUrl:'/admin/editAdmins.html', controllerAs: 'device'}).
             when('/addTeam', {templateUrl: '/admin/teams.html', controllerAs: 'device'}).
             when('/:deviceId', {templateUrl: '/admin/device.html', controllerAs: 'device'});
     });
