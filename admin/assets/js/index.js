@@ -31,10 +31,11 @@ angular.module('devicechecker.directives', []).
                         { "mData": function (oObj) {
                             return '<a href="#/' + oObj.$id + '">' + oObj.name + '</a>';
                         }},
+                        { "mData": "tagDevice"},
                         { "mData": "type" },
                         { "mData": "os" },
                         { "mData": function (oObj) {
-                            return oObj.inUse ? "<span ng-show=\"" + oObj.inUse + "\" class=\"bold-{{" + oObj.inUse + "}}\"><span class=\"icon-ban-circle\"></span> In use</span>" : "<span class=\"bold-{{" + oObj.inUse + "}}\" ng-hide=\"" + oObj.inUse + "\"><span class=\"icon-ok-circle\" ></span> Available</span>";
+                            return oObj.inUse ? "<span ng-show=\"" + oObj.inUse + "\" class=\"bold-" + oObj.inUse + "\"><span class=\"icon-ban-circle\"></span> In use</span>" : "<span class=\"bold-" + oObj.inUse + "\" ng-hide=\"" + oObj.inUse + "\"><span class=\"icon-ok-circle\" ></span> Available</span>";
                         }},
                         { "mData": function (oObj) {
                             var found = {};
@@ -156,8 +157,20 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
             if (!$rootScope.actualUser) {
                 $location.path('/').replace();
             }
+            var findLastIndex = function (array) {
+                    return (parseInt(array[(array.length - 1)].$id, 10) + 1)
+                },
+                findObject = function (array, id) {
+                    var object = {};
+                    angular.forEach(array, function (obj) {
+                        if (obj.id === id) {
+                            object = obj;
+                        }
+                    }, this);
+                    return object;
+                };
             $rootScope.addDevice = function (name, tagDevice, os, osVersion, type, displaySize, teamId) {
-                var deviceRef = new Firebase(fbURL + deviceBasePath + '/' + $rootScope.stocks.length),
+                var deviceRef = new Firebase(fbURL + deviceBasePath + '/' + findLastIndex($rootScope.stocks)),
                     newDevice = {
                         displaySize: displaySize,
                         history: '',
@@ -177,7 +190,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 $location.path('/mainView');
             };
             $rootScope.addAdmin = function (accId, teamId, password) {
-                var adminRef = new Firebase(fbURL + usersPath + '/' + $rootScope.users.length),
+                var adminRef = new Firebase(fbURL + usersPath + '/' + findLastIndex($rootScope.users)),
                     newAdmin = {
                         accId: accId,
                         admin: true,
@@ -203,7 +216,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 if (!angular.isUndefined(password)) {
                     userComplete.pass = password;
                 }
-                var adminRef = new Firebase(fbURL + usersPath + '/' + userComplete.id);
+                var adminRef = new Firebase(fbURL + usersPath + '/' + userComplete.$id);
                     newAdmin = {
                         accId: userComplete.accId,
                         admin: true,
@@ -215,11 +228,12 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 $location.path('/addAdmin');
             };
             $rootScope.deleteUser = function (userId) {
-                var adminRef = new Firebase(fbURL + usersPath + '/' + userId);
+                var userFound = findObject($rootScope.users, userId),
+                    adminRef = new Firebase(fbURL + usersPath + '/' + userFound.$id);
                 adminRef.remove();
             };
             $rootScope.addTeam = function (name, shortName) {
-                var teamRef = new Firebase(fbURL + teamsPath + '/' + ($rootScope.teams.length + 1)),
+                var teamRef = new Firebase(fbURL + teamsPath + '/' + findLastIndex($rootScope.teams)),
                     newTeam = {
                         id: $rootScope.teams.length,
                         name: name,
@@ -240,7 +254,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 if (shortName !== teamComplete.shortName) {
                     teamComplete.shortName = shortName;
                 }
-                var teamRef = new Firebase(fbURL + teamsPath + '/' + teamComplete.id);
+                var teamRef = new Firebase(fbURL + teamsPath + '/' + teamComplete.$id);
                     newTeam = {
                         id: teamComplete.id,
                         name: teamComplete.name,
@@ -250,8 +264,8 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 $location.path('/addTeam');
             };
             $rootScope.deleteTeam = function (teamId) {
-                console.log(teamId);
-                var teamRef = new Firebase(fbURL + teamsPath + '/' + teamId);
+                var teamFound = findObject($rootScope.teams, teamId),
+                    teamRef = new Firebase(fbURL + teamsPath + '/' + teamFound.$id);
                 teamRef.remove();
             };
         }]).

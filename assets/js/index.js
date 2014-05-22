@@ -34,7 +34,7 @@ angular.module('devicechecker.directives', []).
                             { "mData": "type" },
                             { "mData": "os" },
                             { "mData": function (oObj) {
-                                return oObj.inUse ? "<span ng-show=\"" + oObj.inUse + "\" class=\"bold-{{" + oObj.inUse + "}}\"><span class=\"icon-ban-circle\"></span> In use</span>" : "<span class=\"bold-{{" + oObj.inUse + "}}\" ng-hide=\"" + oObj.inUse + "\"><span class=\"icon-ok-circle\" ></span> Available</span>"
+                                return oObj.inUse ? "<span ng-show=\"" + oObj.inUse + "\" class=\"bold-" + oObj.inUse + "\"><span class=\"icon-ban-circle\"></span> In use</span>" : "<span class=\"bold-" + oObj.inUse + "\" ng-hide=\"" + oObj.inUse + "\"><span class=\"icon-ok-circle\" ></span> Available</span>"
                             }},
                             { "mData": function (oObj) {
                                 var found = {};
