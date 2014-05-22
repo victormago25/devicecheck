@@ -6,7 +6,7 @@
             <button ng-click="teamPage()" ng-controller="pagesCtrl" id="teamPage" class="btn btn-primary pull-right ng-scope">Teams</button>
             <button ng-click="mainPage()" ng-controller="pagesCtrl" id="mainPage" class="btn btn-primary pull-right ng-scope">Devices</button>
             <button ng-click="addDevicePage()" ng-controller="pagesCtrl" id="addDevice" class="btn btn-primary pull-right ng-scope">Add Device</button>
-            <h1>Manages Administrators</h1>
+            <h1>Manage Administrators</h1>
             <hr />
             <div collapse="isCollapsed" class="full-width">
                 <table id="tableAdmins" class="table dataTable">
@@ -29,28 +29,28 @@
                 </table>
             </div>
             <h2>Administrator Info</h2>
-            <form name="newAdminForm" class="well" ng-submit="addAdmin(accId, teamId, password)" enctype='multipart/form-data'>
+            <form name="newAdminForm" class="well" ng-submit="updateUser(editUser, teamId, password)" enctype='multipart/form-data'>
                 <div class="control-group" ng-class="{error: newAdminForm.accId.$invalid}">
                     <label>Accenture Id:</label>
-                    <input type="text" name="accId" ng-model="editUser.accId" value="{{editUser.accId}}">
+                    <span type="text" name="accId" ng-model="editUser.accId" value="">{{editUser.accId}}</span>
                 </div>
 
                 <div class="control-group" ng-class="{error: newAdminForm.teamId.$invalid}">
                     <label>Team:</label>
-                    <select name="teamId" ng-model="teamId" ng-init="team.id = editUser.teamId" ng-options="team as team.name for team in teams" required></select>
+                    <select name="teamId" ng-model="teamId" ng-init="teamId = teams[editUser.teamId]" ng-options="team as team.name for team in teams"></select>
                     <span ng-show="newAdminForm.teamId.$error.required" class="help-inline">Required</span>
                     <span ng-show="newAdminForm.teamId.$error.invalid" class="help-inline">Select a Team</span>
                 </div>
 
                 <div class="control-group" ng-class="{error: newAdminForm.password.$invalid}">
                     <label>Password:</label>
-                    <input type="text" name="password" ng-model="password" required>
+                    <input type="text" name="password" ng-model="password">
                     <span ng-show="newAdminForm.password.$error.required" class="help-inline">Required</span>
                     <span ng-show="newAdminForm.password.$error.invalid" class="help-inline">Invalid OS Version</span>
                 </div>
 
                 <br>
-                <button type="submit" ng-disabled="isClean() || newAdminForm.$invalid" class="btn btn-primary">New Admin</button>
+                <button type="submit" ng-disabled="isClean() || newAdminForm.$invalid" class="btn btn-primary">Update Administrator</button>
             </form>
         </div>
     </div>

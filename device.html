@@ -6,21 +6,18 @@
             <h1>Select the device to check for availability</h1>
             <hr />
             <div class="well">
-                <button class="btn btn-primary pull-right" ng-click="isCollapsed = !isCollapsed"><span ng-if="isCollapsed">[+]</span><span ng-if="!isCollapsed">[-]</span></button>
-                <div collapse="isCollapsed" class="full-width">
-                    <table id="tableStatusDevices" class="table dataTable" index="devices" device-table="devices">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Device Type</th>
-                                <th>OS</th>
-                                <th>Status</th>
-                                <th>Owned by</th>
-                                <th>Used by</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
+                <table id="tableStatusDevices" class="table dataTable" index="devices" device-table="devices">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Device Type</th>
+                            <th>OS</th>
+                            <th>Status</th>
+                            <th>Owned by</th>
+                            <th>Used by</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
         <div ng-if="actual" class="col-12" ng-animate="{enter: 'animate-enter'}">

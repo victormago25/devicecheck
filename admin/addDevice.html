@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="control-group" ng-class="{error: newDeviceForm.tagDevice.$invalid}">
-                    <label>Device Name:</label>
+                    <label>Tag Device:</label>
                     <input type="text" name="tagDevice" ng-model="tagDevice" required>
                     <span ng-show="newDeviceForm.tagDevice.$error.required" class="help-inline">Required</span>
                     <span ng-show="newDeviceForm.tagDevice.$error.pattern" class="help-inline">Invalid Name</span>
@@ -56,34 +56,6 @@
                     <select name="teamId" ng-model="teamId" ng-options="team as team.name for team in teams" required></select>
                     <span ng-show="newDeviceForm.teamId.$error.required" class="help-inline">Required</span>
                     <span ng-show="newDeviceForm.teamId.$error.invalid" class="help-inline">Select a Team</span>
-                </div>
-
-                <div class="control-group" ng-class="{error: newDeviceForm.name.$invalid}">
-                    <label class="error">{{msgtxt}}</label>
-                </div>
-
-                <div class="control-group" ng-class="{error: newDeviceForm.os.$invalid}">
-                    <label class="error">{{msgtxt}}</label>
-                </div>
-
-                <div class="control-group" ng-class="{error: newDeviceForm.osVersion.$invalid}">
-                    <label class="error">{{msgtxt}}</label>
-                </div>
-
-                <div class="control-group" ng-class="{error: newDeviceForm.type.$invalid}">
-                    <label class="error">{{msgtxt}}</label>
-                </div>
-
-                <div class="control-group" ng-class="{error: newDeviceForm.displaySize.$invalid}">
-                    <label class="error">{{msgtxt}}</label>
-                </div>
-
-                <div class="control-group" ng-class="{error: newDeviceForm.img.$invalid}">
-                    <label class="error">{{msgtxt}}</label>
-                </div>
-
-                <div class="control-group" ng-class="{error: newDeviceForm.teamId.$invalid}">
-                    <label class="error">{{msgtxt}}</label>
                 </div>
                 <br>
                 <button type="submit" ng-disabled="isClean() || newDeviceForm.$invalid" class="btn btn-primary">New Device</button>

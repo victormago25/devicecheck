@@ -28,19 +28,17 @@
                     </tbody>
                 </table>
             </div>
-            <h1>Add New Team</h1>
+            <h1>Team Information</h1>
             <hr />
-            <form name="newTeamForm" class="well" ng-submit="addTeam(name, shortName)" enctype='multipart/form-data'>
+            <form name="newTeamForm" class="well" ng-submit="updateTeam(editTeam, shortName)" enctype='multipart/form-data'>
                 <div class="control-group" ng-class="{error: newTeamForm.name.$invalid}">
                     <label>Name:</label>
-                    <input type="text" name="name" ng-model="name" required>
-                    <span ng-show="newTeamForm.name.$error.required" class="help-inline">Required</span>
-                    <span ng-show="newTeamForm.name.$error.invalid" class="help-inline">Select a Team</span>
+                    <span type="text" name="name" ng-model="name">{{editTeam.name}}</span>
                 </div>
 
                 <div class="control-group" ng-class="{error: newTeamForm.shortName.$invalid}">
                     <label>Short Name:</label>
-                    <input type="text" name="shortName" ng-model="shortName" required>
+                    <input type="text" name="shortName" ng-model="shortName">
                     <span ng-show="newTeamForm.shortName.$error.required" class="help-inline">Required</span>
                     <span ng-show="newTeamForm.shortName.$error.invalid" class="help-inline">Invalid OS Version</span>
                 </div>
