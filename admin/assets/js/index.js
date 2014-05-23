@@ -31,7 +31,6 @@ angular.module('devicechecker.directives', []).
                         { "mData": function (oObj) {
                             return '<a href="#/' + oObj.$id + '">' + oObj.name + '</a>';
                         }},
-                        { "mData": "tagDevice"},
                         { "mData": "type" },
                         { "mData": "os" },
                         { "mData": function (oObj) {
@@ -47,6 +46,7 @@ angular.module('devicechecker.directives', []).
                             return found.name;
                         }},
                         { "mData": "user" },
+                        { "mData": "tagDevice", "bVisible": false },
                         { "mData": "displaySize", "bVisible": false },
                         { "mData": "history", "bVisible": false },
                         { "mData": "img", "bVisible": false },

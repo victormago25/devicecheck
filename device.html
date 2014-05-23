@@ -53,6 +53,20 @@
                         <p>
                             <span class="bold">Current time is:</span> {{ time.now | date:'short' }}
                         </p>
+
+                        <div class="row" ng-controller="DatepickerDemoCtrl">
+                            <div class="col-md-6">
+                                <p class="input-group">
+                                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="open($event)">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </button>
+                                  </span>
+                                </p>
+                            </div>
+                        </div>
+
                         <br>
                         <button ng-click="send($routeParams, checkForm.password)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-show="actual.inUse">Check-in</button>
                         <button ng-click="send($routeParams)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-hide="actual.inUse">Check-out</button>
@@ -75,3 +89,8 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker();
+    });
+</script>
