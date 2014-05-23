@@ -20,7 +20,7 @@
                 </table>
             </div>
         </div>
-        <div ng-if="actual" class="col-12" ng-animate="{enter: 'animate-enter'}">
+        <div when="showPopup" ng-if="actual" class="col-12">
             <h2>{{actual.name}}</h2>
             <div class="alert ng-scope alert-error" ng-show="actual.inUse">Device in use by {{actual.user}}</div>
             <div class="alert ng-scope alert-success" ng-hide="actual.inUse">Device ready to use</div>

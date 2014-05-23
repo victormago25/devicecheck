@@ -13,7 +13,6 @@
                     <thead>
                         <tr>
                             <th>Accenture ID</th>
-                            <th>Team</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
@@ -21,7 +20,6 @@
                     <tbody>
                         <tr ng-repeat="user in users" ng-class-odd="'odd'" ng-class-even="'even'">
                             <td>{{user.accId}}</td>
-                            <td>{{user.teamId | ownerTeam:teams}}</td>
                             <td><button  class="btn btn-primary" ng-click="editUserFn(user.id)">Edit</button></td>
                             <td><button class="btn btn-primary" ng-click="deleteUser(user.id)">Delete</button></td>
                         </tr>
@@ -35,13 +33,6 @@
                     <input type="text" name="accId" ng-model="accId" required>
                     <span ng-show="newAdminForm.accId.$error.required" class="help-inline">Required</span>
                     <span ng-show="newAdminForm.accId.$error.pattern" class="help-inline">Invalid Name</span>
-                </div>
-
-                <div class="control-group" ng-class="{error: newAdminForm.teamId.$invalid}">
-                    <label>Team:</label>
-                    <select name="teamId" ng-model="teamId" ng-options="team as team.name for team in teams" required></select>
-                    <span ng-show="newAdminForm.teamId.$error.required" class="help-inline">Required</span>
-                    <span ng-show="newAdminForm.teamId.$error.invalid" class="help-inline">Select a Team</span>
                 </div>
 
                 <div class="control-group" ng-class="{error: newAdminForm.password.$invalid}">

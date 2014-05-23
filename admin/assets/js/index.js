@@ -53,7 +53,11 @@ angular.module('devicechecker.directives', []).
                         { "mData": "lockPhrase", "bVisible": false },
                         { "mData": "osVersion", "bVisible": false },
                         { "mData": "password", "bVisible": false }
-                    ],
+                    ], "fnCreatedRow": function (nRow, aData, iDataIndex) {
+                        // $('td:eq(6)', nRow).html("<input type='check' value=''></input>");
+                        $('td:eq(6)', nRow).html("<input type='button' value='Edit'></input>");
+                        $('td:eq(7)', nRow).html("<input type='button' value='Delete'></input>");
+                    },
                         "aaSorting": [[ 2, "desc" ]]});
                     scope.$watchCollection('stocks', function (newNames) {
                         element.dataTable().fnClearTable();
@@ -61,6 +65,27 @@ angular.module('devicechecker.directives', []).
                     });
                     element.dataTable().fnAddData(scope.stocks);
                 }
+            }
+        };
+    }).
+    directive('popup', function($templateCache, $document, $compile) {
+        return {
+            restrict: 'E',
+            link: function postLink(scope, element, attrs) {
+                $(element).hide();
+                scope.$watch(attrs.when, function(show) {
+                    console.log("clicked");
+                    $(element).on('mouseleave', function(e) {
+                        $(element).hide();
+                    });
+                    if (show) {
+                        $(element).show();
+                    } else {
+                        if ($(element).css('display') == 'block') {
+                            //$(element).hide();
+                        }
+                    }
+                });
             }
         };
     });
@@ -168,6 +193,34 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                         }
                     }, this);
                     return object;
+                },
+                updateTeamDevice = function (teamId) {
+                    var deviceRef,
+                        newDevice;
+                    angular.forEach($rootScope.stocks, function (device) {
+                        if (device.teamId === teamId) {
+                            console.log(device);
+                            device.teamId = 0;
+                            console.log(device);
+                            deviceRef = new Firebase(fbURL + deviceBasePath + '/' + device.$id);
+                            newDevice = {
+                                displaySize: device.displaySize,
+                                history: device.history,
+                                img: device.img,
+                                inUse: device.inUse,
+                                lockPhrase: device.lockPhrase,
+                                name: device.name,
+                                os: device.os,
+                                osVersion: device.osVersion,
+                                password: device.password,
+                                tagDevice: device.tagDevice,
+                                teamId: device.teamId,
+                                type: device.type,
+                                user: device.user
+                            };
+                            deviceRef.update(newDevice);
+                        }
+                    }, this);
                 };
             $rootScope.addDevice = function (name, tagDevice, os, osVersion, type, displaySize, teamId) {
                 var deviceRef = new Firebase(fbURL + deviceBasePath + '/' + findLastIndex($rootScope.stocks)),
@@ -195,8 +248,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                         accId: accId,
                         admin: true,
                         id: $rootScope.users.length,
-                        pass: password,
-                        teamId: teamId.id
+                        pass: password
                     };
                 adminRef.set(newAdmin);
                 $location.path('/addAdmin');
@@ -209,10 +261,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 }, this);
                 $location.path('/editUser');
             };
-            $rootScope.updateUser = function (userComplete, teamId, password) {
-                if (teamId.id !== userComplete.teamId) {
-                    userComplete.teamId = teamId.id;
-                }
+            $rootScope.updateUser = function (userComplete, password) {
                 if (!angular.isUndefined(password)) {
                     userComplete.pass = password;
                 }
@@ -221,8 +270,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                         accId: userComplete.accId,
                         admin: true,
                         id: userComplete.id,
-                        pass: userComplete.pass,
-                        teamId: userComplete.teamId
+                        pass: userComplete.pass
                     };
                 adminRef.update(newAdmin);
                 $location.path('/addAdmin');
@@ -264,9 +312,12 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 $location.path('/addTeam');
             };
             $rootScope.deleteTeam = function (teamId) {
+                alert("All devices linked to this team will be on Free devices Category.");
+                updateTeamDevice(teamId);
                 var teamFound = findObject($rootScope.teams, teamId),
                     teamRef = new Firebase(fbURL + teamsPath + '/' + teamFound.$id);
                 teamRef.remove();
+                $location.path('/addTeam');
             };
         }]).
     controller('pagesCtrl', ['$rootScope', '$location',
