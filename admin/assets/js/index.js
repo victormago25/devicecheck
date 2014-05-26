@@ -31,6 +31,7 @@ angular.module('devicechecker.directives', []).
                         { "mData": function (oObj) {
                             return '<a href="#/' + oObj.$id + '">' + oObj.name + '</a>';
                         }},
+                        { "mData": "tagDevice" },
                         { "mData": "type" },
                         { "mData": "os" },
                         { "mData": function (oObj) {
@@ -46,19 +47,28 @@ angular.module('devicechecker.directives', []).
                             return found.name;
                         }},
                         { "mData": "user" },
-                        { "mData": "tagDevice", "bVisible": false },
+                        {
+                            "aTargets": [7],
+                            "mData": null,
+                            "mRender": function (data, type, full) {
+                                return '<button  class="btn btn-primary">Edit</button>';
+                            }
+                        },
+                        {
+                            "aTargets": [8],
+                            "mData": null,
+                            "mRender": function (data, type, full) {
+                                return '<button class="btn btn-primary">Delete</button>';
+                            }
+                        },
                         { "mData": "displaySize", "bVisible": false },
                         { "mData": "history", "bVisible": false },
                         { "mData": "img", "bVisible": false },
                         { "mData": "lockPhrase", "bVisible": false },
                         { "mData": "osVersion", "bVisible": false },
                         { "mData": "password", "bVisible": false }
-                    ], "fnCreatedRow": function (nRow, aData, iDataIndex) {
-                        // $('td:eq(6)', nRow).html("<input type='check' value=''></input>");
-                        $('td:eq(6)', nRow).html("<input type='button' value='Edit'></input>");
-                        $('td:eq(7)', nRow).html("<input type='button' value='Delete'></input>");
-                    },
-                        "aaSorting": [[ 2, "desc" ]]});
+                    ],
+                        "aaSorting": [[ 0, "desc" ]]});
                     scope.$watchCollection('stocks', function (newNames) {
                         element.dataTable().fnClearTable();
                         element.dataTable().fnAddData(newNames);

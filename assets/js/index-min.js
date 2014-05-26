@@ -35,6 +35,8 @@ angular.module("devicechecker.directives", []).directive("activeTable", function
                                 return '<a href="#/' + $routeParams.teamId + "/" + oObj.$id + '">' + oObj.name + "</a>"
                             }
                         }, {
+                            "mData": "tagDevice"
+                        }, {
                             "mData": "type"
                         }, {
                             "mData": "os"
