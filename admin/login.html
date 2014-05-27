@@ -5,25 +5,33 @@
             <h1>Device Tracker System</h1>
             <hr />
             <form name="loginForm" class="well" ng-submit="login(user, password)">
-                <div class="control-group" ng-class="{error: loginForm.user.$invalid}">
-                    <label>Accenture ID: (i.e. juan.perez)</label>
-                    <input type="text" name="user" ng-pattern="/[a-z]+(\.[a-z]+){1,}/"  ng-model="user" required>
-                    <span ng-show="loginForm.user.$error.required" class="help-inline">Required</span>
-                    <span ng-show="loginForm.user.$error.pattern" class="help-inline">Invalid ID</span>
-                </div>
+                <dl class="dl-horizontal control-group" ng-class="{error: loginForm.user.$invalid}">
+                    <dt><label>Accenture ID:</label></dt>
+                    <dd>
+                        <input type="text" name="user" ng-pattern="/[a-z]+(\.[a-z]+){1,}/"  ng-model="user" required>
+                        <span ng-show="loginForm.user.$error.required" class="help-inline">Required</span>
+                        <span ng-show="loginForm.user.$error.pattern" class="help-inline">Invalid ID</span>
+                    </dd>
+                </dl>
 
-                <div class="control-group" ng-class="{error: loginForm.password.$invalid}">
-                    <label>Password:</label>
-                    <input type="password" name="password" required ng-minlength="6" ng-model="password" required>
-                    <span ng-show="loginForm.password.$error.required" class="help-inline">Required</span>
-                    <span ng-show="loginForm.password.$error.invalid" class="help-inline">Invalid Passcode</span>
-                </div>
+                <dl class="dl-horizontal control-group" ng-class="{error: loginForm.password.$invalid}">
+                    <dt><label>Password:</label></dt>
+                    <dd>
+                        <input type="password" name="password" required ng-minlength="6" ng-model="password" required>
+                        <span ng-show="loginForm.password.$error.required" class="help-inline">Required</span>
+                        <span ng-show="loginForm.password.$error.invalid" class="help-inline">Invalid Passcode</span>
+                    </dd>
+                </dl>
 
-                <div class="control-group" ng-class="{error: loginForm.password.$invalid}">
-                    <label class="error">{{msgtxt}}</label>
-                </div>
+                <dl class="dl-horizontal control-group" ng-class="{error: loginForm.password.$invalid}">
+                    <dd><label class="error">{{msgtxt}}</label></dd>
+                </dl>
                 <br>
-                <button type="submit" ng-disabled="isClean() || loginForm.$invalid" class="btn btn-primary">Login</button>
+                <dl class="dl-horizontal control-group">
+                    <dd>
+                        <button type="submit" ng-disabled="isClean() || loginForm.$invalid" class="btn btn-primary">Login</button>
+                    </dd>
+                </dl>
             </form>
         </div>
     </div>

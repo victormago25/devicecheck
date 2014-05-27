@@ -9,7 +9,7 @@
             <h1>Manage Teams</h1>
             <hr />
             <div class="well full-width">
-                <table id="tableAdmins" class="table dataTable">
+                <table id="tableTeams" class="table dataTable">
                     <thead>
                         <tr>
                             <th>Name</th>
@@ -31,22 +31,37 @@
             <h1>Add New Team</h1>
             <hr />
             <form name="newTeamForm" class="well" ng-submit="addTeam(name, shortName)" enctype='multipart/form-data'>
-                <div class="control-group" ng-class="{error: newTeamForm.name.$invalid}">
-                    <label>Name:</label>
-                    <input type="text" name="name" ng-model="name" required>
-                    <span ng-show="newTeamForm.name.$error.required" class="help-inline">Required</span>
-                    <span ng-show="newTeamForm.name.$error.invalid" class="help-inline">Select a Team</span>
-                </div>
+                <dl class="dl-horizontal control-group" ng-class="{error: newTeamForm.name.$invalid}">
+                    <dt><label>Name:</label></dt>
+                    <dd>
+                        <input type="text" name="name" ng-model="name" required>
+                        <span ng-show="newTeamForm.name.$error.required" class="help-inline">Required</span>
+                        <span ng-show="newTeamForm.name.$error.invalid" class="help-inline">Select a Team</span>
+                    </dd>
+                </dl>
 
-                <div class="control-group" ng-class="{error: newTeamForm.shortName.$invalid}">
-                    <label>Short Name:</label>
-                    <input type="text" name="shortName" ng-model="shortName" required>
-                    <span ng-show="newTeamForm.shortName.$error.required" class="help-inline">Required</span>
-                    <span ng-show="newTeamForm.shortName.$error.invalid" class="help-inline">Invalid OS Version</span>
-                </div>
-                <br>
-                <button type="submit" ng-disabled="isClean() || newTeamForm.$invalid" class="btn btn-primary">New Team</button>
+                <dl class="dl-horizontal control-group" ng-class="{error: newTeamForm.shortName.$invalid}">
+                    <dt><label>Short Name:</label></dt>
+                    <dd>
+                        <input type="text" name="shortName" ng-model="shortName" required>
+                        <span ng-show="newTeamForm.shortName.$error.required" class="help-inline">Required</span>
+                        <span ng-show="newTeamForm.shortName.$error.invalid" class="help-inline">Invalid OS Version</span>
+                    </dd>
+                </dl>
+
+                <dl class="dl-horizontal control-group">
+                    <dd>
+                        <button type="submit" ng-disabled="isClean() || newTeamForm.$invalid" class="btn btn-primary">New Team</button>
+                    </dd>
+                </dl>
             </form>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#tableTeams').dataTable({
+            "order": [[ 0, "desc" ]]
+        });
+    });
+</script>

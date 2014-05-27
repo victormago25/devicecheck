@@ -28,22 +28,29 @@
             </div>
             <h2>Add New Administrator</h2>
             <form name="newAdminForm" class="well" ng-submit="addAdmin(accId, teamId, password)" enctype='multipart/form-data'>
-                <div class="control-group" ng-class="{error: newAdminForm.accId.$invalid}">
-                    <label>Accenture Id:</label>
-                    <input type="text" name="accId" ng-model="accId" required>
-                    <span ng-show="newAdminForm.accId.$error.required" class="help-inline">Required</span>
-                    <span ng-show="newAdminForm.accId.$error.pattern" class="help-inline">Invalid Name</span>
-                </div>
+                <dl class="dl-horizontal control-group" ng-class="{error: newAdminForm.accId.$invalid}">
+                    <dt><label>Accenture ID:</label></dt>
+                    <dd>
+                        <input type="text" name="accId" ng-model="accId" required>
+                        <span ng-show="newAdminForm.accId.$error.required" class="help-inline">Required</span>
+                        <span ng-show="newAdminForm.accId.$error.pattern" class="help-inline">Invalid Name</span>
+                    </dd>
+                </dl>
 
-                <div class="control-group" ng-class="{error: newAdminForm.password.$invalid}">
-                    <label>Password:</label>
-                    <input type="text" name="password" ng-model="password" required>
-                    <span ng-show="newAdminForm.password.$error.required" class="help-inline">Required</span>
-                    <span ng-show="newAdminForm.password.$error.invalid" class="help-inline">Invalid OS Version</span>
-                </div>
+                <dl class="dl-horizontal control-group" ng-class="{error: newAdminForm.password.$invalid}">
+                    <dt><label>Password:</label></dt>
+                    <dd>
+                        <input type="text" name="password" ng-model="password" required>
+                        <span ng-show="newAdminForm.password.$error.required" class="help-inline">Required</span>
+                        <span ng-show="newAdminForm.password.$error.invalid" class="help-inline">Invalid OS Version</span>
+                    </dd>
+                </dl>
 
-                <br>
-                <button type="submit" ng-disabled="isClean() || newAdminForm.$invalid" class="btn btn-primary">New Admin</button>
+                <dl class="dl-horizontal control-group">
+                    <dd>
+                        <button type="submit" ng-disabled="isClean() || newAdminForm.$invalid" class="btn btn-primary">New Admin</button>
+                    </dd>
+                </dl>
             </form>
         </div>
     </div>

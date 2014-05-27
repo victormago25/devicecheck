@@ -27,47 +27,48 @@ angular.module('devicechecker.directives', []).
             restrict: 'A',
             link: function (scope, element, attrs) {
                 if (angular.isString(attrs.deviceTable)) {
-                    element.dataTable({"aoColumns": [
-                        { "mData": function (oObj) {
-                            return '<a href="#/' + oObj.$id + '">' + oObj.name + '</a>';
-                        }},
-                        { "mData": "tagDevice" },
-                        { "mData": "type" },
-                        { "mData": "os" },
-                        { "mData": function (oObj) {
-                            return oObj.inUse ? "<span ng-show=\"" + oObj.inUse + "\" class=\"bold-" + oObj.inUse + "\"><span class=\"icon-ban-circle\"></span> In use</span>" : "<span class=\"bold-" + oObj.inUse + "\" ng-hide=\"" + oObj.inUse + "\"><span class=\"icon-ok-circle\" ></span> Available</span>";
-                        }},
-                        { "mData": function (oObj) {
-                            var found = {};
-                            angular.forEach(scope.teams, function (team) {
-                                if (team.id === oObj.teamId) {
-                                    found = team;
+                    element.dataTable({
+                        "aoColumns": [
+                            { "mData": function (oObj) {
+                                return '<a href="#/' + oObj.$id + '">' + oObj.name + '</a>';
+                            }},
+                            { "mData": "tagDevice" },
+                            { "mData": "type" },
+                            { "mData": "os" },
+                            { "mData": function (oObj) {
+                                return oObj.inUse ? "<span ng-show=\"" + oObj.inUse + "\" class=\"bold-" + oObj.inUse + "\"><span class=\"icon-ban-circle\"></span> In use</span>" : "<span class=\"bold-" + oObj.inUse + "\" ng-hide=\"" + oObj.inUse + "\"><span class=\"icon-ok-circle\" ></span> Available</span>";
+                            }},
+                            { "mData": function (oObj) {
+                                var found = {};
+                                angular.forEach(scope.teams, function (team) {
+                                    if (team.id === oObj.teamId) {
+                                        found = team;
+                                    }
+                                });
+                                return found.name;
+                            }},
+                            { "mData": "user" },
+                            {
+                                "aTargets": [7],
+                                "mData": null,
+                                "mRender": function (data, type, full) {
+                                    return '<a href="editDeviceFn(' + full.$id + ')" class="btn btn-primary">Edit</a>';
                                 }
-                            });
-                            return found.name;
-                        }},
-                        { "mData": "user" },
-                        {
-                            "aTargets": [7],
-                            "mData": null,
-                            "mRender": function (data, type, full) {
-                                return '<button  class="btn btn-primary">Edit</button>';
-                            }
-                        },
-                        {
-                            "aTargets": [8],
-                            "mData": null,
-                            "mRender": function (data, type, full) {
-                                return '<button class="btn btn-primary">Delete</button>';
-                            }
-                        },
-                        { "mData": "displaySize", "bVisible": false },
-                        { "mData": "history", "bVisible": false },
-                        { "mData": "img", "bVisible": false },
-                        { "mData": "lockPhrase", "bVisible": false },
-                        { "mData": "osVersion", "bVisible": false },
-                        { "mData": "password", "bVisible": false }
-                    ],
+                            },
+                            {
+                                "aTargets": [8],
+                                "mData": null,
+                                "mRender": function (data, type, full) {
+                                    return '<a href="deleteDevice(' + full.$id + ')" class="btn btn-primary">Delete</a>';
+                                }
+                            },
+                            { "mData": "displaySize", "bVisible": false },
+                            { "mData": "history", "bVisible": false },
+                            { "mData": "img", "bVisible": false },
+                            { "mData": "lockPhrase", "bVisible": false },
+                            { "mData": "osVersion", "bVisible": false },
+                            { "mData": "password", "bVisible": false }
+                        ],
                         "aaSorting": [[ 0, "desc" ]]});
                     scope.$watchCollection('stocks', function (newNames) {
                         element.dataTable().fnClearTable();

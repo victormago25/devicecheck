@@ -28,21 +28,35 @@
             </div>
             <h2>Administrator Info</h2>
             <form name="newAdminForm" class="well" ng-submit="updateUser(editUser, teamId, password)" enctype='multipart/form-data'>
-                <div class="control-group" ng-class="{error: newAdminForm.accId.$invalid}">
-                    <label>Accenture Id:</label>
-                    <span type="text" name="accId" ng-model="editUser.accId" value="">{{editUser.accId}}</span>
-                </div>
+                <dl class="dl-horizontal control-group" ng-class="{error: newAdminForm.accId.$invalid}">
+                    <dt><label>Accenture ID:</label></dt>
+                    <dd>
+                        <span type="text" name="accId" ng-model="editUser.accId" value="">{{editUser.accId}}</span>
+                    </dd>
+                </dl>
 
-                <div class="control-group" ng-class="{error: newAdminForm.password.$invalid}">
-                    <label>Password:</label>
-                    <input type="text" name="password" ng-model="password">
-                    <span ng-show="newAdminForm.password.$error.required" class="help-inline">Required</span>
-                    <span ng-show="newAdminForm.password.$error.invalid" class="help-inline">Invalid OS Version</span>
-                </div>
+                <dl class="dl-horizontal control-group" ng-class="{error: newAdminForm.password.$invalid}">
+                    <dt><label>Password:</label></dt>
+                    <dd>
+                        <input type="text" name="password" ng-model="password">
+                        <span ng-show="newAdminForm.password.$error.required" class="help-inline">Required</span>
+                        <span ng-show="newAdminForm.password.$error.invalid" class="help-inline">Invalid OS Version</span>
+                    </dd>
+                </dl>
 
-                <br>
-                <button type="submit" ng-disabled="isClean() || newAdminForm.$invalid" class="btn btn-primary">Update Administrator</button>
+                <dl class="dl-horizontal control-group">
+                    <dd>
+                        <button type="submit" ng-disabled="isClean() || newAdminForm.$invalid" class="btn btn-primary">Update Administrator</button>
+                    </dd>
+                </dl>
             </form>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#tableAdmins').dataTable({
+            "order": [[ 0, "desc" ]]
+        });
+    });
+</script>
