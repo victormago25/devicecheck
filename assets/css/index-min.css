@@ -1,1 +1,92 @@
-.container .row .col-12 img{position:relative;display:inline-block}.container .row .col-12 button#changeTeam{display:inline-block;margin-top:25px;margin-left:10px}.container .row .col-12 .well > button{margin-bottom:15px}.container .row .col-12 .well > div{clear:both}.container .row .col-12 .deviceContainer{height:430px;margin-bottom:20px}.container .row .col-12 .deviceContainer .infoDevice,.container .row .col-12 .deviceContainer .requestDevice{width:49.845811843872073865213%;display:inline-block;height:100%;vertical-align:top}h1{font-size:150%}a{font-weight:bold;color:#782b90}a:hover{color:#782b90}.bold{font-weight:bold}.bold-true{font-weight:bold;color:#b94a48}.bold-false{font-weight:bold;color:#468847}.header{margin:10px 40px 0}.header img{clear:both}.full-width{width:100%}.underscore{text-decoration:underline}.btn-group{margin-bottom:20px}ul.nav{margin:0}div.tab-pane{padding-top:1px}div.tab-content{overflow:visible;padding:15px;border-left:1px solid #DDD;border-right:1px solid #DDD;border-bottom:1px solid #DDD;background-clip:padding-box}.device-animate-container{padding:15px}.device-animate-container img{max-width:195px;height:auto;margin:0 20px 20px 0;float:left}span.icon-ok-circle,span.icon-ban-circle{background-image:url(../img/glyphicons-halflings.png)}div.accordion{clear:both}.accordion .accordion-heading{background:url(../img/close.png) center right no-repeat}.info{display:inline-block;min-width:140px;width:56%;margin-left:20px}.nav-tabs>li{cursor:pointer}.dataTables_length{margin-right:10px}.animate-enter{-webkit-transition:1s linear all;-moz-transition:1s linear all;-o-transition:1s linear all;transition:1s linear all;opacity:0}.animate-enter.animate-enter-active{opacity:1}@media(max-width:767px){.info{min-width:140px;margin-left:0}}
+body {
+    font: normal normal 13px Verdana;
+}
+h1 {
+    font-size: 146.5%;
+    font-weight: bold;
+}
+h2 {
+    font-size: 123.1%;
+    font-weight: bold;
+}
+h3 {
+    font-size: 116%;
+    font-weight: bold;
+}
+h4 {
+    font-size: 108%;
+    font-weight: bold;
+}
+a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #782b90;
+}
+body .bold {
+    font-weight: bold;
+}
+body .bold-true {
+    font-weight: bold;
+    color: #b94a48;
+}
+body .bold-false {
+    font-weight: bold;
+    color: #468847;
+}
+body .container {
+    width: 1024px;
+    margin: 0 auto;
+    font-size: 93%;
+}
+body .container .btn {
+    line-height: inherit;
+    font-size: 93%;
+    padding: 5px 10px;
+}
+body .container .table>thead>tr>th,
+body .container .table>tbody>tr>th,
+body .container .table>tfoot>tr>th,
+body .container .table>thead>tr>td,
+body .container .table>tbody>tr>td,
+body .container .table>tfoot>tr>td {
+    padding: 3px 10px;
+    line-height: inherit;
+    vertical-align: middle;
+    border-top: 1px solid #ddd;
+}
+body .container .row {
+    margin: 0;
+}
+/*body .container .row form {}*/
+body .container .row .col-12 img {
+    position: relative;
+    display: inline-block;
+}
+body .container .row .col-12 button#changeTeam {
+    display: inline-block;
+    margin-top: 25px;
+    margin-left: 10px;
+}
+body .container .row div .deviceContainer {
+    height: 430px;
+    margin-bottom: 20px;
+}
+body .container .row div .deviceContainer .infoDevice,
+body .container .row div .deviceContainer .requestDevice {
+    width: 49.7734966278076136%;
+    display: inline-block;
+    height: 100%;
+    vertical-align: top;
+}
+body .container .row div .deviceContainer .infoDevice .info {
+    display: inline-block;
+    min-width: 140px;
+    width: 50%;
+    margin-left: 20px;
+}
+@media(max-width:767px) {
+    .info {
+        min-width: 140px;
+        margin-left: 0;
+    }
+}

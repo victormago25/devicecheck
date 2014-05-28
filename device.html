@@ -41,39 +41,44 @@
                 <div class="well requestDevice">
                     <h3>Request Device:</h3>
                     <form name="checkForm">
-                        <div class="control-group" ng-class="{error: checkForm.user.$invalid}">
-                            <label>Accenture ID: (i.e. juan.perez)</label>
-                            <input type="text" name="user" ng-pattern="/[a-z]+(\.[a-z]+){1,}/" ng-model="actual.user" required>
-                            <span ng-show="checkForm.user.$error.required" class="help-inline">Required</span>
-                            <span ng-show="checkForm.user.$error.pattern" class="help-inline">Invalid ID</span>
-                        </div>
+                        <dl class="dl-horizontal control-group" ng-class="{error: checkForm.user.$invalid}">
+                            <dt><label>Accenture ID:</label></dt>
+                            <dd>
+                                <input type="text" name="user" ng-pattern="/[a-z]+(\.[a-z]+){1,}/" ng-model="actual.user" required>
+                                <span ng-show="checkForm.user.$error.required" class="help-inline">Required</span>
+                                <span ng-show="checkForm.user.$error.pattern" class="help-inline">Invalid ID</span>
+                            </dd>
+                        </dl>
 
-                        <div class="control-group" ng-class="{error: checkForm.password.$invalid}">
-                            <label>Passcode:</label>
-                            <input type="text" name="password" ng-model="actual.password" required ng-minlength="3">
-                            <span ng-show="checkForm.password.$error.required" class="help-inline">Required</span>
-                            <span ng-show="checkForm.password.$error.invalid" class="help-inline">Invalid Passcode</span>
-                        </div>
-                        <p>
-                            <span class="bold">Current time is:</span> {{ time.now | date:'short' }}
-                        </p>
+                        <dl class="dl-horizontal control-group" ng-class="{error: checkForm.password.$invalid}">
+                            <dt><label>Passcode:</label></dt>
+                            <dd>
+                                <input type="text" name="password" ng-model="actual.password" required ng-minlength="3">
+                                <span ng-show="checkForm.password.$error.required" class="help-inline">Required</span>
+                                <span ng-show="checkForm.password.$error.invalid" class="help-inline">Invalid Passcode</span>
+                            </dd>
+                        </dl>
 
-                        <div class="row" ng-controller="DatepickerDemoCtrl">
-                            <div class="col-md-6">
-                                <p class="input-group">
-                                    <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
-                                    <span class="input-group-btn">
-                                        <button type="button" class="btn btn-default" ng-click="open($event)">
-                                            <i class="glyphicon glyphicon-calendar"></i>
-                                        </button>
-                                  </span>
-                                </p>
-                            </div>
-                        </div>
+                        <dl class="dl-horizontal">
+                            <dt><label>Current time is:</label></dt>
+                            <dd>
+                                <p>{{ time.now | date:'short' }}</p>
+                            </dd>
+                        </dl>
 
-                        <br>
-                        <button ng-click="send($routeParams, checkForm.password)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-show="actual.inUse">Check-in</button>
-                        <button ng-click="send($routeParams)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-hide="actual.inUse">Check-out</button>
+                        <dl class="dl-horizontal control-group">
+                            <dt><label>Check-in date:</label></dt>
+                            <dd>
+                                <input type="text" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" close-text="Close" id='datetimepicker1' ng-click="open($event)" ng-controller="DatepickerDemoCtrl" required/>
+                            </dd>
+                        </dl>
+
+                        <dl class="dl-horizontal control-group" ng-controller="DatepickerDemoCtrl">
+                            <dd>
+                                <button ng-click="send($routeParams, checkForm.password)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-show="actual.inUse">Check-in</button>
+                                <button ng-click="send($routeParams)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-hide="actual.inUse">Check-out</button>
+                            </dd>
+                        </dl>
                     </form>
                 </div>
             </div>
