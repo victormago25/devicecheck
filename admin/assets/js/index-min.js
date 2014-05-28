@@ -29,9 +29,13 @@ angular.module('devicechecker.directives', []).
                 if (angular.isString(attrs.deviceTable)) {
                     element.dataTable({
                         "aoColumns": [
-                            { "mData": function (oObj) {
-                                return '<a href="#/' + oObj.$id + '">' + oObj.name + '</a>';
-                            }},
+                            {
+                                "aTargets": [0],
+                                "mData": null,
+                                "mRender": function (data, type, full) {
+                                    return '<a ng-click="toggleModal()" href="#/' + full.$id + '">' + oObj.name + '</a>';
+                                }
+                            },
                             { "mData": "tagDevice" },
                             { "mData": "type" },
                             { "mData": "os" },
@@ -69,6 +73,11 @@ angular.module('devicechecker.directives', []).
                             { "mData": "osVersion", "bVisible": false },
                             { "mData": "password", "bVisible": false }
                         ],
+                        "fnCreatedRow": function (nRow, aData, iDataIndex) {
+                            linker = $compile nRow
+                            element = linker $scope
+                            nRow = element
+                        },
                         "aaSorting": [[ 0, "desc" ]]});
                     scope.$watchCollection('stocks', function (newNames) {
                         element.dataTable().fnClearTable();
@@ -98,6 +107,35 @@ angular.module('devicechecker.directives', []).
                     }
                 });
             }
+        };
+    }).
+    directive('modalDialog', function() {
+        return {
+            restrict:'E',
+            scope: {
+                show: '='
+            },
+            replace: true,
+            transclude: true,
+            link: function (scope, element, attrs) {
+                scope.dialogStyle = {};
+                if (attrs.width) {
+                    scope.dialogStyle.width = attrs.width;
+                }
+                if (attrs.height) {
+                    scope.dialogStyle.height = attrs.height;
+                }
+                scope.hideModal = function() {
+                    scope.show = false;
+                };
+            },
+            template: '<div class=\'ng-modal\' ng-show=\'show\'>
+                        <div class=\'ng-modal-overlay\' ng-click=\'hideModal()\'></div>
+                        <div class=\'ng-modal-dialog\' ng-style=\'dialogStyle\'>
+                            <div class=\'ng-modal-close\' ng-click=\'hideModal()\'>X</div>
+                            <div class=\'ng-modal-dialog-content\' ng-transclude></div>
+                        </div>
+                    </div>'
         };
     });
 
@@ -161,6 +199,10 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
             if (!$rootScope.actualUser) {
                 $location.path('/').replace();
             }
+            $rootScope.modalShown = false;
+            $rootScope.toggleModal = function() {
+                $rootScope.modalShown = !$rootScope.modalShown;
+            };
             if (currentGroup) {
                 $rootScope.actual = currentGroup[$routeParams.deviceId];
             }
