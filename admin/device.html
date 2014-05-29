@@ -1,107 +1,72 @@
-<div class="container" ng-controller="DeviceCtrl" ng-if="actualUser">
-    <div class="row">
-        <div class="col-12">
-            <img src="assets/img/AccLogo.png" height="50" width="207" alt="Accenture" />
-            <button ng-click="logout()" ng-controller="pagesCtrl" id="logout" class="btn btn-primary pull-right ng-scope">Logout</button>
-            <button ng-click="teamPage()" ng-controller="pagesCtrl" id="teamPage" class="btn btn-primary pull-right ng-scope">Teams</button>
-            <button ng-click="addDevicePage()" ng-controller="pagesCtrl" id="addDevice" class="btn btn-primary pull-right ng-scope">Add Device</button>
-            <button ng-click="adminPage()" ng-controller="pagesCtrl" id="adminPage" class="btn btn-primary pull-right ng-scope">Administrators</button>
-            <h1>Select the device to check for availability</h1>
-            <hr />
-            <div class="well">
-                <table id="tableStatusDevices" class="table dataTable" index="devices" device-table="devices">
+<modal-dialog show='modalShown' width='1024px' height='90%'>
+    <div ng-if="actual">
+        <h2>{{actual.name}}</h2>
+        <div class="alert ng-scope alert-error" ng-show="actual.inUse">Device in use by {{actual.user}}</div>
+        <div class="alert ng-scope alert-success" ng-hide="actual.inUse">Device ready to use</div>
+        <div class="deviceContainer">
+            <div class="well infoDevice">
+                <img alt="{{actual.name}}" ng-src="{{actual.img}}" class="hidden-phone"/>
+                <div class="well well-large info">
+                    <h3>Device Information:</h3>
+                    <ul>
+                        <li><span class="bold">Tag Device: </span>{{actual.tagDevice}}</li>
+                        <li><span class="bold">Operative System: </span>{{actual.os}}</li>
+                        <li><span class="bold">Version: </span>{{actual.osVersion}}</li>
+                        <li><span class="bold">Display Size: </span>{{actual.displaySize}}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="well requestDevice">
+                <h3>Request Device:</h3>
+                <form name="checkForm">
+                    <dl class="dl-horizontal control-group" ng-class="{error: checkForm.user.$invalid}">
+                        <dt><label>Accenture ID:</label></dt>
+                        <dd>
+                            <input type="text" name="user" ng-pattern="/[a-z]+(\.[a-z]+){1,}/" ng-model="actual.user" required>
+                            <span ng-show="checkForm.user.$error.required" class="help-inline">Required</span>
+                            <span ng-show="checkForm.user.$error.pattern" class="help-inline">Invalid ID</span>
+                        </dd>
+                    </dl>
+
+                    <dl class="dl-horizontal control-group" ng-class="{error: checkForm.password.$invalid}">
+                        <dt><label>Passcode:</label></dt>
+                        <dd>
+                            <input type="text" name="password" ng-model="actual.password" required ng-minlength="3">
+                            <span ng-show="checkForm.password.$error.required" class="help-inline">Required</span>
+                            <span ng-show="checkForm.password.$error.invalid" class="help-inline">Invalid Passcode</span>
+                        </dd>
+                    </dl>
+
+                    <dl class="dl-horizontal">
+                        <dt><label>Current time is:</label></dt>
+                        <dd>
+                            <p>{{ time.now | date:'short' }}</p>
+                        </dd>
+                    </dl>
+
+                    <dl class="dl-horizontal control-group" ng-class="{error: checkForm.password.$invalid}">
+                        <dd>
+                            <button ng-click="send($routeParams, checkForm.password)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-show="actual.inUse">Check-in</button>
+                            <button ng-click="send($routeParams)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-hide="actual.inUse">Check-out</button>
+                        </dd>
+                    </dl>
+                </form>
+            </div>
+        </div>
+        <accordion close-others="true">
+            <accordion-group heading="History">
+                <table id="tableHistory{{$routeParams.deviceId}}" index="{{$routeParams.deviceId}}" class="table" active-table="{{$routeParams.groupId}}">
                     <thead>
                         <tr>
                             <th>Name</th>
-                            <th>Tag Device</th>
-                            <th>Device Type</th>
-                            <th>OS</th>
                             <th>Status</th>
-                            <th>Owned by</th>
-                            <th>Used by</th>
-                            <th>-</th>
-                            <th>-</th>
+                            <th>Date</th>
                         </tr>
                     </thead>
+                    <tbody>
+                    </tbody>
                 </table>
-            </div>
-        </div>
-        <modal-dialog show='modalShown' width='1024px' height='70%'>
-            <div ng-if="actual">
-                <h2>{{actual.name}}</h2>
-                <div class="alert ng-scope alert-error" ng-show="actual.inUse">Device in use by {{actual.user}}</div>
-                <div class="alert ng-scope alert-success" ng-hide="actual.inUse">Device ready to use</div>
-                <div class="deviceContainer">
-                    <div class="well infoDevice">
-                        <img alt="{{actual.name}}" ng-src="{{actual.img}}" class="hidden-phone"/>
-                        <div class="well well-large info">
-                            <h3>Device Information:</h3>
-                            <ul>
-                                <li><span class="bold">Tag Device: </span>{{actual.tagDevice}}</li>
-                                <li><span class="bold">Operative System: </span>{{actual.os}}</li>
-                                <li><span class="bold">Version: </span>{{actual.osVersion}}</li>
-                                <li><span class="bold">Display Size: </span>{{actual.displaySize}}</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="well requestDevice">
-                        <h3>Request Device:</h3>
-                        <form name="checkForm">
-                            <dl class="dl-horizontal control-group" ng-class="{error: checkForm.user.$invalid}">
-                                <dt><label>Accenture ID:</label></dt>
-                                <dd>
-                                    <input type="text" name="user" ng-pattern="/[a-z]+(\.[a-z]+){1,}/" ng-model="actual.user" required>
-                                    <span ng-show="checkForm.user.$error.required" class="help-inline">Required</span>
-                                    <span ng-show="checkForm.user.$error.pattern" class="help-inline">Invalid ID</span>
-                                </dd>
-                            </dl>
-
-                            <dl class="dl-horizontal control-group" ng-class="{error: checkForm.password.$invalid}">
-                                <dt><label>Passcode:</label></dt>
-                                <dd>
-                                    <input type="text" name="password" ng-model="actual.password" required ng-minlength="3">
-                                    <span ng-show="checkForm.password.$error.required" class="help-inline">Required</span>
-                                    <span ng-show="checkForm.password.$error.invalid" class="help-inline">Invalid Passcode</span>
-                                </dd>
-                            </dl>
-
-                            <dl class="dl-horizontal">
-                                <dt><label>Current time is:</label></dt>
-                                <dd>
-                                    <p>{{ time.now | date:'short' }}</p>
-                                </dd>
-                            </dl>
-
-                            <dl class="dl-horizontal control-group" ng-class="{error: checkForm.password.$invalid}">
-                                <dd>
-                                    <button ng-click="send($routeParams, checkForm.password)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-show="actual.inUse">Check-in</button>
-                                    <button ng-click="send($routeParams)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-hide="actual.inUse">Check-out</button>
-                                </dd>
-                            </dl>
-                        </form>
-                    </div>
-                </div>
-                <accordion close-others="true">
-                    <accordion-group heading="History">
-                        <table id="tableHistory{{$routeParams.deviceId}}" index="{{$routeParams.deviceId}}" class="table" active-table="{{$routeParams.groupId}}">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Status</th>
-                                    <th>Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </accordion-group>
-                </accordion>
-            </div>
-        </modal-dialog>
+            </accordion-group>
+        </accordion>
     </div>
-</div>
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker1').datetimepicker();
-    });
-</script>
+</modal-dialog>

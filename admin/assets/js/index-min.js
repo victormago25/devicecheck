@@ -22,7 +22,7 @@ angular.module('devicechecker.directives', []).
             }
         };
     }).
-    directive('deviceTable', function () {
+    directive('deviceTable', function ($compile) {
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
@@ -33,7 +33,7 @@ angular.module('devicechecker.directives', []).
                                 "aTargets": [0],
                                 "mData": null,
                                 "mRender": function (data, type, full) {
-                                    return '<a ng-click="toggleModal()" href="#/' + full.$id + '">' + oObj.name + '</a>';
+                                    return '<span class="link" ng-click="toggleModal(' + full.$id + ')">' + full.name + '</span>';
                                 }
                             },
                             { "mData": "tagDevice" },
@@ -56,14 +56,14 @@ angular.module('devicechecker.directives', []).
                                 "aTargets": [7],
                                 "mData": null,
                                 "mRender": function (data, type, full) {
-                                    return '<a href="editDeviceFn(' + full.$id + ')" class="btn btn-primary">Edit</a>';
+                                    return '<button ng-click="editDeviceFn(' + full.$id + ')" ng-controller="upManagerCtrl" class="btn btn-primary">Edit</button>';
                                 }
                             },
                             {
                                 "aTargets": [8],
                                 "mData": null,
                                 "mRender": function (data, type, full) {
-                                    return '<a href="deleteDevice(' + full.$id + ')" class="btn btn-primary">Delete</a>';
+                                    return '<button ng-click="deleteDevice(' + full.$id + ')" ng-controller="upManagerCtrl" class="btn btn-primary">Delete</button>';
                                 }
                             },
                             { "mData": "displaySize", "bVisible": false },
@@ -74,9 +74,7 @@ angular.module('devicechecker.directives', []).
                             { "mData": "password", "bVisible": false }
                         ],
                         "fnCreatedRow": function (nRow, aData, iDataIndex) {
-                            linker = $compile nRow
-                            element = linker $scope
-                            nRow = element
+                            $compile(nRow)(scope);
                         },
                         "aaSorting": [[ 0, "desc" ]]});
                     scope.$watchCollection('stocks', function (newNames) {
@@ -85,27 +83,6 @@ angular.module('devicechecker.directives', []).
                     });
                     element.dataTable().fnAddData(scope.stocks);
                 }
-            }
-        };
-    }).
-    directive('popup', function($templateCache, $document, $compile) {
-        return {
-            restrict: 'E',
-            link: function postLink(scope, element, attrs) {
-                $(element).hide();
-                scope.$watch(attrs.when, function(show) {
-                    console.log("clicked");
-                    $(element).on('mouseleave', function(e) {
-                        $(element).hide();
-                    });
-                    if (show) {
-                        $(element).show();
-                    } else {
-                        if ($(element).css('display') == 'block') {
-                            //$(element).hide();
-                        }
-                    }
-                });
             }
         };
     }).
@@ -129,13 +106,7 @@ angular.module('devicechecker.directives', []).
                     scope.show = false;
                 };
             },
-            template: '<div class=\'ng-modal\' ng-show=\'show\'>
-                        <div class=\'ng-modal-overlay\' ng-click=\'hideModal()\'></div>
-                        <div class=\'ng-modal-dialog\' ng-style=\'dialogStyle\'>
-                            <div class=\'ng-modal-close\' ng-click=\'hideModal()\'>X</div>
-                            <div class=\'ng-modal-dialog-content\' ng-transclude></div>
-                        </div>
-                    </div>'
+            template: '<div class="ng-modal" ng-show="show"><div class="ng-modal-overlay" ng-click="hideModal()"></div><div class="ng-modal-dialog" ng-style="dialogStyle"><div class="ng-modal-close" ng-click="hideModal()">X</div><div class="ng-modal-dialog-content" ng-transclude></div></div></div>'
         };
     });
 
@@ -193,14 +164,15 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
             return teams[teamId] ? teams[teamId].name : 'Free Device';
         };
     }).
-    controller('DeviceCtrl', ['$rootScope', 'time', '$routeParams', 'fbURL', 'deviceBasePath',
-        function ($rootScope, time, $routeParams, fbURL, deviceBasePath) {
+    controller('DeviceCtrl', ['$rootScope', 'time', '$routeParams', 'fbURL', 'deviceBasePath', '$location',
+        function ($rootScope, time, $routeParams, fbURL, deviceBasePath, $location) {
             var currentGroup = $rootScope.stocks;
             if (!$rootScope.actualUser) {
                 $location.path('/').replace();
             }
             $rootScope.modalShown = false;
-            $rootScope.toggleModal = function() {
+            $rootScope.toggleModal = function(deviceId) {
+                $location.path('/' + deviceId);
                 $rootScope.modalShown = !$rootScope.modalShown;
             };
             if (currentGroup) {
@@ -294,6 +266,12 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                     };
                 deviceRef.set(newDevice);
                 $location.path('/mainView');
+            };
+            $rootScope.editDeviceFn = function (deviceId) {
+                console.log(deviceId);
+            };
+            $rootScope.deleteDevice = function (deviceId) {
+                console.log(deviceId);
             };
             $rootScope.addAdmin = function (accId, teamId, password) {
                 var adminRef = new Firebase(fbURL + usersPath + '/' + findLastIndex($rootScope.users)),
@@ -403,5 +381,5 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
             when('/editUser', {templateUrl:'/admin/editAdmins.html', controllerAs: 'device'}).
             when('/addTeam', {templateUrl: '/admin/teams.html', controllerAs: 'device'}).
             when('/editTeam', {templateUrl: '/admin/editTeams.html', controllerAs: 'device'}).
-            when('/:deviceId', {templateUrl: '/admin/device.html', controllerAs: 'device'});
+            when('/:deviceId', {templateUrl: '/admin/mainView.html', controllerAs: 'device'});
     });
