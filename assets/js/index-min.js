@@ -184,7 +184,6 @@ angular.module("device", ["ui.bootstrap", "firebase", "devicechecker.directives"
                 $routeParams.checkItOut = false;
             }
         });
-        $rootScope.time = time;
         $rootScope.$routeParams = $routeParams;
         $rootScope.send = function($routeParams, input) {
             var actualInfo = $rootScope.actual,
@@ -253,37 +252,6 @@ angular.module("device", ["ui.bootstrap", "firebase", "devicechecker.directives"
             delete $rootScope["actual"];
             $location.path("/")
         }
-    }
-]).controller("DatepickerDemoCtrl", ["$rootScope", "$event",
-    function($rootScope, $event) {
-        $rootScope.today = function() {
-            $rootScope.dt = new Date
-        };
-        $rootScope.today();
-        $rootScope.clear = function() {
-            $rootScope.dt =
-                null
-        };
-        $rootScope.disabled = function(date, mode) {
-            return mode === "day" && (date.getDay() === 0 || date.getDay() === 6)
-        };
-        $rootScope.toggleMin = function() {
-            $rootScope.minDate = $rootScope.minDate ? null : new Date
-        };
-        $rootScope.toggleMin();
-        $rootScope.open = function($event) {
-            $event.preventDefault();
-            $event.stopPropagation();
-            $rootScope.opened = true
-        };
-        $rootScope.dateOptions = {
-            formatYear: "yy",
-            startingDay: 1
-        };
-        $rootScope.initDate = new Date("2016-15-20");
-        $rootScope.formats = ["dd-MMMM-yyyy", "yyyy/MM/dd", "dd.MM.yyyy", "shortDate"];
-        $rootScope.format =
-            $rootScope.formats[0]
     }
 ]).config(["$routeProvider",
     function($routeProvider) {
