@@ -1,7 +1,6 @@
 /*global $, angular, Firebase, CryptoJS, moment*/
 /*jslint nomen: true, regexp: true, unparam: true */
 angular.module("devicechecker.directives", []).directive("activeTable", function() {
-    'use strict';
     return {
         restrict: "A",
         link: function(scope, element, attrs) {
@@ -22,15 +21,12 @@ angular.module("devicechecker.directives", []).directive("activeTable", function
                     element.dataTable().fnClearTable();
                     element.dataTable().fnAddData(newNames);
                 });
-                if (scope.device && scope.actual && scope.actual.history) {
-                    element.dataTable().fnAddData(scope.actual.history);
-                }
+                if (scope.device && scope.actual && scope.actual.history) element.dataTable().fnAddData(scope.actual.history);
             }
         }
     };
 }).directive("deviceTable",
     function($location, $compile, $routeParams) {
-        'use strict';
         return {
             restrict: "A",
             link: function(scope, element, attrs) {
@@ -57,9 +53,7 @@ angular.module("devicechecker.directives", []).directive("activeTable", function
                             "mData": function(oObj) {
                                 var found = {};
                                 angular.forEach(scope.teams, function(team) {
-                                    if (team.id === oObj.teamId) {
-                                        found = team;
-                                    }
+                                    if (team.id === oObj.teamId) found = team;
                                 });
                                 return found.name;
                             }
@@ -132,6 +126,7 @@ angular.module("device", ["ui.bootstrap", "firebase", "devicechecker.directives"
     (function tick() {
         time.now = new Date;
     })();
+    console.log(time);
     return time;
 }).controller("selectTeamCtrl", ["$rootScope", "angularFireCollection", "fbURL", "deviceBasePath", "teamsPath", "$location",
     function($rootScope, angularFireCollection, fbURL, deviceBasePath, teamsPath, $location) {
@@ -148,18 +143,6 @@ angular.module("device", ["ui.bootstrap", "firebase", "devicechecker.directives"
             }, this);
             $rootScope.stocksByTeam = newTeams;
             $location.path("/" + selectedItem.id).replace();
-        };
-    }
-    ]).controller("ListCtrl", ["$rootScope", "angularFireCollection", "fbURL", "$location",
-    function($rootScope, angularFireCollection, fbURL, $routeParams, $location) {
-        'use strict';
-        $rootScope.changeTeam = function() {
-            $location.path("/").replace();
-        };
-        $rootScope.modalShown = false;
-        $rootScope.toggleModal = function(teamId, deviceId) {
-            $location.path('/' + teamId + '/' + deviceId);
-            $rootScope.modalShown = !$rootScope.modalShown;
         };
     }
     ]).controller("DeviceCtrl", ["$rootScope", "$location", "time", "$routeParams", "fbURL", "deviceBasePath",
