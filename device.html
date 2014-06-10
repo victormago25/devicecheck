@@ -44,13 +44,16 @@
                         </dd>
                     </dl>
 
-                    <dl class="dl-horizontal control-group">
+                    <dl class="dl-horizontal form-group">
                         <dt><label>Check-in date:</label></dt>
-                        <dd class="date" id='datetimepicker1'>
-                            <input type='text' class="form-control" />
-                            <span class="input-group-addon">
-                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
-                            </span>
+                        <dd>
+                            <div class="form-group">
+                                <div class='input-group date' id='datetimepicker1'>
+                                    <input type='text'/>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
                         </dd>
                     </dl>
 
@@ -80,8 +83,3 @@
         </accordion>
     </div>
 </modal-dialog>
-<script type="text/javascript">
-    $(function () {
-        $('#datetimepicker1').datetimepicker();
-    });
-</script>
