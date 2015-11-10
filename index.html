@@ -12,7 +12,6 @@
         <link type="text/css" rel="stylesheet" href="assets/css/index-min.css">
     </head>
     <body>
-        <div ng-view></div>
         <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="//cdn.jsdelivr.net/angularjs/1.2.16/angular.min.js"></script>
         <script type="text/javascript" src="//cdn.jsdelivr.net/angularjs/1.2.16/angular-route.min.js"></script>
@@ -25,5 +24,11 @@
         <script type="text/javascript" src="https://cdn.firebase.com/libs/angularfire/0.3.0/angularfire.min.js"></script>
         <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.datatables/1.9.4/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="assets/js/index-min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker();
+            });
+        </script>
+        <div ng-view></div>
     </body>
 </html>

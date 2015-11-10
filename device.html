@@ -43,7 +43,6 @@
                             <p>{{ time.now | date:'short' }}</p>
                         </dd>
                     </dl>
-
                     <dl class="dl-horizontal control-group" ng-class="{error: checkForm.checkinDate.$invalid}">
                         <dt><label>Check-in date:</label></dt>
                         <dd>
@@ -56,7 +55,7 @@
                         </dd>
                     </dl>
 
-                    <dl class="dl-horizontal control-group">
+                    <dl class="dl-horizontal control-group" ng-class="{error: checkForm.password.$invalid}">
                         <dd>
                             <button ng-click="send($routeParams, checkForm.password)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-show="actual.inUse">Check-in</button>
                             <button ng-click="send($routeParams)" ng-disabled="isClean() || checkForm.$invalid" class="btn btn-primary" ng-hide="actual.inUse">Check-out</button>
@@ -81,6 +80,7 @@
             </accordion-group>
         </accordion>
     </div>
+<<<<<<< HEAD
 </modal-dialog>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -90,3 +90,6 @@
         });
     });
 </script>
+=======
+</modal-dialog>
+>>>>>>> origin/master
