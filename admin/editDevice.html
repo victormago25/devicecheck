@@ -25,6 +25,38 @@
                     </thead>
                 </table>
             </div>
+            <h1>Team Information</h1>
+            <hr />
+            <form name="newTeamForm" class="well" ng-submit="updateTeam(editTeam, shortName)" enctype='multipart/form-data'>
+                <dl class="dl-horizontal control-group" ng-class="{error: newTeamForm.name.$invalid}">
+                    <dt><label>Name:</label></dt>
+                    <dd>
+                        <span type="text" name="name" ng-model="name">{{editTeam.name}}</span>
+                    </dd>
+                </dl>
+
+                <dl class="dl-horizontal control-group" ng-class="{error: newTeamForm.shortName.$invalid}">
+                    <dt><label>Short Name:</label></dt>
+                    <dd>
+                        <input type="text" name="shortName" ng-model="shortName">
+                        <span ng-show="newTeamForm.shortName.$error.required" class="help-inline">Required</span>
+                        <span ng-show="newTeamForm.shortName.$error.invalid" class="help-inline">Invalid OS Version</span>
+                    </dd>
+                </dl>
+
+                <dl class="dl-horizontal control-group">
+                    <dd>
+                        <button type="submit" ng-disabled="isClean() || newTeamForm.$invalid" class="btn btn-primary">New Team</button>
+                    </dd>
+                </dl>
+            </form>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#tableTeams').dataTable({
+            "order": [[ 0, "desc" ]]
+        });
+    });
+</script>

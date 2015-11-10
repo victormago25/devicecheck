@@ -37,20 +37,22 @@
                         </dd>
                     </dl>
 
-                    <dl class="dl-horizontal">
+                    <dl class="dl-horizontal control-group">
                         <dt><label>Current time is:</label></dt>
                         <dd>
                             <p>{{ time.now | date:'short' }}</p>
                         </dd>
                     </dl>
 
-                    <dl class="dl-horizontal control-group">
+                    <dl class="dl-horizontal control-group" ng-class="{error: checkForm.checkinDate.$invalid}">
                         <dt><label>Check-in date:</label></dt>
-                        <dd class="input-group date" id='datetimepicker1'>
-                            <input type='text' class="form-control" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
+                        <dd>
+                            <div id='datetimepicker1' class="input-append date">
+                                <input data-format="dd/MM/yyyy hh:mm:ss" type="text"></input>
+                                <span class="add-on">
+                                    <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+                                </span>
+                            </div>
                         </dd>
                     </dl>
 
@@ -81,7 +83,10 @@
     </div>
 </modal-dialog>
 <script type="text/javascript">
-    $(function () {
-        $('#datetimepicker1').datetimepicker();
+    $(document).ready(function () {
+        $('#datetimepicker1').datetimepicker({
+            language: 'en',
+            format: "dd/mm/yyyy"
+        });
     });
 </script>

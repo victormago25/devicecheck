@@ -201,6 +201,14 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
                 });
                 deviceRef.update(updateFields);
             };
+            $rootScope.editDeviceFn = function (deviceId) {
+                angular.forEach($rootScope.device, function (device) {
+                    if (device.id === deviceId) {
+                        $rootScope.editDevice = device;
+                    }
+                }, this);
+                $location.path('/editDevice');
+            };
         }]).
     controller('upManagerCtrl', ['$rootScope', 'fbURL', 'deviceBasePath', 'usersPath', 'teamsPath', '$location',
         function ($rootScope, fbURL, deviceBasePath, usersPath, teamsPath, $location) {
@@ -377,6 +385,7 @@ angular.module('device', ['ui.bootstrap', 'firebase', 'devicechecker.directives'
             when('/', {templateUrl: '/admin/login.html', controllerAs: 'device'}).
             when('/mainView', {templateUrl: '/admin/mainView.html', controllerAs: 'device'}).
             when('/addDevice', {templateUrl: '/admin/addDevice.html', controllerAs: 'device'}).
+            when('/editUser', {templateUrl:'/admin/editDevice.html', controllerAs: 'device'}).
             when('/addAdmin', {templateUrl: '/admin/admins.html', controllerAs: 'device'}).
             when('/editUser', {templateUrl:'/admin/editAdmins.html', controllerAs: 'device'}).
             when('/addTeam', {templateUrl: '/admin/teams.html', controllerAs: 'device'}).
